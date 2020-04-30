@@ -40,7 +40,6 @@ a = schema1(Prefix = "AAA", NumSubjects = 30)
 
 #The next step involves adding treatment/control to the end
 
-def schema2(Prefix, NumSubjects, Ratio):
 
 
 

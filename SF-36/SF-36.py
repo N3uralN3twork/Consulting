@@ -32,7 +32,7 @@ What I learned:
 
 #Set working directory where contents will be stored and accessed:
 import os
-os.chdir(path = "C:/Users/MatthiasQ.MATTQ/Desktop/Consulting Projects/SF-36")
+os.chdir(path = "C:/Users/miqui/OneDrive/Consulting/SF-36")
 os.listdir()
 
 #Import the necessary libraries:
