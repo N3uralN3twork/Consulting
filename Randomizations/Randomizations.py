@@ -15,7 +15,7 @@ os.listdir()
 import random
 from random import shuffle
 import pandas as pd
-from pyDOE import *
+from doepy import build
 
 ##################################################################
 ###                         Schema Making:                     ###
