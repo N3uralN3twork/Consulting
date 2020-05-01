@@ -14,3 +14,37 @@ full_factorial = build.build_full_fact(levels)
 len(full_factorial) # 36
 
 
+
+
+
+
+
+
+
+import timeit
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import fetch_olivetti_faces
+olive = fetch_olivetti_faces()
+dir(olive)
+
+X,y = olive.data, olive.target
+pca = PCA(n_components=64)
+X_trans = pca.fit_transform(X)
+print(X_trans.shape)
+
+# Create time function for RF model:
+
+def ModelTime(X, y):
+    start = timeit.default_timer()
+    RandomForestClassifier().fit(X=X, y=y)
+    stop = timeit.default_timer()
+    print(f"Time {stop - start}")
+
+# Model 1 - Original data set
+
+ModelTime(X=X, y=y)
+
+# Model 2 - PCA data set
+
+ModelTime(X=X_trans, y=y)
