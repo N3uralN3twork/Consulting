@@ -1,4 +1,5 @@
-setwd("C:/Users/MatthiasQ.MATTQ/Desktop/SF-36")
+setwd("C:/Users/MatthiasQ.MATTQ/Desktop/SF-36") # PC
+setwd("C:/Users/miqui/OneDrive/Consulting/SF-36") # Desktop
 getwd()
 list.files()
 

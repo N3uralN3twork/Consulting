@@ -29,7 +29,6 @@ What I learned:
 ###                         Data Prerequisites:                ###
 ##################################################################
 
-
 #Set working directory where contents will be stored and accessed:
 import os
 os.chdir(path = "C:/Users/miqui/OneDrive/Consulting/SF-36")
@@ -39,6 +38,7 @@ os.listdir()
 import numpy as np
 import pandas as pd
 
+pd.set_option('display.max_columns', 10)
 #Read in the sample data set:
 
 data = pd.read_excel("Practice SF-36 data.xlsx",
@@ -48,6 +48,9 @@ data.head(3)
 ##################################################################
 ###                         Data Preparation:                  ###
 ##################################################################
+
+row_count = data.shape[0]
+col_count = data.shape[1] # Nice
 
 #Set up variables to be worked with
 #You cannot include the calculated variables because they all have NaN at the moment
