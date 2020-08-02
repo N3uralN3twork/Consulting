@@ -1,7 +1,3 @@
-library(dplyr)
-library(randomizeR)
-
-
 # Building the design schema:
 SCHEMA <- function(prefix = "AAA", NSubjects, NSites=1, NFactors){
   row_count = (NSubjects * NSites)
