@@ -1,26 +1,29 @@
 library(dplyr)
-library(ISLR)
 library(randomizeR)
 
 
-
-# Printing out the codes:
-for (i in seq(1, 30)){
-  if (i < 10){
-    print(paste("AAA", i, sep = "0"))
-  } else {
-    print(paste("AAA", i, sep = ""))
-  }
-}
-
-
 # Building the design schema:
-SCHEMA <- function(NSubjects, NSites, NFactors){
+SCHEMA <- function(prefix = "AAA", NSubjects, NSites=1, NFactors){
   row_count = (NSubjects * NSites)
   col_count = (NFactors)
-  ID = seq(1:row_count)
-  matt = matrix(nrow = row_count, ncol = col_count)
-  return(data.frame(ID=1:row_count, matt))
+  result <- vector("list", NSubjects)
+  for (i in seq(1, NSubjects)){
+    if (i < 10){
+      result[[i]] <- paste(prefix, i, sep = "0")
+    } else {
+      result[[i]] <- paste(prefix, i, sep = "")}}
+  result <- t(as.data.frame(result))
+  TLC = data.frame(TorC = sample(t(rep(c("T", "C"), 15))))
+  mattrix <- matrix(nrow = row_count, ncol = col_count)
+  final = data.frame(ID = result, mattrix, row.names = NULL)
+  final = final[sample(nrow(final)), ]
+  final = data.frame(Order = 1:row_count, final)
+  final = data.frame(ID = paste(final$ID, TLC$TorC, sep = ""), Order = seq(1:row_count), mattrix, row.names = NULL)
+  return(final)
 }
 
-matt = SCHEMA(NSubjects = 30, NSites = 1, NFactors = 3)
+matt = SCHEMA(prefix = "AAA", NSubjects = 30, NSites = 1, NFactors = 3)
+
+
+
+
