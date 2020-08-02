@@ -11,12 +11,6 @@ Date Began: Dec. 25, 2019
 import os
 os.chdir("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 os.listdir()
-
-import random
-from random import shuffle
-import pandas as pd
-from doepy import build
-
 ##################################################################
 ###                         Schema Making:                     ###
 ##################################################################

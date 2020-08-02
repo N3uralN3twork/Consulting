@@ -1,4 +1,10 @@
-# Building the design schema:
+"
+Title: Randomization Schema
+Author: Matt Quinn
+Date: August 2nd 2020
+"
+
+# Building the design schema for 1 site:
 SCHEMA <- function(prefix = "AAA", NSubjects, NSites=1, NFactors){
   row_count = (NSubjects * NSites)
   col_count = (NFactors)
@@ -18,7 +24,8 @@ SCHEMA <- function(prefix = "AAA", NSubjects, NSites=1, NFactors){
   return(final)
 }
 
-matt = SCHEMA(prefix = "AAA", NSubjects = 30, NSites = 1, NFactors = 3)
+matt = SCHEMA(prefix = "AAA", NSubjects = 30, NFactors = 3)
+
 
 
 
