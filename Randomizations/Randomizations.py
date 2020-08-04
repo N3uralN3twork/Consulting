@@ -31,9 +31,6 @@ def schema1(Prefix = None, NSubjects = 1):
 #Testing:
 schema1(Prefix = "AAA", NSubjects = 30)
 
-#The next step involves adding treatment/control to the end
-def DOE(NSites, NSubjects, NBlocks, RRatio)
-
 
 
 
