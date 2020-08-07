@@ -2,65 +2,96 @@
 Title: Randomization Schema
 Author: Matt Quinn
 Date: August 2nd 2020
+Finished on: August 6th 2020
+Class: Consulting and Programming
 "
 
 setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
+
+
+################################################################################
+###                           NOTES:                                         ###
+################################################################################
+# INPUT:
+  # A list of site codes
+  # The number of subjects per site
+  # The randomization ratio
+
+# OUTPUT:
+  # A sequential list of N codes inside a dataframe object
 
 # For each site do the following:
   # Store site in dataframe N times each
   # Add numbers (1-K) to end of each site code in dataframe
   # Randomly assign (T/C) to end of each site code in dataframe
 
+# Assigning the numbers:
+   # Based on your row number for each site
+   # If less than 10, assign a "0" between the code and the number
+   # Otherwise, assign no space between the code and the number
 
 # Randomization Ratio:
-  # Number of T subjects == (N/(N+D))*NSubjects:
-  # Number of C subjects == (NSubjects - TSubjects)
+  # Number of Treatment subjects == (N/(N+D))*NSubjects:
+  # Number of Control subjects == (NSubjects - TSubjects)
 
-
-"Building the design schema for 1 site:"
-SCHEMA <- function(prefix = "AAA", NSubjects, NSites=1, NFactors, RRatio){
-  row_count = (NSubjects * NSites)
-  col_count = (NFactors)
-  result <- vector("list", length = NSubjects) # Start with an empty list
-  # Assigning the numbers
-  for (i in seq(1, NSubjects)){
-    if (i < 10){
-      result[[i]] <- paste(prefix, i, sep = "0")
-    } else {
-      result[[i]] <- paste(prefix, i, sep = "")}}
-  result <- t(as.data.frame(result))
-  # Determining the number of T's and C's
-  timesT = NSubjects*(RRatio/(RRatio+1))
-  timesC = (NSubjects - timesT)
-  TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC)))))
-  # Creating the design matrix
-  mattrix <- matrix(nrow = row_count, ncol = col_count)
-  final = data.frame(ID = result, mattrix, row.names = NULL)
-  final = final[sample(nrow(final)), ]
-  final = data.frame(Order = 1:row_count, final)
-  final = data.frame(ID = paste(final$ID, TLC$TorC, sep = ""), Order = seq(1:row_count), mattrix, row.names = NULL)
-  return(final)
-}
-
-matt = SCHEMA(prefix = "AAA", NSubjects = 15, NFactors = 3, RRatio = 2)
-
-
+##################################
+### SCHEMA for Multiple Sites: ###
+##################################
 # Multiple Sites:
+library(tidyverse) # For the unite function and row_number function
 
-
-test <- function(Sites = NULL, NSubjects){
-  matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) # Start with an empty matrix
+schema <- function(Sites = NULL, NSubjects, RRatio = NULL){
+  
+  # Start with an empty data matrix
+  matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
+  
+  # Assign names to each column, otherwise you'll get an error
   dimnames(matt) = list(Sites)
   for (i in Sites){
     for (j in NSubjects){
-      #print(rep(i, NSubjects))
       matt[i, ] = rep(i, NSubjects)
     }
   }
-  matt = t(matt)} # Return the transpose of the matrix
+  
+  # Return the transpose of the matrix:
+  matt = as.data.frame(t(matt))
+  
+  # Adding the numbers to the end via a simple if-then-else statement
+  for (column in matt){
+    matt[column, ] = if_else(row_number(column) < 10,
+                             true = paste(column, "0", row_number(column), sep = ""),
+                             false = paste(column, row_number(column), sep = ""))
+  }
+  row.names(matt) = NULL # Just for aesthetics, no functional purpose
+  
+  #Select the first column & rows between [nrow(data) -> NSubjects]:
+  matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
+  
+  # Calculating the number of T's and C's:
+  for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
+    timesT = NSubjects*(RRatio/(RRatio+1))
+    timesC = (NSubjects - timesT)
+    TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC)))))
+  }
+  # Repeat the process above for each site
+  TLC = data.frame(TorC = rep(TLC$TorC, times = length(Sites)))
+  
+  # Shuffle the data randomly:
+  matt = sample(matt)
+  
+  # Turn into a data.frame:
+  matt = as.data.frame(matt)
+  
+  # Concatenate both objects into a single dataframe
+  result = data.frame(c(TLC, matt))
+  
+  # Use the "unite" function to concatenate both columns into a single column
+  result = result %>% # using the pipe operator from the dplyr syntax
+    unite(Codes, c("matt", "TorC"), sep = "")
+  
+  # Return the end result:
+  return(result)
+}
 
 
-Sites <- test(Sites = c("AAA", "BBB"), NSubjects = 5)
-
-
-
+FINAL <- schema(Sites = c("AAA", "BBB", "CCC"), NSubjects = 30, RRatio = 1)
