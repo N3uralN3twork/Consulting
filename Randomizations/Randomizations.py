@@ -1,4 +1,5 @@
-"""This is for the randomization schemas project in the consulting class
+"""
+This is for the randomization schemas project in the consulting class
 Author: Matthias Quinn
 Goal: Develop schemas given certain conditions
 More specific goal: Goal: S subjects at T sites in blocks of B where ratio is N:D
@@ -14,24 +15,20 @@ os.listdir()
 ##################################################################
 ###                         Schema Making:                     ###
 ##################################################################
+import numpy as np
 
 " Goal: S subjects at T sites in blocks of B where ratio is N:D"
 
+def schema(Sites, NSubjects, RRatio=1):
+    matt = np.empty(shape=[len(Sites), NSubjects])
+    john = []
+    jake = np.reshape(np.repeat(np.nan, repeats=(NSubjects*len(Sites))), (len(Sites), NSubjects), "F")
+    for i in Sites:
+        for j in range(NSubjects):
+          john.append(np.repeat(i, repeats=NSubjects))
+    return john
 
-def schema1(Prefix = None, NSubjects = 1):
-    """Function to print the first and easy schema: Controlling prefix and # of subjects
-    Inputs: NumSubjects
-    Output: List of codes (AAA01T, or AAA30C)"""
-    for i in range(1, NSubjects + 1):
-        if i < 10:
-            print(Prefix, i, sep = "0")
-        else:
-            print(Prefix, i, sep = "")
+schema(Sites=["AAA"], NSubjects=10)
 
-#Testing:
-schema1(Prefix = "AAA", NSubjects = 30)
-
-
-
-
-
+np.reshape(np.repeat(np.nan, repeats=20), (2, 10), "F")
+np.empty(shape=[2,10])

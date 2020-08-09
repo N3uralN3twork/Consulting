@@ -3,7 +3,7 @@ Title: Randomization Schema
 Author: Matt Quinn
 Date: August 2nd 2020
 Finished on: August 6th 2020
-Class: Consulting and Programming
+Class: STA 635 Consulting and Programming
 "
 
 setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
@@ -16,9 +16,11 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
   # A list of site codes
   # The number of subjects per site
   # The randomization ratio
+  # Number of factors in your experiment
 
 # OUTPUT:
   # A sequential list of N codes inside a dataframe object
+  # An empty data vector for each factor
 
 # For each site do the following:
   # Store site in dataframe N times each
@@ -33,28 +35,34 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 # Randomization Ratio:
   # Number of Treatment subjects == (N/(N+D))*NSubjects:
   # Number of Control subjects == (NSubjects - TSubjects)
+  # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc.
+
+
 
 ##################################
 ### SCHEMA for Multiple Sites: ###
 ##################################
 # Multiple Sites:
-library(tidyverse) # For the unite function and row_number function
+library(tidyverse) # For the unite and row_number functions
 
-schema <- function(Sites = NULL, NSubjects, RRatio = NULL){
+schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
   
-  # Start with an empty data matrix
+  # Start with 2 empty data matrices:
   matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
+  final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = NFactors+1)
   
-  # Assign names to each column, otherwise you'll get an error
+  # Assign names to each column, otherwise you'll get an error:
   dimnames(matt) = list(Sites)
+  
+  # Assign numbers to each subject @ each site
   for (i in Sites){
     for (j in NSubjects){
-      matt[i, ] = rep(i, NSubjects)
+      matt[i, ] = rep(i, NSubjects) # Row-wise
     }
   }
   
   # Return the transpose of the matrix:
-  matt = as.data.frame(t(matt))
+  matt = as.data.frame(t(matt)) # Turn into a dataframe as well
   
   # Adding the numbers to the end via a simple if-then-else statement
   for (column in matt){
@@ -79,7 +87,7 @@ schema <- function(Sites = NULL, NSubjects, RRatio = NULL){
   # Shuffle the data randomly:
   matt = sample(matt)
   
-  # Turn into a data.frame:
+  # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
   
   # Concatenate both objects into a single dataframe
@@ -89,9 +97,14 @@ schema <- function(Sites = NULL, NSubjects, RRatio = NULL){
   result = result %>% # using the pipe operator from the dplyr syntax
     unite(Codes, c("matt", "TorC"), sep = "")
   
+  # For each column, append the result to the previously empty matrix above
+  for(column in 0:1){
+    final[, column] <- result[ , 1] # Copy only the first column 
+  }
+  
   # Return the end result:
-  return(result)
+  return(final)
 }
 
 
-FINAL <- schema(Sites = c("AAA", "BBB", "CCC"), NSubjects = 30, RRatio = 1)
+FINAL <- schema(Sites = c("AAA", "BBB", "CCC"), NSubjects = 30, RRatio = 1, NFactors = 3)
