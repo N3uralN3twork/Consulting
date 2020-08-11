@@ -13,9 +13,9 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ###                           NOTES:                                         ###
 ################################################################################
 # INPUT:
-  # A list of site codes
+  # A list of site codes (character)
   # The number of subjects per site
-  # The randomization ratio
+  # The randomization ratio (>= 1)
   # Number of factors in your experiment
 
 # OUTPUT:
@@ -35,7 +35,7 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 # Randomization Ratio:
   # Number of Treatment subjects == (N/(N+D))*NSubjects:
   # Number of Control subjects == (NSubjects - TSubjects)
-  # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc.
+  # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
 
 
 
@@ -57,7 +57,7 @@ schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
   # Assign numbers to each subject @ each site
   for (i in Sites){
     for (j in NSubjects){
-      matt[i, ] = rep(i, NSubjects) # Row-wise
+      matt[i, ] = rep(i, times = NSubjects) # Row-wise
     }
   }
   
