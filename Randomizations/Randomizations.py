@@ -12,23 +12,31 @@ Date Began: Dec. 25, 2019
 import os
 os.chdir("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 os.listdir()
+
+##################################################################
+###                         Notes                              ###
+##################################################################
+"1. Python starts at 0"
+
 ##################################################################
 ###                         Schema Making:                     ###
 ##################################################################
 import numpy as np
+import pandas as pd
 
 " Goal: S subjects at T sites in blocks of B where ratio is N:D"
+def schema(Sites, NSubjects, RRatio=1, NFactors=1):
+    # Start with an empty list:
+    matt = []
+    # Assign numbers to each subject @ each site:
+    for site in Sites:
+        matt.append(np.repeat(site, repeats=NSubjects, axis=0))
+    matt = pd.DataFrame(np.transpose(matt), columns=Sites)
+    return matt
 
-def schema(Sites, NSubjects, RRatio=1):
-    matt = np.empty(shape=[len(Sites), NSubjects])
-    john = []
-    jake = np.reshape(np.repeat(np.nan, repeats=(NSubjects*len(Sites))), (len(Sites), NSubjects), "F")
-    for i in Sites:
-        for j in range(NSubjects):
-          john.append(np.repeat(i, repeats=NSubjects))
-    return john
+"Testing:"
+schema(Sites=["AAA", "BBB"], NSubjects=20)
 
-schema(Sites=["AAA"], NSubjects=10)
 
-np.reshape(np.repeat(np.nan, repeats=20), (2, 10), "F")
-np.empty(shape=[2,10])
+
+
