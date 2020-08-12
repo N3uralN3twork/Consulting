@@ -54,7 +54,7 @@ schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
   # Assign names to each column, otherwise you'll get an error:
   dimnames(matt) = list(Sites)
   
-  # Assign numbers to each subject @ each site:
+  # Assign letters to each subject @ each site:
   for (i in Sites){
     for (j in NSubjects){
       matt[i, ] = rep(i, times = NSubjects) # Row-wise
