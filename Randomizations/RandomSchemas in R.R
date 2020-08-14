@@ -14,9 +14,9 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ################################################################################
 # INPUT:
   # A list of site codes (character)
-  # The number of subjects per site
+  # The number of subjects per site (integer)
   # The randomization ratio (>= 1)
-  # Number of factors in your experiment
+  # Number of factors in your experiment (>= 0)
 
 # OUTPUT:
   # A sequential list of N codes inside a dataframe object
@@ -42,10 +42,35 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ##################################
 ### SCHEMA for Multiple Sites: ###
 ##################################
-# Multiple Sites:
 library(tidyverse) # For the unite and row_number functions
 
 schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
+  
+  ### Error-checking: ###
+    # Unique site codes:
+      test1 = any(duplicated(Sites))
+      if (test1 == TRUE){
+        stop("Error: Please enter unique site codes")
+      }
+    # Non-positive number of subjects:
+      test2 <- any(NSubjects <= 0)
+      if (test2 == TRUE){
+        stop("Error: Please enter a positive integer for the number of subjects per site")
+      }
+    # Improper Randomization Ratio:
+      if (is.character(RRatio) == TRUE){
+        stop("Error: The randomization ratio must be a numeric data type")
+      }
+    
+      test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
+      if (test3 == TRUE){
+        stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
+      }
+      
+    # Improper number of factors:
+      if (NFactors < 0){
+        stop("Error: The number of factors must be greater than or equal to 0")
+      }
   
   # Start with 2 empty data matrices:
   matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
@@ -102,9 +127,12 @@ schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
     final[, column] <- result[ , 1] # Copy only the first column 
   }
   
+  # Turn into a dataframe:
+  final <- as.data.frame(final)
+  
   # Return the end result:
   return(final)
 }
 
-
-FINAL <- schema(Sites = c("AAA", "BBB", "CCC"), NSubjects = 30, RRatio = 1, NFactors = 3)
+# Testing:
+FINAL <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 1, NFactors = 3)
