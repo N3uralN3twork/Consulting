@@ -119,7 +119,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
 ###                         Creating the User Interface                      ###
 ################################################################################
 
-# Define UI for the data set viewer app ----
+# Define UI for the data set viewer app --->
 ui <- fluidPage(
     
     # Application theme --->
