@@ -51,6 +51,14 @@ library(DT)           # For displaying the final output
 
 # If a negative number is input, it will take the absolute value of the input
 
+
+# Sources:
+"https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"
+"https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"
+"https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"
+"https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"
+"https://www.datamentor.io/r-programming/for-loop/"
+
 ################################################################################
 ###                         Creating the Design Schema   
 ###
@@ -169,7 +177,7 @@ ui <- fluidPage(
     theme = shinytheme("cerulean"),
         
     # App title --->
-    titlePanel(h1("Project: Randomization Schema")),
+    titlePanel(title = "Project: Randomization Schema"),
     
     # Sidebar layout with input and output definitions --->
     sidebarLayout(position = "left",
@@ -190,7 +198,9 @@ ui <- fluidPage(
                                label = "Please select the sites you would like:",
                                choices = list("AAA", "BBB", "CCC", "DDD", "EEE", "FFF"),
                                selected = "AAA",
-                               inline = TRUE),
+                               inline = TRUE,
+                               icon = icon("check-square"),
+                               animation = "pulse"),
             
             # Input: Numeric entry for choosing the number of subjects per site --->
             numericInput(inputId = "NSubjects",
@@ -228,7 +238,26 @@ ui <- fluidPage(
                           container = span)),
             
             # Output: HTML table with requested number of observations ----
-            DT::dataTableOutput("table")
+            DT::dataTableOutput("table"),
+            
+            # Sources:
+                # Written in HTML format
+            
+            h2("References"),
+                a("1. Table Options",
+                  href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
+            br(),
+                a("2. Pretty Options",
+                  href = "https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"),
+            br(),
+                a("3. Shiny Tutorial",
+                  href = "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"),
+            br(),
+                a("4. Error Handling in R",
+                  href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
+            br(),
+                a("5. FOR Loops in R",
+                  href = "https://www.datamentor.io/r-programming/for-loop/")
 
         )
     )
@@ -268,7 +297,9 @@ server <- function(input, output, session){
     
     # Output the table
     output$table <- DT::renderDataTable({
-            FINAL()})
+            FINAL()}
+    )
+
 }
 
 
