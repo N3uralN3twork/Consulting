@@ -13,16 +13,55 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ###                           Necessary Libraries                            ###
 ################################################################################
 
-library(shiny)
-library(DT)
-library(tidyverse)
-library(shinythemes)
+library(tidyverse)    # For the row_number and unite functions
+library(shiny)        # For the UI and server-side app
+library(shinythemes)  # For aesthetics
+library(shinyWidgets) # For aesthetics
+library(DT)           # For displaying the final output
+
+
+################################################################################
+###                           NOTES:                                         ###
+################################################################################
+
+# INPUT:
+# A list of site codes (character)
+# The number of subjects per site (integer)
+# The randomization ratio (>= 1)
+# Number of factors in your experiment (>= 0)
+
+# OUTPUT:
+# A sequential list of N codes inside a dataframe object
+# An empty data vector for each factor
+
+# For each site do the following:
+# Store site in dataframe N times each
+# Add numbers (1-K) to end of each site code in dataframe
+# Randomly assign (T/C) to end of each site code in dataframe
+
+# Assigning the numbers:
+# Based on your row number for each site
+# If less than 10, assign a "0" between the code and the number
+# Otherwise, assign no space between the code and the number
+
+# Randomization Ratio:
+# Number of Treatment subjects == (N/(N+D))*NSubjects:
+# Number of Control subjects == (NSubjects - TSubjects)
+# (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
+
+# If a negative number is input, it will take the absolute value of the input
 
 ################################################################################
 ###                         Creating the Design Schema   
 ###
 ################################################################################
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFactors){
+    
+    ### INPUT CHECKING ###
+    NSubjects <- abs(NSubjects)
+    BlockSize <- abs(BlockSize)
+    RRatio <- abs(RRatio)
+    NFactors <- abs(NFactors)
     
     ### Error-checking: ###
     # Unique site codes:
@@ -43,6 +82,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
     test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
     if (test3 == TRUE){
         stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
+    }
+    
+    if (RRatio <= 0){
+        stop("The randomization ratio must be greater than or equal to 0")
     }
     
     # Improper number of factors:
@@ -123,7 +166,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
 ui <- fluidPage(
     
     # Application theme --->
-    theme = shinytheme("united"),
+    theme = shinytheme("cerulean"),
         
     # App title --->
     titlePanel(h1("Project: Randomization Schema")),
@@ -134,7 +177,7 @@ ui <- fluidPage(
         
         # Sidebar panel for inputs --->
         sidebarPanel(
-            
+        
             # Input: Text for providing a caption --->
             # Note: Changes made to the caption in the textInput control
             # are updated in the output area immediately as you type
@@ -143,10 +186,11 @@ ui <- fluidPage(
                       value = "Randomization Schema"),
             
             # Input: Check-box group for choosing site codes --->
-            checkboxGroupInput(inputId = "Sites",
+            prettyCheckboxGroup(inputId = "Sites",
                                label = "Please select the sites you would like:",
-                               choices = list("AAA", "BBB", "CCC", "DDD", "EEE"),
-                               selected = "AAA"),
+                               choices = list("AAA", "BBB", "CCC", "DDD", "EEE", "FFF"),
+                               selected = "AAA",
+                               inline = TRUE),
             
             # Input: Numeric entry for choosing the number of subjects per site --->
             numericInput(inputId = "NSubjects",
@@ -160,7 +204,7 @@ ui <- fluidPage(
             
             # Input: Numeric entry for choosing the block size ---> 
             numericInput(inputId = "BlockSize",
-                         label = "Please input the block size:",
+                         label = "Please input the number of subjects per block",
                          value = 0),
             
             # Input: Numeric entry for the number of factors --->

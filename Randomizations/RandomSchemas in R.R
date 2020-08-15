@@ -44,7 +44,7 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ##################################
 library(tidyverse) # For the unite and row_number functions
 
-schema <- function(Sites = NULL, NSubjects, RRatio = NULL, NFactors){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFactors){
   
   ### Error-checking: ###
     # Unique site codes:
