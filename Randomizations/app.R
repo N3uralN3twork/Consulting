@@ -19,7 +19,6 @@ library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
 library(DT)           # For displaying the final output
 
-
 ################################################################################
 ###                           NOTES:                                         ###
 ################################################################################
@@ -63,13 +62,8 @@ library(DT)           # For displaying the final output
 ###                         Creating the Design Schema   
 ###
 ################################################################################
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFactors){
-    
-    ### INPUT CHECKING ###
-    NSubjects <- abs(NSubjects)
-    BlockSize <- abs(BlockSize)
-    RRatio <- abs(RRatio)
-    NFactors <- abs(NFactors)
+
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     
     ### Error-checking: ###
     # Unique site codes:
@@ -92,22 +86,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
         stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
     }
     
-    if (RRatio <= 0){
-        stop("The randomization ratio must be greater than or equal to 0")
-    }
-    
-    # Improper number of factors:
-    if (NFactors < 0){
-        stop("Error: The number of factors must be greater than or equal to 0")
-    }
-    # Missing number of factors:
-    if (is.null(NFactors)){
-        stop("Please enter a numeric integer for the number of integers")
-    }
-    
     # Start with 2 empty data matrices:
     matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
-    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = NFactors+1)
+    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
     
     # Assign names to each column, otherwise you'll get an error:
     dimnames(matt) = list(Sites)
@@ -163,6 +144,15 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
     # Turn into a dataframe:
     final <- as.data.frame(final)
     
+    # Extracting different parts of the codes for easier reading:
+    final["Code"] = final[,1]
+    final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
+    final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
+    final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
+    
+    # Remove the repeated column:
+    final = final %>% select(Code, Site, Subject, Group)
+    
     # Return the end result:
     return(final)
 }
@@ -217,11 +207,6 @@ ui <- fluidPage(
                          label = "Please input the number of subjects per block",
                          value = 0),
             
-            # Input: Numeric entry for the number of factors --->
-            numericInput(inputId = "NFactors",
-                         label = "Please enter the number of factors:",
-                         value = 0),
-            
             tags$strong("Author: Matt Quinn",
                         tags$br(),
                         "Class: STA 635",
@@ -257,7 +242,10 @@ ui <- fluidPage(
                   href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
             br(),
                 a("5. FOR Loops in R",
-                  href = "https://www.datamentor.io/r-programming/for-loop/")
+                  href = "https://www.datamentor.io/r-programming/for-loop/"),
+            br(),
+                a("6. Substrings in R",
+                  href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string")
 
         )
     )
@@ -292,8 +280,7 @@ server <- function(input, output, session){
         Sites = input$Sites,
         NSubjects = input$NSubjects,
         RRatio = input$RRatio,
-        BlockSize = input$BlockSize,
-        NFactors = input$NFactors)})
+        BlockSize = input$BlockSize)})
     
     # Output the table
     output$table <- DT::renderDataTable({
@@ -301,8 +288,6 @@ server <- function(input, output, session){
     )
 
 }
-
-
 
 "Wrapping it all together:"
 shinyApp(ui, server)

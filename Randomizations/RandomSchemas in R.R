@@ -44,7 +44,7 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ##################################
 library(tidyverse) # For the unite and row_number functions
 
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFactors){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
   
   ### Error-checking: ###
     # Unique site codes:
@@ -66,15 +66,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
       if (test3 == TRUE){
         stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
       }
-      
-    # Improper number of factors:
-      if (NFactors < 0){
-        stop("Error: The number of factors must be greater than or equal to 0")
-      }
   
   # Start with 2 empty data matrices:
   matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
-  final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = NFactors+1)
+  final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
   
   # Assign names to each column, otherwise you'll get an error:
   dimnames(matt) = list(Sites)
@@ -130,9 +125,19 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, NFa
   # Turn into a dataframe:
   final <- as.data.frame(final)
   
+  # Extracting different parts of the codes for easier reading:
+  final["Code"] = final[,1]
+  final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
+  final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
+  final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
+  
+  # Remove the repeated column:
+  final = final %>% select(Code, Site, Subject, Group)
+  
   # Return the end result:
   return(final)
 }
 
 # Testing:
-FINAL <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 1, NFactors = 3)
+FINAL <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 1)
+FINAL

@@ -1,9 +1,7 @@
-myTitlePanel <- function (title, windowTitle = title, color = "coral") {
-  css <- paste(paste0("background-color:", color),
-               "padding-left: 15px",
-               "margin-left: -15px",
-               "margin-right: -15px",
-               sep = ";")
-  tagList(tags$head(tags$title(windowTitle)), 
-          h1(title, style = css))
-}
+code <- "AAA100C"
+
+FINAL["Site"] <-  substr(FINAL$V1, 1, 3)
+FINAL["Subject"] <-  gsub("[a-zA-Z]+", "", FINAL$V1) # remove letters with regex
+FINAL["Group"] <- substr(FINAL$V1, nchar(FINAL$V1), nchar(FINAL$V1))
+
+
