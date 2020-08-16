@@ -67,7 +67,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     
     ### Error-checking: ###
     # Unique site codes:
-    test1 = any(duplicated(Sites))
+    test1 = any(duplicated(Sites)) # Test for duplicate sites
     if (test1 == TRUE){
         stop("Error: Please enter unique site codes")
     }
@@ -77,18 +77,18 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
         stop("Error: Please enter a positive integer for the number of subjects per site")
     }
     # Improper Randomization Ratio:
-    if (is.character(RRatio) == TRUE){
+    if (is.character(RRatio) == TRUE){ # Tests if RRatio is input as a string
         stop("Error: The randomization ratio must be a numeric data type")
     }
     
-    test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
+    test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0 # Test if RRatio makes sense
     if (test3 == TRUE){
         stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
     }
     
     # Start with 2 empty data matrices:
-    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
-    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
+    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) # [Sites.length, NSubjects]
+    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1) # [Sites.length, 1]
     
     # Assign names to each column, otherwise you'll get an error:
     dimnames(matt) = list(Sites)
@@ -96,7 +96,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     # Assign letters to each subject @ each site:
     for (i in Sites){
         for (j in NSubjects){
-            matt[i, ] = rep(i, times = NSubjects) # Row-wise
+            matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
         }
     }
     
@@ -207,11 +207,20 @@ ui <- fluidPage(
                          label = "Please input the number of subjects per block",
                          value = 0),
             
+            # Ownership
             tags$strong("Author: Matt Quinn",
                         tags$br(),
                         "Class: STA 635",
                         tags$br(),
-                        "Date: 9/2/2020")
+                        "Date: 8/24/2020"),
+            
+            br(),
+            
+            # Instructions
+            actionButton(
+                inputId = "Instructions",
+                label = "Instructions",
+                icon = icon("cog"))
             
         ),
         
@@ -227,6 +236,7 @@ ui <- fluidPage(
             
             # Sources:
                 # Written in HTML format
+                # a() is for hyperlinks
             
             h2("References"),
                 a("1. Table Options",
@@ -287,6 +297,22 @@ server <- function(input, output, session){
             FINAL()}
     )
 
+    # Instructions:
+    observeEvent(input$Instructions, {
+        show_alert(
+            title = "Instructions",
+            text =  p("1. Choose the sites you would like",
+                      br(),
+                      "2. Input the number of subjects per site",
+                      br(),
+                      "3. Input the randomization ratio in the form of a floating-point number",
+                      br(),
+                      "4. Input the number of subjects per block",
+                      br(),
+                      "Note: The program will update after each change you make automatically")
+        )
+    })
+    
 }
 
 "Wrapping it all together:"
