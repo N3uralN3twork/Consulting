@@ -1,0 +1,15 @@
+# Repeating letters given the number of sites and the number of subjects per site:
+	1. Create "AAA", "BBB", "CCC", ... first
+		a. repeat the letters of the alphabet 3 times
+		b. concatenate result into 1 string
+	2. Repeat each one of those n times equal to the number of subjects
+
+
+FIGURE OUT WHY THE SCHEMA WON'T WORK WITH 1 SITE:
+	1. If Sites is numeric and the number of sites == 1:
+		change "matt[column]" to just "matt" 
+		&
+		change "column" in the if_else statement to just "matt"
+		
+Make some tests to ensure that the base program works correctly
+	Think this is called unit-testing

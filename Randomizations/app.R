@@ -14,10 +14,11 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ################################################################################
 
 library(tidyverse)    # For the row_number and unite functions
+library(testthat)     # For unit testing
 library(shiny)        # For the UI and server-side app
 library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
-library(DT)           # For displaying the final output
+library(DT)           # For displaying the data table
 
 ################################################################################
 ###                           NOTES:                                         ###
@@ -57,6 +58,9 @@ library(DT)           # For displaying the final output
 "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"
 "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"
 "https://www.datamentor.io/r-programming/for-loop/"
+"https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"
+"https://www.rdocumentation.org/packages/tidyft/versions/0.4.5/topics/uncount" # Uncount Function
+"https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1" # && operator
 
 ################################################################################
 ###                         Creating the Design Schema   
@@ -94,8 +98,8 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     dimnames(matt) = list(Sites)
     
     # Assign letters to each subject @ each site:
-    for (i in Sites){
-        for (j in NSubjects){
+    for (i in Sites){ # @ Each site
+        for (j in NSubjects){ # and for each subject:
             matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
         }
     }
@@ -110,7 +114,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
                                  false = paste(column, row_number(column), sep = ""))
     }
     row.names(matt) = NULL # Just for aesthetics, no functional purpose
-    
+
     #Select the first column & rows between [nrow(data) -> NSubjects]:
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
     
@@ -255,7 +259,13 @@ ui <- fluidPage(
                   href = "https://www.datamentor.io/r-programming/for-loop/"),
             br(),
                 a("6. Substrings in R",
-                  href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string")
+                  href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string"),
+            br(),
+                a("7. rep() in R",
+                  href = "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"),
+            br(),
+                a("8. Boolean && Operator",
+                  href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1")
 
         )
     )
@@ -297,7 +307,7 @@ server <- function(input, output, session){
             FINAL()}
     )
 
-    # Instructions:
+    # Instructions via HTML:
     observeEvent(input$Instructions, {
         show_alert(
             title = "Instructions",
@@ -309,7 +319,7 @@ server <- function(input, output, session){
                       br(),
                       "4. Input the number of subjects per block",
                       br(),
-                      "Note: The program will update after each change you make automatically")
+                      "Note: The program will automatically update after each change you make")
         )
     })
     
