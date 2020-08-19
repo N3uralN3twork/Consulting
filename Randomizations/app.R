@@ -61,6 +61,7 @@ library(DT)           # For displaying the data table
 "https://www.rdocumentation.org/packages/tidyft/versions/0.4.5/topics/uncount" # Uncount Function
 "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1" # && operator
 "https://rdrr.io/cran/shinyWidgets/man/multiInput.html" # MultiInput Widget
+"https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"
 
 ################################################################################
 ###                         Creating the Design Schema   
@@ -103,19 +104,19 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     }
     
     # Designing the schema:
-    # If the input to sites is NUMERIC number
-    if (is.numeric(Sites) == TRUE){
+    # If the input to sites is a NUMERIC number
+    if (is.numeric(Sites) == TRUE){ # Test if a numeric number
         matt = c() # Start with an empty vector
-        final = matrix(NA, nrow = Sites*NSubjects, ncol = 1)
-        for (letter in LETTERS){
-            result = rep(letter, times = 3)
-            result = paste(result, collapse = "")
-            matt[letter] = result
-        }
-        matt = data.frame(t(matt))
-        matt = matt %>%
-            uncount(NSubjects)
-        matt = matt[1:NSubjects, 1:Sites]
+        final = matrix(NA, nrow = Sites*NSubjects, ncol = 1) # Add an empty matrix
+        for (letter in LETTERS){ # For each letter in the uppercase(Alphabet):
+            result = rep(letter, times = 3) # Repeat each letter 3 times
+            result = paste(result, collapse = "") # Combine the result into 1 string
+            matt[letter] = result # Assigns the result to the previously empty vector "matt"
+        } # Now that we have assigned the letters to the vector "matt"
+        matt = data.frame(t(matt)) # Transpose "matt"
+        matt = matt %>% # For each site code in your input:
+            uncount(NSubjects) # Duplicate the site code NSubjects number of times
+        matt = matt[1:NSubjects, 1:Sites] # Removing redundent codes
         rownames(matt) = NULL
     }
     # If the input to sites is a CHARACTER vector
@@ -125,7 +126,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
         final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
         for (i in Sites){
             for (j in NSubjects){
-                matt[i, ] = rep(i, times = NSubjects) # Row-wise
+                matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
             }
         }
         matt = as.data.frame(t(matt))
@@ -238,7 +239,8 @@ ui <- fluidPage(
                           condition = "input.SiteType == 'character'",
                           # Multiple input for sites:
                           multiInput(
-                              inputId = "Sites", label = "Please select the site codes you would like:",
+                              inputId = "Sites",
+                              label = "Please select the site codes you would like:",
                               choices = c("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH",
                                           "III", "JJJ", "KKK", "LLL", "MMM", "NNN", "OOO", "PPP",
                                           "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX", 
@@ -257,7 +259,7 @@ ui <- fluidPage(
                       
                       # Input: Numeric entry for choosing the block size ---> 
                       numericInput(inputId = "BlockSize",
-                                   label = "Please input the number of subjects per block",
+                                   label = "Please input the number of subjects per block:",
                                    value = 0),
                       
                       # Ownership
@@ -354,7 +356,7 @@ server <- function(input, output, session){
         RRatio = input$RRatio,
         BlockSize = input$BlockSize)})
     
-    # Output the table
+    # Output the schema:
     output$table <- DT::renderDataTable({
         FINAL()}
     )

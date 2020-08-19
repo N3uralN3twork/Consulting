@@ -15,4 +15,9 @@ Make some tests to ensure that the base program works correctly
 	Think this is called unit-testing
 	
 Let the user decide whether they would like to input sites as a number or a list of site codes:
-	Via the MultiInput function from the "shinyWidgets" package
+	Via the MultiInput and ConditionalPanel functions from the "shinyWidgets" package
+	If you want to input a number of sites, select "Numbers"
+	If you want to input a list of site codes, select "Letters"
+
+Create some documentation for your schema function:
+	Using a .Rd file extension
