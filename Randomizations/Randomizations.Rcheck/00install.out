@@ -1,0 +1,12 @@
+* installing *source* package 'Randomizations' ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for 'tidyverse':
+ .onLoad failed in loadNamespace() for 'broom', details:
+  call: loadNamespace(name)
+  error: there is no package called 'backports'
+Error: package 'tidyverse' could not be loaded
+Execution halted
+ERROR: lazy loading failed for package 'Randomizations'
+* removing 'C:/Users/miqui/OneDrive/Consulting/Randomizations/Randomizations.Rcheck/Randomizations'

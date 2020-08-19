@@ -1,0 +1,28 @@
+* using log directory 'C:/Users/miqui/OneDrive/Consulting/Randomizations/Randomizations.Rcheck'
+* using R version 4.0.2 (2020-06-22)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* checking for file 'Randomizations/DESCRIPTION' ... OK
+* this is package 'Randomizations' version '1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for .dll and .exe files ... OK
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .idea
+These were most likely included in error. See section 'Package
+structure' in the 'Writing R Extensions' manual.
+* checking for portable file names ... WARNING
+Found the following files with non-portable file names:
+  RandomSchemas in R.R
+  Randomization Schema Project.docx
+These are not fully portable file names.
+See section 'Package structure' in the 'Writing R Extensions' manual.
+* checking whether package 'Randomizations' can be installed ... ERROR
+Installation failed.
+See 'C:/Users/miqui/OneDrive/Consulting/Randomizations/Randomizations.Rcheck/00install.out' for details.
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
