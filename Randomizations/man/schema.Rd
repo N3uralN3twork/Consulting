@@ -4,7 +4,7 @@
 \alias{schema}
 \title{Create a Random Design Schema}
 \usage{
-schema(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL)
+schema(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed)
 }
 \arguments{
 \item{Sites}{A number of sites / a list of site codes to be used}
@@ -14,6 +14,8 @@ schema(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL)
 \item{BlockSize}{The number of subjects assigned to each block}
 
 \item{RRatio}{The randomization ratio used to assign treatment and control groups}
+
+\item{seed}{The seed set for reproducibility}
 }
 \value{
 A dataframe containing the design matrix

@@ -8,6 +8,7 @@
 #' @param NSubjects The number of subjects assigned to each site
 #' @param BlockSize The number of subjects assigned to each block
 #' @param RRatio The randomization ratio used to assign treatment and control groups
+#' @param seed The seed set for reproducibility
 #'
 #' @return A dataframe containing the design matrix
 #'
@@ -19,7 +20,11 @@
 #' @import tidyverse dplyr
 #'
 #' @export
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed){
+
+  # Set the seed for reproducibility:
+  if (!missing(seed))
+    set.seed(seed)
 
   ### Error-checking: ###
   # Null value for sites:
