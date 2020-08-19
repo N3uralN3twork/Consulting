@@ -6,7 +6,7 @@ Finished on: August 6th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
+setwd("C:/Users/miqui/OneDrive/Consulting/Actual Work/")
 
 library(tidyverse) # For the unite and row_number functions
 
@@ -39,18 +39,18 @@ library(tidyverse) # For the unite and row_number functions
   # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
 
 # Seed
-  # Set a seed number for reproducibility
+  # Do you want to reproduce the design schema?
 
 ##################################
 ### SCHEMA for Multiple Sites: ###
 ##################################
 
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
 
   # Set the seed for reproducibility:
-  if (!missing(seed))
-    set.seed(seed)
-
+  if (seed == TRUE){
+    set.seed(123)}
+  
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){
@@ -178,7 +178,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 
 # Unit Testing:
 
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = 1, seed = 123)
+test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = 1, seed = TRUE)
 test2 <- schema(Sites = 1, NSubjects = 10, RRatio = 1)
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
 test4 <- schema(Sites = 2, NSubjects = 30, RRatio = 2)
