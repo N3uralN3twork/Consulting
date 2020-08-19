@@ -45,7 +45,7 @@ library(tidyverse) # For the unite and row_number functions
 ##################################
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
-  
+
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){
@@ -69,16 +69,16 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
   if (is.character(RRatio) == TRUE){
     stop("The randomization ratio must be a numeric data type")
   }
-  
+
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
   }
-  
+
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
   }
-  
+
   # Designing the schema:
   # If the input to sites is a NUMERIC number
   if (is.numeric(Sites) == TRUE){ # Test if a numeric number
@@ -97,7 +97,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
   }
   # If the input to sites is a CHARACTER vector
   else if (is.vector(Sites) == TRUE){
-    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) 
+    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
     dimnames(matt) = list(Sites)
     final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
     for (i in Sites){
@@ -126,7 +126,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     row.names(matt) = NULL
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
   }
-  
+
   for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
     timesT = NSubjects*(RRatio/(RRatio+1))
     timesC = (NSubjects - timesT)
@@ -138,34 +138,34 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
                                                        no = length(Sites))))
   # Shuffle the data randomly:
   matt = sample(matt)
-  
+
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
-  
+
   # Concatenate both objects into a single dataframe
   result = data.frame(c(TLC, matt))
-  
+
   # Use the "unite" function to concatenate both columns into a single column
   result = result %>% # using the pipe operator from the dplyr syntax
     unite(Codes, c("matt", "TorC"), sep = "")
-  
+
   # For each column, append the result to the previously empty matrix above
   for(column in 0:1){
-    final[, column] <- result[ , 1] # Copy only the first column 
+    final[, column] <- result[ , 1] # Copy only the first column
   }
-  
+
   # Turn into a dataframe:
   final <- as.data.frame(final)
-  
+
   # Extracting different parts of the codes for easier reading:
   final["Code"] = final[, 1]
   final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
   final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
   final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
-  
+
   # Remove the repeated column:
   final = final %>% select(Code, Site, Subject, Group)
-  
+
   # Return the end result:
   return(final)
 }

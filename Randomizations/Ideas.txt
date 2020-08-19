@@ -19,5 +19,15 @@ Let the user decide whether they would like to input sites as a number or a list
 	If you want to input a number of sites, select "Numbers"
 	If you want to input a list of site codes, select "Letters"
 
-Create some documentation for your schema function:
-	Using a .Rd file extension
+Create a package so that others in the class can use your library:
+	Using a .Rd file extension:
+	Create documentation for your package using Roxygen2
+		@title
+		@description
+		@param
+		@return
+		@author
+		@section
+		@import
+		@export 
+		
