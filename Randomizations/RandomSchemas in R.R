@@ -75,6 +75,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
   }
   
+  if (RRatio <= 0){
+    stop("The randomization ratio must be greater than 0")
+  }
+  
   # Designing the schema:
   # If the input to sites is NUMERIC number
   if (is.numeric(Sites) == TRUE){
@@ -173,5 +177,7 @@ test2 <- schema(Sites = 1, NSubjects = 10, RRatio = 1)
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
 test4 <- schema(Sites = 2, NSubjects = 30, RRatio = 2)
 test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, RRatio = 1)
-test6 <- schema(Sites = NULL, NSubjects = 10, RRatio = 1)
+test6 <- schema(Sites = NULL, NSubjects = 10, RRatio = 1) # Should return error
 test7 <- schema(Sites = c("AAA", 1), NSubjects = 10, RRatio = 1)
+
+

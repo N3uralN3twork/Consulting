@@ -14,7 +14,6 @@ setwd("C:/Users/miqui/OneDrive/Consulting/Randomizations")
 ################################################################################
 
 library(tidyverse)    # For the row_number and unite functions
-library(testthat)     # For unit testing
 library(shiny)        # For the UI and server-side app
 library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
@@ -61,6 +60,7 @@ library(DT)           # For displaying the data table
 "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"
 "https://www.rdocumentation.org/packages/tidyft/versions/0.4.5/topics/uncount" # Uncount Function
 "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1" # && operator
+"https://rdrr.io/cran/shinyWidgets/man/multiInput.html" # MultiInput Widget
 
 ################################################################################
 ###                         Creating the Design Schema   
@@ -70,63 +70,95 @@ library(DT)           # For displaying the data table
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     
     ### Error-checking: ###
+    # Null value for sites:
+    if (is.null(Sites) == TRUE){
+        stop("Please enter either an integer or site prefixes")
+    }
     # Unique site codes:
-    test1 = any(duplicated(Sites)) # Test for duplicate sites
+    test1 = any(duplicated(Sites))
     if (test1 == TRUE){
-        stop("Error: Please enter unique site codes")
+        stop("Please enter unique site codes")
+    }
+    # Non-positive number of sites:
+    if (is.numeric(Sites) && Sites <= 0){
+        stop("Please enter a valid number of sites (>=1)")
     }
     # Non-positive number of subjects:
     test2 <- any(NSubjects <= 0)
     if (test2 == TRUE){
-        stop("Error: Please enter a positive integer for the number of subjects per site")
+        stop("Please enter a positive integer for the number of subjects per site")
     }
     # Improper Randomization Ratio:
-    if (is.character(RRatio) == TRUE){ # Tests if RRatio is input as a string
-        stop("Error: The randomization ratio must be a numeric data type")
+    if (is.character(RRatio) == TRUE){
+        stop("The randomization ratio must be a numeric data type")
     }
     
-    test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0 # Test if RRatio makes sense
+    test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
     if (test3 == TRUE){
-        stop("Error: The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)")
+        stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
     }
     
-    # Start with 2 empty data matrices:
-    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) # [Sites.length, NSubjects]
-    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1) # [Sites.length, 1]
+    if (RRatio <= 0){
+        stop("The randomization ratio must be greater than 0")
+    }
     
-    # Assign names to each column, otherwise you'll get an error:
-    dimnames(matt) = list(Sites)
-    
-    # Assign letters to each subject @ each site:
-    for (i in Sites){ # @ Each site
-        for (j in NSubjects){ # and for each subject:
-            matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
+    # Designing the schema:
+    # If the input to sites is NUMERIC number
+    if (is.numeric(Sites) == TRUE){
+        matt = c() # Start with an empty vector
+        final = matrix(NA, nrow = Sites*NSubjects, ncol = 1)
+        for (letter in LETTERS){
+            result = rep(letter, times = 3)
+            result = paste(result, collapse = "")
+            matt[letter] = result
         }
+        matt = data.frame(t(matt))
+        matt = matt %>%
+            uncount(NSubjects)
+        matt = matt[1:NSubjects, 1:Sites]
+        rownames(matt) = NULL
     }
-    
-    # Return the transpose of the matrix:
-    matt = as.data.frame(t(matt)) # Turn into a dataframe as well
-    
+    # If the input to sites is a CHARACTER vector
+    else if (is.vector(Sites) == TRUE){
+        matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) 
+        dimnames(matt) = list(Sites)
+        final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
+        for (i in Sites){
+            for (j in NSubjects){
+                matt[i, ] = rep(i, times = NSubjects) # Row-wise
+            }
+        }
+        matt = as.data.frame(t(matt))
+        rownames(matt) = NULL
+        matt = data.frame(matt)
+    }
     # Adding the numbers to the end via a simple if-then-else statement
-    for (column in matt){
-        matt[column, ] = if_else(row_number(column) < 10,
-                                 true = paste(column, "0", row_number(column), sep = ""),
-                                 false = paste(column, row_number(column), sep = ""))
+    if (is.numeric(Sites) && Sites == 1){
+        matt = ifelse(row_number(matt) < 10,
+                      yes = paste(matt, "0", row_number(matt), sep = ""),
+                      no = paste(matt, row_number(matt), sep = ""))
+        row.names(matt) = NULL
+        matt = data.frame(matt)
     }
-    row.names(matt) = NULL # Just for aesthetics, no functional purpose
-
-    #Select the first column & rows between [nrow(data) -> NSubjects]:
-    matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
+    else {
+        for (column in matt){
+            matt[column, ] = if_else(row_number(column) < 10,
+                                     true = paste(column, "0", row_number(column), sep = ""),
+                                     false = paste(column, row_number(column), sep = ""))
+        }
+        row.names(matt) = NULL
+        matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
+    }
     
-    # Calculating the number of T's and C's:
     for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
         timesT = NSubjects*(RRatio/(RRatio+1))
         timesC = (NSubjects - timesT)
         TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC)))))
     }
     # Repeat the process above for each site
-    TLC = data.frame(TorC = rep(TLC$TorC, times = length(Sites)))
-    
+    TLC = data.frame(TorC = rep(TLC$TorC, times = ifelse(is.numeric(Sites),
+                                                         yes = Sites,
+                                                         no = length(Sites))))
     # Shuffle the data randomly:
     matt = sample(matt)
     
@@ -149,7 +181,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     final <- as.data.frame(final)
     
     # Extracting different parts of the codes for easier reading:
-    final["Code"] = final[,1]
+    final["Code"] = final[, 1]
     final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
     final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
     final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
@@ -160,114 +192,134 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     # Return the end result:
     return(final)
 }
+
 ################################################################################
 ###                         Creating the User Interface                      ###
 ################################################################################
 
-# Define UI for the data set viewer app --->
+# Define UI for the schema viewer app --->
 ui <- fluidPage(
     
     # Application theme --->
     theme = shinytheme("cerulean"),
-        
+    
     # App title --->
     titlePanel(title = "Project: Randomization Schema"),
     
     # Sidebar layout with input and output definitions --->
     sidebarLayout(position = "left",
                   fluid = TRUE, # For mobile use
-        
-        # Sidebar panel for inputs --->
-        sidebarPanel(
-        
-            # Input: Text for providing a caption --->
-            # Note: Changes made to the caption in the textInput control
-            # are updated in the output area immediately as you type
-            textInput(inputId = "caption",
-                      label = "Title:",
-                      value = "Randomization Schema"),
-            
-            # Input: Check-box group for choosing site codes --->
-            prettyCheckboxGroup(inputId = "Sites",
-                               label = "Please select the sites you would like:",
-                               choices = list("AAA", "BBB", "CCC", "DDD", "EEE", "FFF"),
-                               selected = "AAA",
-                               inline = TRUE,
-                               icon = icon("check-square"),
-                               animation = "pulse"),
-            
-            # Input: Numeric entry for choosing the number of subjects per site --->
-            numericInput(inputId = "NSubjects",
-                         label = "Please input the number of subjects at each site:",
-                         value = 10),
-            
-            # Input: Selector for choosing the randomization ratio --->
-            numericInput(inputId = "RRatio",
-                        label = "Choose a randomization ratio:",
-                        value = 1),
-            
-            # Input: Numeric entry for choosing the block size ---> 
-            numericInput(inputId = "BlockSize",
-                         label = "Please input the number of subjects per block",
-                         value = 0),
-            
-            # Ownership
-            tags$strong("Author: Matt Quinn",
-                        tags$br(),
-                        "Class: STA 635",
-                        tags$br(),
-                        "Date: 8/24/2020"),
-            
-            br(),
-            
-            # Instructions
-            actionButton(
-                inputId = "Instructions",
-                label = "Instructions",
-                icon = icon("cog"))
-            
-        ),
-        
-        # Main panel for displaying outputs ----
-        mainPanel(
-            
-            # Output: Formatted text for caption ----
-            h2(textOutput(outputId = "caption",
-                          container = span)),
-            
-            # Output: HTML table with requested number of observations ----
-            DT::dataTableOutput("table"),
-            
-            # Sources:
-                # Written in HTML format
-                # a() is for hyperlinks
-            
-            h2("References"),
-                a("1. Table Options",
-                  href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
-            br(),
-                a("2. Pretty Options",
-                  href = "https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"),
-            br(),
-                a("3. Shiny Tutorial",
-                  href = "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"),
-            br(),
-                a("4. Error Handling in R",
-                  href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
-            br(),
-                a("5. FOR Loops in R",
-                  href = "https://www.datamentor.io/r-programming/for-loop/"),
-            br(),
-                a("6. Substrings in R",
-                  href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string"),
-            br(),
-                a("7. rep() in R",
-                  href = "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"),
-            br(),
-                a("8. Boolean && Operator",
-                  href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1")
-
-        )
+                  
+                  # Sidebar panel for inputs --->
+                  sidebarPanel(
+                      
+                      # Input: Text for providing a caption --->
+                      # Note: Changes made to the caption in the textInput control
+                      # are updated in the output area immediately as you type
+                      textInput(inputId = "caption",
+                                label = "Title:",
+                                value = "Randomization Schema"),
+                      
+                      selectInput(inputId = "SiteType",
+                                  label = "Please select the type of site input you would like:",
+                                  choices = c(Numbers = "numeric",
+                                              Letters = "character")),
+                      conditionalPanel(
+                          condition = "input.SiteType == 'numeric'",
+                          # Input: Numeric entry for choosing the number of sites --->
+                          numericInput(inputId = "Sites",
+                                       label = "Please enter the number of sites you would like:",
+                                       value = 1,
+                                       min = 1,
+                                       max = 100,
+                                       step = 1)),
+                      
+                      conditionalPanel(
+                          condition = "input.SiteType == 'character'",
+                          # Multiple input for sites:
+                          multiInput(
+                              inputId = "Sites", label = "Please select the site codes you would like:",
+                              choices = c("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH",
+                                          "III", "JJJ", "KKK", "LLL", "MMM", "NNN", "OOO", "PPP",
+                                          "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX", 
+                                          "YYY", "ZZZ"),
+                              selected = "AAA", width = "350px")),
+                      
+                      # Input: Numeric entry for choosing the number of subjects per site --->
+                      numericInput(inputId = "NSubjects",
+                                   label = "Please input the number of subjects at each site:",
+                                   value = 10),
+                      
+                      # Input: Selector for choosing the randomization ratio --->
+                      numericInput(inputId = "RRatio",
+                                   label = "Choose a randomization ratio:",
+                                   value = 1),
+                      
+                      # Input: Numeric entry for choosing the block size ---> 
+                      numericInput(inputId = "BlockSize",
+                                   label = "Please input the number of subjects per block",
+                                   value = 0),
+                      
+                      # Ownership
+                      tags$strong("Author: Matt Quinn",
+                                  tags$br(),
+                                  "Class: STA 635",
+                                  tags$br(),
+                                  "Date: 8/24/2020"),
+                      
+                      br(),
+                      
+                      # Instructions
+                      actionButton(
+                          inputId = "Instructions",
+                          label = "Instructions",
+                          icon = icon("cog"))
+                      
+                  ),
+                  
+                  # Main panel for displaying outputs --->
+                  mainPanel(
+                      
+                      # Output: Formatted text for caption --->
+                      h2(textOutput(outputId = "caption",
+                                    container = span)),
+                      
+                      # Output: HTML table with requested number of observations --->
+                      DT::dataTableOutput("table"),
+                      
+                      # Sources:
+                      # Written in HTML format
+                      # a() is for hyperlinks
+                      
+                      h2("References"),
+                      a("1. Table Options",
+                        href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
+                      br(),
+                      a("2. Pretty Options",
+                        href = "https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"),
+                      br(),
+                      a("3. Shiny Tutorial",
+                        href = "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"),
+                      br(),
+                      a("4. Error Handling in R",
+                        href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
+                      br(),
+                      a("5. FOR Loops in R",
+                        href = "https://www.datamentor.io/r-programming/for-loop/"),
+                      br(),
+                      a("6. Substrings in R",
+                        href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string"),
+                      br(),
+                      a("7. rep() in R",
+                        href = "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"),
+                      br(),
+                      a("8. Boolean && Operator",
+                        href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1"),
+                      br(),
+                      a("9. Multi User Input in Shiny",
+                        href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html")
+                      
+                  )
     )
 )
 
@@ -304,9 +356,9 @@ server <- function(input, output, session){
     
     # Output the table
     output$table <- DT::renderDataTable({
-            FINAL()}
+        FINAL()}
     )
-
+    
     # Instructions via HTML:
     observeEvent(input$Instructions, {
         show_alert(
