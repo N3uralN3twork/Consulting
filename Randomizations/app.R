@@ -64,12 +64,12 @@ library(DT)           # For displaying the data table
 "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"
 
 ################################################################################
-###                         Creating the Design Schema   
+###                         Creating the Design Schema
 ###
 ################################################################################
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
-    
+
     ### Error-checking: ###
     # Null value for sites:
     if (is.null(Sites) == TRUE){
@@ -93,16 +93,16 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
     if (is.character(RRatio) == TRUE){
         stop("The randomization ratio must be a numeric data type")
     }
-    
+
     test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
     if (test3 == TRUE){
         stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
     }
-    
+
     if (RRatio <= 0){
         stop("The randomization ratio must be greater than 0")
     }
-    
+
     # Designing the schema:
     # If the input to sites is a NUMERIC number
     if (is.numeric(Sites) == TRUE){ # Test if a numeric number
@@ -116,41 +116,41 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
         matt = data.frame(t(matt)) # Transpose "matt"
         matt = matt %>% # For each site code in your input:
             uncount(NSubjects) # Duplicate the site code NSubjects number of times
-        matt = matt[1:NSubjects, 1:Sites] # Removing redundent codes
+        matt = matt[1:NSubjects, 1:Sites] # Removing redundant codes
         rownames(matt) = NULL
     }
     # If the input to sites is a CHARACTER vector
     else if (is.vector(Sites) == TRUE){
-        matt = matrix(NA, nrow = length(Sites), ncol = NSubjects) 
-        dimnames(matt) = list(Sites)
-        final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
-        for (i in Sites){
-            for (j in NSubjects){
-                matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
+        matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)  # Start with an empty data matrix
+        dimnames(matt) = list(Sites) # Must include or won't run
+        final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1) # Start with an empty data matrix
+        for (i in Sites){ # For each site:
+            for (j in NSubjects){ # And for each subject
+                matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment of letters
             }
         }
-        matt = as.data.frame(t(matt))
-        rownames(matt) = NULL
+        matt = as.data.frame(t(matt)) # Transpose and turn into a dataframe for reasonable viewing
+        rownames(matt) = NULL # Replace unnecessary rownames
         matt = data.frame(matt)
     }
     # Adding the numbers to the end via a simple if-then-else statement
     if (is.numeric(Sites) && Sites == 1){
-        matt = ifelse(row_number(matt) < 10,
-                      yes = paste(matt, "0", row_number(matt), sep = ""),
-                      no = paste(matt, row_number(matt), sep = ""))
+        matt = ifelse(row_number(matt) < 10, # If the row-number is less than 10:
+                      yes = paste(matt, "0", row_number(matt), sep = ""), # Assign a 0 between letter and number
+                      no = paste(matt, row_number(matt), sep = "")) # Otherwise: assign no space between letters and number
         row.names(matt) = NULL
         matt = data.frame(matt)
     }
-    else {
-        for (column in matt){
-            matt[column, ] = if_else(row_number(column) < 10,
+    else { # For all other cases:
+        for (column in matt){ # For each column in the "matt" matrix
+            matt[column, ] = if_else(row_number(column) < 10, # Same instructions as above
                                      true = paste(column, "0", row_number(column), sep = ""),
                                      false = paste(column, row_number(column), sep = ""))
         }
         row.names(matt) = NULL
-        matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
+        matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
     }
-    
+
     for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
         timesT = NSubjects*(RRatio/(RRatio+1))
         timesC = (NSubjects - timesT)
@@ -162,34 +162,34 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
                                                          no = length(Sites))))
     # Shuffle the data randomly:
     matt = sample(matt)
-    
+
     # Turn the data matrix into a data.frame:
     matt = as.data.frame(matt)
-    
+
     # Concatenate both objects into a single dataframe
     result = data.frame(c(TLC, matt))
-    
+
     # Use the "unite" function to concatenate both columns into a single column
     result = result %>% # using the pipe operator from the dplyr syntax
         unite(Codes, c("matt", "TorC"), sep = "")
-    
+
     # For each column, append the result to the previously empty matrix above
     for(column in 0:1){
-        final[, column] <- result[ , 1] # Copy only the first column 
+        final[, column] <- result[ , 1] # Copy only the first column
     }
-    
+
     # Turn into a dataframe:
     final <- as.data.frame(final)
-    
+
     # Extracting different parts of the codes for easier reading:
     final["Code"] = final[, 1]
     final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
     final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
     final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
-    
+
     # Remove the repeated column:
     final = final %>% select(Code, Site, Subject, Group)
-    
+
     # Return the end result:
     return(final)
 }
@@ -200,27 +200,27 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL){
 
 # Define UI for the schema viewer app --->
 ui <- fluidPage(
-    
+
     # Application theme --->
     theme = shinytheme("cerulean"),
-    
+
     # App title --->
     titlePanel(title = "Project: Randomization Schema"),
-    
+
     # Sidebar layout with input and output definitions --->
     sidebarLayout(position = "left",
                   fluid = TRUE, # For mobile use
-                  
+
                   # Sidebar panel for inputs --->
                   sidebarPanel(
-                      
+
                       # Input: Text for providing a caption --->
                       # Note: Changes made to the caption in the textInput control
                       # are updated in the output area immediately as you type
                       textInput(inputId = "caption",
                                 label = "Title:",
                                 value = "Randomization Schema"),
-                      
+
                       selectInput(inputId = "SiteType",
                                   label = "Please select the type of site input you would like:",
                                   choices = c(Numbers = "numeric",
@@ -234,7 +234,7 @@ ui <- fluidPage(
                                        min = 1,
                                        max = 100,
                                        step = 1)),
-                      
+
                       conditionalPanel(
                           condition = "input.SiteType == 'character'",
                           # Multiple input for sites:
@@ -243,56 +243,56 @@ ui <- fluidPage(
                               label = "Please select the site codes you would like:",
                               choices = c("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH",
                                           "III", "JJJ", "KKK", "LLL", "MMM", "NNN", "OOO", "PPP",
-                                          "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX", 
+                                          "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX",
                                           "YYY", "ZZZ"),
                               selected = "AAA", width = "350px")),
-                      
+
                       # Input: Numeric entry for choosing the number of subjects per site --->
                       numericInput(inputId = "NSubjects",
                                    label = "Please input the number of subjects at each site:",
                                    value = 10),
-                      
+
                       # Input: Selector for choosing the randomization ratio --->
                       numericInput(inputId = "RRatio",
                                    label = "Choose a randomization ratio:",
                                    value = 1),
-                      
-                      # Input: Numeric entry for choosing the block size ---> 
+
+                      # Input: Numeric entry for choosing the block size --->
                       numericInput(inputId = "BlockSize",
                                    label = "Please input the number of subjects per block:",
                                    value = 0),
-                      
+
                       # Ownership
                       tags$strong("Author: Matt Quinn",
                                   tags$br(),
                                   "Class: STA 635",
                                   tags$br(),
                                   "Date: 8/24/2020"),
-                      
+
                       br(),
-                      
+
                       # Instructions
                       actionButton(
                           inputId = "Instructions",
                           label = "Instructions",
                           icon = icon("cog"))
-                      
+
                   ),
-                  
+
                   # Main panel for displaying outputs --->
                   mainPanel(
-                      
+
                       # Output: Formatted text for caption --->
                       h2(textOutput(outputId = "caption",
                                     container = span)),
-                      
+
                       # Output: HTML table with requested number of observations --->
                       DT::dataTableOutput("table"),
-                      
+
                       # Sources:
                       # Written in HTML format
                       # a() is for hyperlinks
-                      
+
                       h2("References"),
                       a("1. Table Options",
                         href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
@@ -320,7 +320,7 @@ ui <- fluidPage(
                       br(),
                       a("9. Multi User Input in Shiny",
                         href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html")
-                      
+
                   )
     )
 )
@@ -331,7 +331,7 @@ ui <- fluidPage(
 
 # Define server logic to summarize and view selected data set ----
 server <- function(input, output, session){
-    
+
     # Create caption ----
     # The output$caption is computed based on a reactive expression
     # that returns input$caption. When the user changes the
@@ -346,21 +346,21 @@ server <- function(input, output, session){
     output$caption <- renderText({
         input$caption
     })
-    
-    # Using the above inputs, put into a reactive environment the 
+
+    # Using the above inputs, put into a reactive environment the
     # elements that you created above in the user interface
-    
+
     FINAL <- reactive({schema(
         Sites = input$Sites,
         NSubjects = input$NSubjects,
         RRatio = input$RRatio,
         BlockSize = input$BlockSize)})
-    
+
     # Output the schema:
     output$table <- DT::renderDataTable({
         FINAL()}
     )
-    
+
     # Instructions via HTML:
     observeEvent(input$Instructions, {
         show_alert(
@@ -376,7 +376,7 @@ server <- function(input, output, session){
                       "Note: The program will automatically update after each change you make")
         )
     })
-    
+
 }
 
 "Wrapping it all together:"

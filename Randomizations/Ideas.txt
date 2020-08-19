@@ -29,5 +29,7 @@ Create a package so that others in the class can use your library:
 		@author
 		@section
 		@import
-		@export 
+		@export
+
+Don't forget to document your code and application		
 		
