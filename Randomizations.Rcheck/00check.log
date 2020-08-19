@@ -1,0 +1,76 @@
+* using log directory 'C:/Users/miqui/OneDrive/Consulting/Randomizations.Rcheck'
+* using R version 4.0.2 (2020-06-22)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* using options '--no-manual --as-cran'
+* checking for file 'Randomizations/DESCRIPTION' ... OK
+* this is package 'Randomizations' version '1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .idea
+These were most likely included in error. See section 'Package
+structure' in the 'Writing R Extensions' manual.
+* checking for portable file names ... WARNING
+Found the following files with non-portable file names:
+  RandomSchemas in R.R
+  Randomization Schema Project.docx
+These are not fully portable file names.
+See section 'Package structure' in the 'Writing R Extensions' manual.
+* checking serialization versions ... OK
+* checking whether package 'Randomizations' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... WARNING
+Non-standard license specification:
+  use_gpl3_license()
+Standardizable: FALSE
+* checking top-level files ... NOTE
+Non-standard files/directories found at top level:
+  'Ideas.txt' 'Michelle_randomizations.R' 'RandomSchemas in R.R'
+  'Randomization Schema Project.docx' 'app.R'
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+schema: no visible global function definition for 'uncount'
+schema: no visible global function definition for 'unite'
+schema: no visible binding for global variable 'Codes'
+schema: no visible binding for global variable 'Code'
+schema: no visible binding for global variable 'Site'
+schema: no visible binding for global variable 'Subject'
+schema: no visible binding for global variable 'Group'
+Undefined global functions or variables:
+  Code Codes Group Site Subject uncount unite
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... NONE
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 2 WARNINGs, 3 NOTEs
