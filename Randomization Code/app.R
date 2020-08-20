@@ -6,7 +6,7 @@ Finished on: August 6th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Actual Work")
+setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code/")
 
 
 ################################################################################
