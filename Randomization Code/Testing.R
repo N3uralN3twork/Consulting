@@ -1,57 +1,19 @@
-"
-Title: Randomization Schema
-Author: Matt Quinn
-Date: August 2nd 2020
-Finished on: August 6th 2020
-Class: STA 635 Consulting and Programming
-"
+library(Randomizations)
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Actual Work/")
 
-# install.packages("tidyverse")
-library(tidyverse) # For the unite and row_number functions
-
-################################################################################
-###                           NOTES:                                         ###
-################################################################################
-# INPUT:
-  # A list of site codes (character)
-  # The number of subjects per site (integer)
-  # The randomization ratio (>= 1)
-  # Number of factors in your experiment (>= 0)
-
-# OUTPUT:
-  # A sequential list of N codes inside a dataframe object
-  # An empty data vector for each factor
-
-# For each site do the following:
-  # Store site in dataframe N times each
-  # Add numbers (1-K) to end of each site code in dataframe
-  # Randomly assign (T/C) to end of each site code in dataframe
-
-# Assigning the numbers:
-   # Based on your row number for each site
-   # If less than 10, assign a "0" between the code and the number
-   # Otherwise, assign no space between the code and the number
-
-# Randomization Ratio:
-  # Number of Treatment subjects == (N/(N+D))*NSubjects:
-  # Number of Control subjects == (NSubjects - TSubjects)
-  # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
-
-# Seed
-  # Do you want to reproduce the design schema?
-
-##################################
-### SCHEMA for Multiple Sites: ###
-##################################
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
-
+  
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
-
+  
+  # Input morphism:
+  if (is.character(RRatio)){
+    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":")))
+    RRatio = nums[1]/nums[2]
+  }
+  
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){
@@ -72,19 +34,22 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("Please enter a positive integer for the number of subjects per site")
   }
   # Improper Randomization Ratio:
-  if (is.character(RRatio) == TRUE){
-    stop("The randomization ratio must be a numeric data type")
-  }
-
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
   }
-
+  
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
   }
-
+  
+  # Improper random seed
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+  
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+    stop("The seed is a boolean input") # Return this error message
+  }
+  
   # Designing the schema:
   # If the input to sites is a NUMERIC number
   if (is.numeric(Sites) == TRUE){ # Test if a numeric number
@@ -132,7 +97,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     row.names(matt) = NULL
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
-
+  
   for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
     timesT = NSubjects*(RRatio/(RRatio+1)) # Calculates the number of Ts to assign
     timesC = (NSubjects - timesT) # Calculates the number of Cs to assign
@@ -145,45 +110,37 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
                                                        no = length(Sites))))
   # Shuffle the data randomly:
   matt = sample(matt)
-
+  
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
-
+  
   # Concatenate both objects into a single dataframe
   result = data.frame(c(TLC, matt))
-
+  
   # Use the "unite" function to concatenate both columns into a single column
   result = result %>% # using the pipe operator from the dplyr syntax
     unite(Codes, c("matt", "TorC"), sep = "")
-
+  
   # For each column, append the result to the previously empty matrix above
   for(column in 0:1){
     final[, column] <- result[ , 1] # Copy only the first column
   }
-
+  
   # Turn into a dataframe:
   final <- as.data.frame(final)
-
+  
   # Extracting different parts of the codes for easier reading:
   final["Code"] = final[, 1]
   final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
   final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
   final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
-
+  
   # Remove the repetitive column:
   final = final %>% select(Code, Site, Subject, Group)
-
+  
   # Return the end result:
   return(final)
 }
 
-# Unit Testing:
-
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = 1, seed = TRUE)
-test2 <- schema(Sites = 1, NSubjects = 10, RRatio = 1)
-test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
-test4 <- schema(Sites = 2, NSubjects = 30, RRatio = 2)
-test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, RRatio = 1)
-test6 <- schema(Sites = NULL, NSubjects = 10, RRatio = 1) # Should return error
-test7 <- schema(Sites = c("AAA", 1), NSubjects = 10, RRatio = 1)
+schema(Sites = "AAA", NSubjects = 10, BlockSize = 5, RRatio = "4:1", seed = FALSE)
 

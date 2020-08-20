@@ -62,6 +62,7 @@ library(DT)           # For displaying the data table
 "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1" # && operator
 "https://rdrr.io/cran/shinyWidgets/man/multiInput.html" # MultiInput Widget
 "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"
+"https://stackoverflow.com/questions/38351820/negation-of-in-in-r" # Negation of %in%
 
 ################################################################################
 ###                         Creating the Design Schema
@@ -73,6 +74,12 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
+  
+  # Input morphism:
+  if (is.character(RRatio)){
+    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":")))
+    RRatio = nums[1]/nums[2]
+  }
   
   ### Error-checking: ###
   # Null value for sites:
@@ -94,10 +101,6 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("Please enter a positive integer for the number of subjects per site")
   }
   # Improper Randomization Ratio:
-  if (is.character(RRatio) == TRUE){
-    stop("The randomization ratio must be a numeric data type")
-  }
-  
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
@@ -105,6 +108,13 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
+  }
+  
+  # Improper random seed
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+  
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+    stop("The seed is a boolean input") # Return this error message
   }
   
   # Designing the schema:
@@ -331,7 +341,10 @@ ui <- fluidPage(
                         href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html"),
                       br(),
                       a("10. Making an R Package",
-                        href = "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html")
+                        href = "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"),
+                      br(),
+                      a("11. Negation in R",
+                        href = "https://stackoverflow.com/questions/38351820/negation-of-in-in-r")
                   )
     )
 )
