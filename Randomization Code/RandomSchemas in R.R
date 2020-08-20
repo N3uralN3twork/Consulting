@@ -6,7 +6,7 @@ Finished on: August 6th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Actual Work/")
+setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code")
 
 # install.packages("tidyverse")
 library(tidyverse) # For the unite and row_number functions
@@ -47,48 +47,54 @@ library(tidyverse) # For the unite and row_number functions
 ##################################
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
-
+  
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
-
+  
+  # Input morphism:
+  if (is.character(RRatio)){ # If the input is a character ratio
+    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":"))) # Extract the chars and turn into integers
+    RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
+  }
+  
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){
     stop("Please enter either an integer or site prefixes")
   }
+  
   # Unique site codes:
   test1 = any(duplicated(Sites))
   if (test1 == TRUE){
     stop("Please enter unique site codes")
   }
+  
   # Non-positive number of sites:
   if (is.numeric(Sites) && Sites <= 0){
     stop("Please enter a valid number of sites (>=1)")
   }
+  
   # Non-positive number of subjects:
   test2 <- any(NSubjects <= 0)
   if (test2 == TRUE){
     stop("Please enter a positive integer for the number of subjects per site")
   }
+  
   # Improper Randomization Ratio:
-  if (is.character(RRatio) == TRUE){
-    stop("The randomization ratio must be a numeric data type")
-  }
-
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
   }
-
+  
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
   }
   
   # Improper random seed
-  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
   
-  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not TRUE or FALSE:
     stop("The seed should be a boolean input") # Return this error message
   }
   
@@ -139,7 +145,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     row.names(matt) = NULL
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
-
+  
   for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
     timesT = NSubjects*(RRatio/(RRatio+1)) # Calculates the number of Ts to assign
     timesC = (NSubjects - timesT) # Calculates the number of Cs to assign
@@ -152,41 +158,41 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
                                                        no = length(Sites))))
   # Shuffle the data randomly:
   matt = sample(matt)
-
+  
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
-
+  
   # Concatenate both objects into a single dataframe
   result = data.frame(c(TLC, matt))
-
+  
   # Use the "unite" function to concatenate both columns into a single column
   result = result %>% # using the pipe operator from the dplyr syntax
     unite(Codes, c("matt", "TorC"), sep = "")
-
+  
   # For each column, append the result to the previously empty matrix above
   for(column in 0:1){
     final[, column] <- result[ , 1] # Copy only the first column
   }
-
+  
   # Turn into a dataframe:
   final <- as.data.frame(final)
-
+  
   # Extracting different parts of the codes for easier reading:
   final["Code"] = final[, 1]
   final["Site"] =  substr(final[, 1], 1, 3) # extract first three letters from code
   final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
   final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
-
+  
   # Remove the repetitive column:
-  final = final %>% select(Code, Site, Subject, Group)
-
+  final = final %>% select(Code, Site, Subject, Group) # Using dplyr's built-in pipe (%>%) operator
+  
   # Return the end result:
   return(final)
 }
 
 # Unit Testing:
 
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = 1, seed = TRUE)
+test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = "1:1", seed = TRUE)
 test2 <- schema(Sites = 1, NSubjects = 10, RRatio = 1)
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
 test4 <- schema(Sites = 2, NSubjects = 30, RRatio = 2)

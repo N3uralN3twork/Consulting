@@ -61,7 +61,7 @@ library(DT)           # For displaying the data table
 "https://www.rdocumentation.org/packages/tidyft/versions/0.4.5/topics/uncount" # Uncount Function
 "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1" # && operator
 "https://rdrr.io/cran/shinyWidgets/man/multiInput.html" # MultiInput Widget
-"https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"
+"https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html" # Making an R Package
 "https://stackoverflow.com/questions/38351820/negation-of-in-in-r" # Negation of %in%
 
 ################################################################################
@@ -76,9 +76,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     set.seed(123)}
   
   # Input morphism:
-  if (is.character(RRatio)){
-    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":")))
-    RRatio = nums[1]/nums[2]
+  if (is.character(RRatio)){ # If the input is a character ratio
+    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":"))) # Extract the chars and turn into integers
+    RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
   }
   
   ### Error-checking: ###
@@ -86,20 +86,24 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (is.null(Sites) == TRUE){
     stop("Please enter either an integer or site prefixes")
   }
+  
   # Unique site codes:
   test1 = any(duplicated(Sites))
   if (test1 == TRUE){
     stop("Please enter unique site codes")
   }
+  
   # Non-positive number of sites:
   if (is.numeric(Sites) && Sites <= 0){
     stop("Please enter a valid number of sites (>=1)")
   }
+  
   # Non-positive number of subjects:
   test2 <- any(NSubjects <= 0)
   if (test2 == TRUE){
     stop("Please enter a positive integer for the number of subjects per site")
   }
+  
   # Improper Randomization Ratio:
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
@@ -111,9 +115,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Improper random seed
-  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
   
-  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not TRUE or FALSE:
     stop("The seed should be a boolean input") # Return this error message
   }
   
