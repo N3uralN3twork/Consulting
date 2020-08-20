@@ -54,16 +54,16 @@ schema(Sites = 1, NSubjects = 10, BlockSize = 6, RRatio = 1, seed = TRUE) %>%
 
 | Code   | Site | Subject | Group |
 | :----- | :--- | :------ | :---- |
-| AAA01C | AAA  | 01      | C     |
-| AAA02T | AAA  | 02      | T     |
-| AAA03C | AAA  | 03      | C     |
-| AAA04T | AAA  | 04      | T     |
-| AAA05T | AAA  | 05      | T     |
-| AAA06T | AAA  | 06      | T     |
+| AAA01T | AAA  | 01      | T     |
+| AAA02C | AAA  | 02      | C     |
+| AAA03T | AAA  | 03      | T     |
+| AAA04C | AAA  | 04      | C     |
+| AAA05C | AAA  | 05      | C     |
+| AAA06C | AAA  | 06      | C     |
 | AAA07T | AAA  | 07      | T     |
 | AAA08C | AAA  | 08      | C     |
-| AAA09C | AAA  | 09      | C     |
-| AAA10C | AAA  | 10      | C     |
+| AAA09T | AAA  | 09      | T     |
+| AAA10T | AAA  | 10      | T     |
 
 # Resources :notebook:
 
@@ -92,3 +92,6 @@ Shiny](https://rdrr.io/cran/shinyWidgets/man/multiInput.html)
 
 [Making an R
 Package](https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html)
+
+[Negation in
+R](https://stackoverflow.com/questions/38351820/negation-of-in-in-r)

@@ -74,6 +74,8 @@ schema(Sites = 1, NSubjects = 10, BlockSize = 6, RRatio = 1, seed = TRUE) %>%
 
 [Making an R Package](https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html)
 
+[Negation in R](https://stackoverflow.com/questions/38351820/negation-of-in-in-r)
+
 
 
 

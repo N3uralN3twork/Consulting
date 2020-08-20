@@ -26,6 +26,12 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (seed == TRUE){
     set.seed(123)}
 
+  # Input morphism:
+  if (is.character(RRatio)){
+    nums = as.integer(unlist(str_split(string = RRatio, pattern = ":")))
+    RRatio = nums[1]/nums[2]
+  }
+
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){
@@ -46,10 +52,6 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("Please enter a positive integer for the number of subjects per site")
   }
   # Improper Randomization Ratio:
-  if (is.character(RRatio) == TRUE){
-    stop("The randomization ratio must be a numeric data type")
-  }
-
   test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
   if (test3 == TRUE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
@@ -57,6 +59,13 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
+  }
+
+  # Improper random seed
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+    stop("The seed is a boolean input") # Return this error message
   }
 
   # Designing the schema:
@@ -72,47 +81,48 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     matt = data.frame(t(matt)) # Transpose "matt"
     matt = matt %>% # For each site code in your input:
       uncount(NSubjects) # Duplicate the site code NSubjects number of times
-    matt = matt[1:NSubjects, 1:Sites] # Removing redundent codes
+    matt = matt[1:NSubjects, 1:Sites] # Removing redundant codes
     rownames(matt) = NULL
   }
   # If the input to sites is a CHARACTER vector
   else if (is.vector(Sites) == TRUE){
-    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)
-    dimnames(matt) = list(Sites)
-    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1)
-    for (i in Sites){
-      for (j in NSubjects){
-        matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment
+    matt = matrix(NA, nrow = length(Sites), ncol = NSubjects)  # Start with an empty data matrix
+    dimnames(matt) = list(Sites) # Must include or won't run
+    final = matrix(NA, nrow = length(Sites)*NSubjects, ncol = 1) # Start with an empty data matrix
+    for (i in Sites){ # For each site:
+      for (j in NSubjects){ # And for each subject
+        matt[i, ] = rep(i, times = NSubjects) # Row-wise assignment of letters
       }
     }
-    matt = as.data.frame(t(matt))
-    rownames(matt) = NULL
+    matt = as.data.frame(t(matt)) # Transpose and turn into a dataframe for reasonable viewing
+    rownames(matt) = NULL # Replace unnecessary rownames
     matt = data.frame(matt)
   }
   # Adding the numbers to the end via a simple if-then-else statement
   if (is.numeric(Sites) && Sites == 1){
-    matt = ifelse(row_number(matt) < 10,
-                  yes = paste(matt, "0", row_number(matt), sep = ""),
-                  no = paste(matt, row_number(matt), sep = ""))
+    matt = ifelse(row_number(matt) < 10, # If the row-number is less than 10:
+                  yes = paste(matt, "0", row_number(matt), sep = ""), # Assign a 0 between letter and number
+                  no = paste(matt, row_number(matt), sep = "")) # Otherwise: assign no space between letters and number
     row.names(matt) = NULL
     matt = data.frame(matt)
   }
-  else {
-    for (column in matt){
-      matt[column, ] = if_else(row_number(column) < 10,
+  else { # For all other cases:
+    for (column in matt){ # For each column in the "matt" matrix
+      matt[column, ] = if_else(row_number(column) < 10, # Same instructions as above
                                true = paste(column, "0", row_number(column), sep = ""),
                                false = paste(column, row_number(column), sep = ""))
     }
     row.names(matt) = NULL
-    matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1]
+    matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
 
   for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
-    timesT = NSubjects*(RRatio/(RRatio+1))
-    timesC = (NSubjects - timesT)
-    TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC)))))
+    timesT = NSubjects*(RRatio/(RRatio+1)) # Calculates the number of Ts to assign
+    timesC = (NSubjects - timesT) # Calculates the number of Cs to assign
+    TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC))))) # Concatenates and puts into a dataframe
   }
   # Repeat the process above for each site
+  # Must assign special cases for 1 dimensional and N>1 dimensional matrices
   TLC = data.frame(TorC = rep(TLC$TorC, times = ifelse(is.numeric(Sites),
                                                        yes = Sites,
                                                        no = length(Sites))))
@@ -143,10 +153,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   final["Subject"] =  gsub("[a-zA-Z]+", "", final[, 1]) # remove letters with regex
   final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
 
-  # Remove the repeated column:
+  # Remove the repetitive column:
   final = final %>% select(Code, Site, Subject, Group)
 
   # Return the end result:
   return(final)
 }
-

@@ -17,7 +17,7 @@ library(tidyverse) # For the unite and row_number functions
 # INPUT:
   # A list of site codes (character)
   # The number of subjects per site (integer)
-  # The randomization ratio (>= 1)
+  # The randomization ratio 
   # Number of factors in your experiment (>= 0)
 
 # OUTPUT:
@@ -39,7 +39,7 @@ library(tidyverse) # For the unite and row_number functions
   # Number of Control subjects == (NSubjects - TSubjects)
   # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
 
-# Seed
+# Seed:
   # Do you want to reproduce the design schema?
 
 ##################################
@@ -84,7 +84,14 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
   }
-
+  
+  # Improper random seed
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
+  
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
+    stop("The seed is a boolean input") # Return this error message
+  }
+  
   # Designing the schema:
   # If the input to sites is a NUMERIC number
   if (is.numeric(Sites) == TRUE){ # Test if a numeric number
