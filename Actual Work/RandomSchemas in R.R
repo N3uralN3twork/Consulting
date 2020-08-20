@@ -8,6 +8,7 @@ Class: STA 635 Consulting and Programming
 
 setwd("C:/Users/miqui/OneDrive/Consulting/Actual Work/")
 
+# install.packages("tidyverse")
 library(tidyverse) # For the unite and row_number functions
 
 ################################################################################

@@ -20,11 +20,11 @@
 #' @import tidyverse dplyr
 #'
 #' @export
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
 
   # Set the seed for reproducibility:
-  if (!missing(seed))
-    set.seed(seed)
+  if (seed == TRUE){
+    set.seed(123)}
 
   ### Error-checking: ###
   # Null value for sites:
