@@ -51,7 +51,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
-  
+
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){

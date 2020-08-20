@@ -149,3 +149,4 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Return the end result:
   return(final)
 }
+
