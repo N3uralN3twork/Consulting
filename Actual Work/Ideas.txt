@@ -34,3 +34,7 @@ Create a package so that others in the class can use your library:
 Don't forget to document your code and application		
 		
 FIGURE OUT HOW TO MAKE THE SCHEMA REPRODUCIBLE USING A SEED
+
+### To Let Others Use your Function
+library(devtools)
+devtools::install_github("N3uralN3twork/Consulting/Randomizations", INSTALL_opts=c("--no-multiarch"))

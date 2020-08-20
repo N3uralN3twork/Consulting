@@ -328,7 +328,10 @@ ui <- fluidPage(
                         href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1"),
                       br(),
                       a("9. Multi User Input in Shiny",
-                        href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html")
+                        href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html"),
+                      br(),
+                      a("10. Making an R Package",
+                        href = "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html")
                   )
     )
 )
@@ -381,6 +384,8 @@ server <- function(input, output, session){
                       "3. Input the randomization ratio in the form of a floating-point number",
                       br(),
                       "4. Input the number of subjects per block",
+                      br(),
+                      "5. You can reproduce your results if you use the handy switch",
                       br(),
                       "Note: The program will automatically update after each change you make")
         )
