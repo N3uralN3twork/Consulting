@@ -114,7 +114,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   "%!in%" = Negate("%in%") # Handy function to include the negation of an in statement
   
   if (seed %!in% c(TRUE, FALSE)){ # If seed not in c(TRUE, FALSE)
-    stop("The seed is a boolean input") # Return this error message
+    stop("The seed should be a boolean input") # Return this error message
   }
   
   # Designing the schema:
@@ -269,7 +269,7 @@ ui <- fluidPage(
 
                       # Input: Selector for choosing the randomization ratio --->
                       numericInput(inputId = "RRatio",
-                                   label = "Choose a randomization ratio:",
+                                   label = "Please choose a randomization ratio:",
                                    value = 1),
 
                       # Input: Numeric entry for choosing the block size --->
