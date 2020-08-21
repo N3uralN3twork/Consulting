@@ -58,6 +58,14 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
   }
   
+  if (is.character(NSubjects)){
+    NSubjects = as.integer(NSubjects)
+  }
+  
+  if (is.character(BlockSize)){
+    BlockSize = as.integer(BlockSize)
+  }
+  
   ### Error-checking: ###
   # Null value for sites:
   if (is.null(Sites) == TRUE){

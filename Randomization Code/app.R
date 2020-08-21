@@ -6,7 +6,7 @@ Finished on: August 6th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code/")
+setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code")
 
 
 ################################################################################
@@ -79,6 +79,14 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (is.character(RRatio)){ # If the input is a character ratio
     nums = as.integer(unlist(str_split(string = RRatio, pattern = ":"))) # Extract the chars and turn into integers
     RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
+  }
+  
+  if (is.character(NSubjects)){
+    NSubjects = as.integer(NSubjects)
+  }
+  
+  if (is.character(BlockSize)){
+    BlockSize = as.integer(BlockSize)
   }
   
   ### Error-checking: ###
@@ -207,7 +215,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   final["Group"] = substr(final[, 1], nchar(final[, 1]), nchar(final[, 1]))
   
   # Remove the repetitive column:
-  final = final %>% select(Code, Site, Subject, Group)
+  final = final %>% select(Code, Site, Subject, Group) # Using dplyr's built-in pipe (%>%) operator
   
   # Return the end result:
   return(final)
