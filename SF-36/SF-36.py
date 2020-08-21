@@ -66,9 +66,12 @@ data = data.astype({"Q1": "float64"}) #For later problems
 df = data.copy() #Don't just type "df = data" 'cause you'll have linked changes you make
 df.dtypes
 
-"""Steps: 1. Change Decimals to NA"
-"         2. Change Negatives to NA /
-"         3. Change out-of-range values to NA"""
+"""
+Steps: 
+    1. Change Decimals to NA"
+    2. Change Negatives to NA /
+    3. Change out-of-range values to NA
+"""
 
 #1. Change entries with decimals to NA:
 
@@ -78,7 +81,6 @@ df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, Non
 
 #2. Change Negatives to NA:
 df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, None))
-
 
 #3. Change out-of-range values to NA:
 #Question Ranges:
@@ -146,7 +148,7 @@ del OneToSixColumns
 def RAW_PF(a,b,c,d,e,f,g,h,i,j):
     """A function to return the raw Physical-Functioning score
     Inputs: Items 3a - 3j
-    Output: Phyiscal-functioning score"""
+    Output: Physical-functioning score"""
     list = pd.Series([a,b,c,d,e,f,g,h,i,j]) #Create a list of the items
     Mean = np.mean(list)                    #Calculate the mean of the items in the list
     Missing = list.isna().sum()
@@ -162,7 +164,7 @@ def RAW_PF(a,b,c,d,e,f,g,h,i,j):
 RAW_PF(2,1,3,2,3,2,1,1,np.nan,3) #20
 RAW_PF(3,3,2,2,2,3,3,3,2,2) #25
 RAW_PF(np.nan,3,np.nan,3,np.nan,1,np.nan,2,np.nan,np.nan) #None
-RAW_PF(1,	3,	3,	1,	1,	2,	2,	1,	2,	2) #18
+RAW_PF(1, 3, 3,	1,	1,	2,	2,	1,	2,	2) #18
 RAW_PF(np.nan, 3,1,3,1,2,2,2,1,3) #20
 
 
