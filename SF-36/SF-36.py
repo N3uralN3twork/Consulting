@@ -257,7 +257,8 @@ RAW_BP(np.nan, np.nan) #None
 RAW_BP(4, np.nan) #6.2
 RAW_BP(np.nan, 9) #None
 RAW_BP(np.nan, 2) #9.5
-RAW_BP(3,5) #7
+RAW_BP(3, 5) #7 # Why is there a mismatch?
+
 
 #Applying to the data set
 df["Raw_BP"] = df.apply(lambda row: RAW_BP(row["Q7"], row["Q8"]), axis = 1)
