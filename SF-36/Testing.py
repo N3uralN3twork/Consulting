@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-# from dfply import *
 
 
 class Schema:
@@ -106,8 +105,163 @@ class Schema:
         else:
             return None
 
-    
+    def rawGH(self, item1, item11a, item11b, item11c, item11d):
+        """A function to return the raw General Health score
+        Inputs: Items 1, 11a - 11d
+        Output: Raw General Health score"""
+        Item1Dict = {np.nan: np.nan, 1: 5, 2: 4.4, 3: 3.4, 4: 2, 5: 1}
+        if item1 in Item1Dict:  # Recode
+            global a  # Define "a" as a global variable (no idea what that means btw)
+            a = Item1Dict[item1]  # Go through and check dictionary
+        b = item11a  # Don't change
+        c = (np.abs(item11b - 5) + 1)  # Recode
+        d = item11c
+        e = (np.abs(item11d - 5) + 1)  # Recode
+        List = pd.Series([a, b, c, d, e])
+        Missing = List.isna().sum()
+        if Missing == 0:  # All present
+            return np.sum([a, b, c, d, e])
+        elif Missing >= 3:  # 3 or more missing
+            return None
+        elif (Missing == 1 or Missing == 2):
+            a2 = np.nanmean([b, c, d, e])
+            b2 = np.nanmean([a, c, d, e])
+            c2 = np.nanmean([a, b, d, e])
+            d2 = np.nanmean([a, b, c, e])
+            e2 = np.nanmean([a, b, c, d])
+            return np.nansum([a2 + b2 + c2 + d2 + e2])
+        else:
+            return "Error"
 
+    def rawVT(self, item9a, item9e, item9g, item9i):
+        """A function to return the raw Vitality score
+        Inputs: Items 9a, 9e, 9g, and 9i
+        Output: Raw Vitality score"""
+        item9a = np.abs(item9a - 5) + 1  # Recode before computation
+        item9e = np.abs(item9e - 5) + 1
+        item9g = item9g  # Keep same
+        item9i = item9i  # Keep same
+        ls = pd.Series([item9a, item9e, item9g, item9i])
+        Missing = ls.isna().sum()
+        if Missing >= 3:  # 3 or more are missing
+            return None
+        elif Missing == 0:  # None missing
+            return (item9a + item9e + item9g + item9i)
+        elif (Missing == 1):  # Only 1 item missing
+            a3 = np.nanmean([item9e, item9g, item9i])
+            b3 = np.nanmean([item9a, item9g, item9i])
+            c3 = np.nanmean([item9a, item9e, item9i])
+            d3 = np.nanmean([item9a, item9e, item9g])
+            return (a3 + b3 + c3 + d3)
+        elif (Missing == 2):  # Just 2 missing
+            return (2 * (item9g + item9i))  # Yes, this is cheating a bit
+        else:
+            return None
+
+    def rawSF(self, item6, item10):
+        """Function to return the raw Social-Functioning score
+        Inputs: Items 6 and 10
+        Output: Raw Social-Functioning score"""
+        while np.isnan(item6) and np.isnan(item10):  # Both missing
+            return None
+        while np.isnan(item6) and item10 > 0:  # Just 6 missing
+            return (2 * item10)
+        while item6 > 0 and np.isnan(item10):  # Just 10 missing
+            return (2 * ((np.abs(item6 - 5)) + 1))
+        while item6 > 0 and item10 > 0:  # Both items present
+            return ((np.abs(item6 - 5)) + item10 + 1)
+        else:
+            return None
+
+    def rawRE(self, item5a, item5b, item5c):
+        """Function that returns that raw Role-Emotional score
+        Inputs: Items 5a-5c
+        Output: Raw Role-Emotional score"""
+        List = pd.Series([item5a, item5b, item5c])
+        Missing = np.isnan(List).sum()
+        Mean = np.mean(List)
+        while np.isnan(item5a) and np.isnan(item5b) and np.isnan(item5c):  # All missing
+            return None
+        while Missing >= 2:
+            return None
+        while item5a > 0 and item5b > 0 and item5c > 0:  # All items present
+            return (item5a + item5b + item5c)
+        while Missing == 1:  # If only missing one item
+            List2 = List.replace(np.nan, Mean)
+            return sum(List2)
+        else:  # Prolly run forever without the below statement
+            return None
+
+    def rawMH(self, item9b, item9c, item9d, item9f, item9h):
+        """A function that returns the raw mental health score
+        Inputs: Items 9b, 9c, 9d, 9f, and 9h
+        Output: Raw Mental Health score"""
+        item9b = item9b  # Keep same
+        item9c = item9c
+        item9d = (np.abs(item9d - 5) + 1)  # Recode
+        item9f = item9f  # Keep same
+        item9h = (np.abs(item9h - 5) + 1)  # Recode
+        List = pd.Series([item9b, item9c, item9d, item9f, item9h])
+        Missing = List.isna().sum()
+        if Missing >= 3:  # 3 or more missing
+            return None
+        elif Missing == 0:  # All items present
+            return (item9b + item9c + item9d + item9f + item9h)
+        elif (Missing > 0 or Missing < 3):
+            b2 = np.nanmean([item9c, item9d, item9f, item9h])
+            c2 = np.nanmean([item9b, item9d, item9f, item9h])
+            d2 = np.nanmean([item9b, item9c, item9f, item9h])
+            f2 = np.nanmean([item9b, item9c, item9d, item9h])
+            h2 = np.nanmean([item9b, item9c, item9d, item9f])
+            return (b2 + c2 + d2 + f2 + h2)
+        else:
+            return "Error"
+
+    def transformations(self):
+        df["Transformed_PF"] = ((df["Raw_PF"] - 10) / 20) * 100
+        df["Transformed_RP"] = ((df["Raw_RP"] - 4) / 16) * 100
+        df["Transformed_BP"] = ((df["Raw_BP"] - 2) / 10) * 100
+        df["Transformed_GH"] = ((df["Raw_GH"] - 5) / 20) * 100
+        df["Transformed_VT"] = ((df["Raw_VT"] - 4) / 16) * 100
+        df["Transformed_SF"] = ((df["Raw_SF"] - 2) / 8) * 100
+        df["Transformed_RE"] = ((df["Raw_RE"] - 3) / 12) * 100
+        df["Transformed_MH"] = ((df["Raw_MH"] - 5) / 20) * 100
+        return df
+
+    def standardization(self):
+        df["Standardized_PF"] = ((df["Transformed_PF"] - 83.29094) / 23.75883)
+        df["Standardized_RP"] = ((df["Transformed_RP"] - 82.50964) / 25.52028)
+        df["Standardized_BP"] = ((df["Transformed_BP"] - 71.32527) / 23.66224)
+        df["Standardized_GH"] = ((df["Transformed_GH"] - 70.84570) / 20.97821)
+        df["Standardized_VT"] = ((df["Transformed_VT"] - 58.31411) / 20.01923)
+        df["Standardized_SF"] = ((df["Transformed_SF"] - 84.30250) / 22.91921)
+        df["Standardized_RE"] = ((df["Transformed_RE"] - 87.39733) / 21.43778)
+        df["Standardized_MH"] = ((df["Transformed_MH"] - 74.98685) / 17.75604)
+        return df
+
+    def normBased(self):
+        df["NormBased_PF"] = (50 + (df["Standardized_PF"] * 10))
+        df["NormBased_RP"] = (50 + (df["Standardized_RP"] * 10))
+        df["NormBased_BP"] = (50 + (df["Standardized_BP"] * 10))
+        df["NormBased_GH"] = (50 + (df["Standardized_GH"] * 10))
+        df["NormBased_VT"] = (50 + (df["Standardized_VT"] * 10))
+        df["NormBased_SF"] = (50 + (df["Standardized_SF"] * 10))
+        df["NormBased_RE"] = (50 + (df["Standardized_RE"] * 10))
+        df["NormBased_MH"] = (50 + (df["Standardized_MH"] * 10))
+        return df
+
+    def finale(self, df):
+        Questions = df.iloc[:, 0:37]
+        Answers = df.iloc[:, 37:69]
+        FinalScoredData = pd.concat([Questions, Answers], axis=1)
+        FinalScoredData = np.round(FinalScoredData, decimals=2)  # Round everything to 2 decimal places
+        return FinalScoredData
+
+    def writeResults(self, df, fileName):
+        pd.DataFrame.to_csv(df, path_or_buf=fileName,
+                            header=True, index=False)
+
+    os.listdir()
 
 # Initialize the sf-36 survey class:
 test = Schema()
@@ -125,3 +279,24 @@ df["Raw_RP"] = df.apply(lambda row: test.rawRP(row["Q4a"], row["Q4b"],
                                                row["Q4c"], row["Q4d"]), axis = 1)
 
 df["Raw_BP"] = df.apply(lambda row: test.rawBP(row["Q7"], row["Q8"]), axis = 1)
+
+df["Raw_GH"] = df.apply(lambda row: test.rawGH(row["Q1"], row["Q11a"], row["Q11b"],
+                                               row["Q11c"], row["Q11d"]), axis = 1)
+
+df["Raw_VT"] = df.apply(lambda row: test.rawVT(row["Q9a"], row["Q9e"],
+                                               row["Q9g"], row["Q9i"]), axis = 1)
+
+df["Raw_SF"] = df.apply(lambda row: test.rawSF(row["Q6"], row["Q10"]), axis = 1)
+
+df["Raw_RE"] = df.apply(lambda row: test.rawRE(row["Q5a"], row["Q5b"], row["Q5c"]), axis = 1)
+
+df["Raw_MH"] = df.apply(lambda row: test.rawMH(row["Q9b"], row["Q9c"], row["Q9d"],
+                                           row["Q9f"], row["Q9h"]), axis = 1)
+
+df = test.transformations()
+
+df = test.standardization()
+
+df = test.normBased()
+
+test.writeResults(df, fileName="FinalScoredData.csv")
