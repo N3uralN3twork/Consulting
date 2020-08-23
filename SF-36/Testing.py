@@ -291,7 +291,7 @@ df["Raw_SF"] = df.apply(lambda row: test.rawSF(row["Q6"], row["Q10"]), axis = 1)
 df["Raw_RE"] = df.apply(lambda row: test.rawRE(row["Q5a"], row["Q5b"], row["Q5c"]), axis = 1)
 
 df["Raw_MH"] = df.apply(lambda row: test.rawMH(row["Q9b"], row["Q9c"], row["Q9d"],
-                                           row["Q9f"], row["Q9h"]), axis = 1)
+                                               row["Q9f"], row["Q9h"]), axis = 1)
 
 df = test.transformations()
 
