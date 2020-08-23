@@ -6,7 +6,7 @@ import pandas as pd
 class Schema:
 
     def __init__(self):
-        self.data = None
+        pass
 
     def loadData(self):
         path = str(input("Please enter the path to the folder: "))
@@ -262,6 +262,7 @@ class Schema:
                             header=True, index=False)
 
     os.listdir()
+
 
 # Initialize the sf-36 survey class:
 test = Schema()
