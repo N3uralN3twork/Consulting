@@ -1,29 +1,26 @@
-import os
 import numpy as np
 import pandas as pd
-# from dfply import *
 
 
 class Schema:
 
     def __init__(self):
-        self.data = None
+        pass
 
-    def loadData(self):
-        path = str(input("Please enter the path to the folder: "))
-        os.chdir(path=path)
-        fileName = str(input("Please enter the name of the Excel file: "))
-        sheet = str(input("Please enter the Excel sheet name: "))
-        df = pd.read_excel(path+"/"+fileName,
-                           sheet_name=sheet,
-                           index_col=0)
-        return df
+    def emptyList(self):
+        LETTERS = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH", "III", "JJJ", "KKK", "LLL", "MMM",
+                   "NNN", "OOO", "PPP", "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX", "YYY", "ZZZ"]
+
+        Sites = int(input("Please enter the number of sites: "))
+        NSubjects = int(input("Please enter the number of subjects per site: "))
+        matt = []
+        for i in LETTERS:
+            for j in range(NSubjects):
+                matt.append([i, j])
+        return np.transpose(matt)
 
 
-# Initialize the sf-36 survey class:
 test = Schema()
 
-# Set the working directory and load in the dataset:
-df = test.loadData()
-
+test.emptyList()
 

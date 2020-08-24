@@ -43,7 +43,7 @@ library(tidyverse) # For the unite and row_number functions
   # Do you want to reproduce the design schema?
 
 ##################################
-### SCHEMA for Multiple Sites: ###
+###    SCHEMA for N Site(s)    ###
 ##################################
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
@@ -116,11 +116,11 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
       result = paste(result, collapse = "") # Combine the result into 1 string
       matt[letter] = result # Assigns the result to the previously empty vector "matt"
     } # Now that we have assigned the letters to the vector "matt"
-    matt = data.frame(t(matt)) # Transpose "matt"
+    matt = data.frame(t(matt)) # Transpose the vector
     matt = matt %>% # For each site code in your input:
       uncount(NSubjects) # Duplicate the site code NSubjects number of times
     matt = matt[1:NSubjects, 1:Sites] # Removing redundant codes
-    rownames(matt) = NULL
+    rownames(matt) = NULL # Aesthetics
   }
   # If the input to sites is a CHARACTER vector
   else if (is.vector(Sites) == TRUE){
