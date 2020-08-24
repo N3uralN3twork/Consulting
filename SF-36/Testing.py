@@ -270,8 +270,10 @@ test = Schema()
 # Set the working directory and load in the dataset:
 df = test.loadData()
 
+# Prepare the data before hand; remove decimals, fix ranges, etc.
 df = test.dataPrep(df=df)
 
+# Calculate the raw scores:
 df["Raw_PF"] = df.apply(lambda row: test.rawPF(row["Q3a"], row["Q3b"], row["Q3c"],
                                                row["Q3d"], row["Q3e"], row["Q3f"],
                                                row["Q3g"], row["Q3h"], row["Q3i"], row["Q3j"]), axis = 1)
@@ -301,3 +303,4 @@ df = test.standardization()
 df = test.normBased()
 
 test.writeResults(df, fileName="FinalScoredData.csv")
+
