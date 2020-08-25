@@ -27,7 +27,13 @@ class Schema:
                      'Q9d', 'Q9e', 'Q9f', 'Q9g', 'Q9h',
                      'Q9i', 'Q10', 'Q11a', 'Q11b', 'Q11c', 'Q11d']
 
-        df = df.astype({"Q1": "float64"})
+        df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
+                        "Q4a": "float64", "Q4b": "float64", "Q4c": "float64", "Q4d": "float64", "Q5a": "float64",
+                        "Q5b": "float64", "Q5c": "float64", "Q6": "float64", "Q7": "float64", "Q8": "float64",
+                        "Q9a": "float64", "Q9b": "float64", "Q9c": "float64", "Q9d": "float64", "Q9e": "float64",
+                        "Q9f": "float64", "Q9g": "float64", "Q9h": "float64", "Q9i": "float64", "Q10": "float64",
+                        "Q11d": "float64"})
+
         df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, None))
         df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, None))
 
@@ -259,7 +265,7 @@ class Schema:
 
     def writeResults(self, df, fileName):
         pd.DataFrame.to_csv(df, path_or_buf=fileName,
-                            header=True, index=False)
+                            header=True, index=True)
 
     os.listdir()
 
@@ -303,4 +309,3 @@ df = test.standardization()
 df = test.normBased()
 
 test.writeResults(df, fileName="FinalScoredData.csv")
-
