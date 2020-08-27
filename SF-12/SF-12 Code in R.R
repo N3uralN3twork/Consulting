@@ -1,6 +1,7 @@
 setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/SF-12")
 library(MLCIRTwithin)
 library(readr)
+library(readxl)
 library(dplyr)
 #data("SF12")
 #data("SF12_nomiss")
@@ -12,7 +13,6 @@ table(SF12$Y11)
 table(SF12$Y12)'
 
 "No missing dataset: "
-library(readxl)
 nomiss <- read_excel("SF12_nomissing.xlsx")
 View(nomiss)
 

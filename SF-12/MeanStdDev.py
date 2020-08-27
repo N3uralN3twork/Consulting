@@ -9,28 +9,35 @@ Resources:
 ####################################################################
 #                Set the WD and Import the Libraries               #
 ####################################################################
+"Setting the Working Directory: "
 import os
 os.chdir(path="C:/Users/miqui/OneDrive/CSU Classes/Consulting/SF-12")
 os.listdir()
 
+"Importing the Necessary Libraries: "
 import pandas as pd
 import numpy as np
 
-pd.set_option('display.max_columns', 10)
+"Increasing the Max Columns to Display: "
+pd.set_option('display.max_columns', 20)
 
-#Read in the sample data set:
-miss = pd.read_excel("SF12_missing.xlsx",
-                     sheet_name="data")
-miss.head(3)
-miss.describe()
-
+"Read in the sample data set: "
 nomiss = pd.read_excel("SF12_nomissing.xlsx",
                      sheet_name="data")
 nomiss.head(3)
 nomiss.describe()
 
 ####################################################################
-#           Step 1: Code Out-of-Range Values to NA                 #
+#            Step 1: Add 1 to all Columns Except Age               #
+####################################################################
+PlusOne = ['Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y6', 'Y7', 'Y8', 'Y9', 'Y10', 'Y11', 'Y12']
+
+nomiss[PlusOne] = nomiss[PlusOne]+1 # Faster version compared to .applymap()
+
+nomiss.describe()
+
+####################################################################
+#           Step 2: Code Out-of-Range Values to NA                 #
 ####################################################################
 
 nomiss.columns
@@ -52,16 +59,23 @@ nomiss[OnetoFiveColumns] = nomiss[OnetoFiveColumns].applymap(lambda x: np.where(
 nomiss.describe()
 
 ####################################################################
-#         Step 2: Reverse Code 4 Items to Higher Scale             #
+#         Step 3: Reverse Code 4 Items to Higher Scale             #
 ####################################################################
 
 "General Formula for reversing a scale = (N+1)-i:"
 
 ReverseVars = ["Y1", "Y8", "Y9", "Y10"]
 
-df = nomiss.copy()
+nomiss[ReverseVars] = nomiss[ReverseVars].applymap(lambda x: 6-x)
 
-nomiss[ReverseVars] = nomiss[ReverseVars].applymap(lambda x: 5-x)
+# Check our results:
+nomiss[ReverseVars].head()
 
+"Computing the Mean and Standard Deviation of Each Column: "
+meanStdDev = nomiss.describe()
+print(meanStdDev)
 
+####################################################################
+#              Step 4: Compute the Raw Scale Scores                #
+####################################################################
 
