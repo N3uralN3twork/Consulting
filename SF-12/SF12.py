@@ -2,8 +2,10 @@
 Title: Step One of Scoring the SF-12 version 2
 Author: Matt Quinn
 Date: 25th August 2020
+End: 27th August 2020
 Class: STA 635
 Resources:
+    https://www.geeksforgeeks.org/using-dictionary-to-remap-values-in-pandas-dataframe-columns/
 
 """
 ####################################################################
@@ -64,7 +66,7 @@ nomiss.describe()
 
 "General Formula for reversing a scale = (N+1)-i:"
 
-ReverseVars = ["Y1", "Y8", "Y9", "Y10"]
+ReverseVars = ["Y8", "Y9", "Y10"]
 
 nomiss[ReverseVars] = nomiss[ReverseVars].applymap(lambda x: 6-x)
 
@@ -74,6 +76,12 @@ nomiss[ReverseVars].head()
 "Computing the Mean and Standard Deviation of Each Column: "
 meanStdDev = nomiss.describe()
 print(meanStdDev)
+
+"Recalibrating Item # 1 via a Dictionary: "
+Item1Dict = {np.nan: np.nan, 1: 5, 2: 4.4, 3: 3.4, 4: 2, 5: 1}
+
+# Map the new values from the old values
+nomiss["Y1"] = nomiss["Y1"].map(Item1Dict)
 
 ####################################################################
 #              Step 4: Compute the Raw Scale Scores                #
@@ -135,7 +143,8 @@ Items["SF_Z"] = (Items["TransSF"] - 83.73973)/24.75775
 Items["RE_Z"] = (Items["TransRE"] - 86.41051)/22.35543
 Items["MH_Z"] = (Items["TransMH"] - 70.18217)/20.50597
 
-
+Zs = ["PF_Z", "RP_Z", "BP_Z", "GH_Z", "VT_Z", "SF_Z", "RE_Z", "MH_Z"]
+Items[Zs].describe()
 ####################################################################
 #                 Step 7: Aggregate Scale Scores                   #
 ####################################################################
@@ -143,10 +152,12 @@ Items["MH_Z"] = (Items["TransMH"] - 70.18217)/20.50597
 Create Aggregate-Scale Scores
 """
 # Aggregate Physical Summary Score:
-Items["PHYS"] = (Items["PF_Z"]*0.42402) + (Items["RP_Z"]*0.35119) + (Items["BP_Z"]*0.31754) + (Items["GH_Z"]*0.24954) + (Items["VT_Z"]*0.02877) + (Items["SF_Z"]*-0.00753) + (Items["RE_Z"]*-0.19206) + (Items["MH_Z"]*-0.22069)
+Items["PHYS"] = (Items["PF_Z"]*0.42402) + (Items["RP_Z"]*0.35119) + (Items["BP_Z"]*0.31754) + (Items["GH_Z"]*0.24954) + \
+                (Items["VT_Z"]*0.02877) + (Items["SF_Z"]*-0.00753) + (Items["RE_Z"]*-0.19206) + (Items["MH_Z"]*-0.22069)
 
 # Aggregate Mental Summary Score:
-Items["MENT"] = (Items["PF_Z"]*-0.22999) + (Items["RP_Z"]*-0.12329) + (Items["BP_Z"]*-0.09731) + (Items["GH_Z"]*-0.01571) + (Items["VT_Z"]*0.23534) + (Items["SF_Z"]*0.26876) + (Items["RE_Z"]*0.43407) + (Items["MH_Z"]*0.48581)
+Items["MENT"] = (Items["PF_Z"]*-0.22999) + (Items["RP_Z"]*-0.12329) + (Items["BP_Z"]*-0.09731) + (Items["GH_Z"]*-0.01571) + \
+                (Items["VT_Z"]*0.23534) + (Items["SF_Z"]*0.26876) + (Items["RE_Z"]*0.43407) + (Items["MH_Z"]*0.48581)
 
 ####################################################################
 #                 Step 8: Aggregate T-Scores                       #
