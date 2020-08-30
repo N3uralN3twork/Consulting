@@ -6,16 +6,18 @@ I am currently a graduate student at CSU attaining my master's degree
 
 - 🥅 2020 Goals: Contribute more to Open Source projects
 
+- ✍ School: Cleveland State University
+
 <details>
 <summary>List of Tools Used:</summary>
 <br>
-* Python 
+- Python 
 <br>
-* SAS
+- SAS
 <br>
-* R
+- R
 <br>
-* SQL
+- SQL
 </details>
 
 ## ⚡ What is this Repository For? ⚡
@@ -24,4 +26,12 @@ This codebase is an archive of projects related to a statistical consulting clas
 
 It contains code and other documents related to the following projects:
 
-
+<details>
+<summary>Projects:</summary>
+<br>
+- CITI
+<br>
+- Randomization Schema
+<br>
+- SF-12
+</details>
