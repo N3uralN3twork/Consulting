@@ -8,6 +8,7 @@ Resources:
     https://www.geeksforgeeks.org/using-dictionary-to-remap-values-in-pandas-dataframe-columns/
 
 """
+
 ####################################################################
 #                Set the WD and Import the Libraries               #
 ####################################################################
@@ -19,11 +20,12 @@ os.listdir()
 "Importing the Necessary Libraries: "
 import pandas as pd
 import numpy as np
+import dfply
 
 "Increasing the Max Columns to Display: "
 pd.set_option('display.max_columns', 20)
 
-"Read in the sample data set: "
+"Read in the sample data set from Excel: "
 nomiss = pd.read_excel("SF12_nomissing.xlsx",
                      sheet_name="data")
 nomiss.head(3)
