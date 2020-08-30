@@ -67,6 +67,10 @@ nomiss <- nomiss %>%
 
 table(nomiss$Y1)
 
+"Check that the results make sense using a cross-tab table: "
+
+table(nomiss$Y1, nomiss$Y)
+
 "Create the 8 Scales: "
 Items = nomiss
 
@@ -101,6 +105,8 @@ Items["SF_Z"] <- (Items["TransSF"] - 83.73973)/24.75775
 Items["RE_Z"] <- (Items["TransRE"] - 86.41051)/22.35543
 Items["MH_Z"] <- (Items["TransMH"] - 70.18217)/20.50597
 
+describe(Items)
+
 "Create Aggregate Scale Scores using Factor Weights: "
 
 Items["AGG_PHYS"] = (Items["PF_Z"]*0.42402) + (Items["RP_Z"]*0.35119) + (Items["BP_Z"]*0.31754) + (Items["GH_Z"]*0.24954) +
@@ -115,5 +121,3 @@ Items["TransPHYS"] = 50 + (Items["AGG_PHYS"]*10)
 Items["TransMENT"] = 50 + (Items["AGG_MENT"]*10)
 
 describe(Items)
-
-
