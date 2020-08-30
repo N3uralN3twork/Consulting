@@ -6,8 +6,6 @@ I am currently a graduate student at CSU attaining my master's degree
 
 - 🥅 2020 Goals: Contribute more to Open Source projects
 
-- 
-
 <details>
 <summary>List of Tools Used:</summary>
 <br>
