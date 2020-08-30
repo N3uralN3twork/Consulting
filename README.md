@@ -9,7 +9,7 @@ I am currently a graduate student at CSU attaining my master's degree
 <details>
 <summary>List of Tools Used:</summary>
 <br>
-* Python
+* [Python](https://www.python.org/)
 <br>
 * SAS
 <br>
@@ -18,10 +18,20 @@ I am currently a graduate student at CSU attaining my master's degree
 * SQL
 </details>
 
-## What is this Repository For? <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+## ⚡ What is this Repository For? ⚡
 
+This codebase is an archive of projects related to a statistical consulting class that I am in.
 
+It contains code and other documents for:
 
-
-
-
+<details>
+<summary></summary>
+<br>
+* Python
+<br>
+* SAS
+<br>
+* R
+<br>
+* SQL
+</details>
