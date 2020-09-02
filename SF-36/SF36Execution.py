@@ -12,7 +12,7 @@ class SF36:
         path = str(input("Please enter the path to the folder: "))
         os.chdir(path=path)
         file_name = str(input("Please enter the name of the Excel file: "))
-        extension = os.path.splitext(file_name)[1] # Python starts at 0
+        extension = os.path.splitext(file_name)[1]  # Python starts at 0
         sheet = str(input("Please enter the Excel sheet name: "))
         if extension == ".csv":
             df = pd.read_csv(path + "/" + file_name,
@@ -25,6 +25,17 @@ class SF36:
             return df
         else:
             raise Exception("Please input either a .csv or .xlsx data set")
+
+    def check(self, df):
+        ls = []
+        for column in df:
+            for row in df:
+                ls.append(row.isalpha())
+        Trues = ls.count(True)
+        if Trues >= 1:
+            raise ValueError("Must not have any characters in your data set")
+        else:
+            print("Your data set looks good")
 
     def dataPrep(self, df):
         Questions = ['Q1', 'Q2', 'Q3a', 'Q3b', 'Q3c',
@@ -284,6 +295,9 @@ test = SF36()
 
 # Set the working directory and load in the dataset:
 df = test.loadData()
+
+# Check for any string/character values in your data set:
+test.check(df)
 
 # Prepare the data before hand by: removing decimals, fixing ranges, etc.
 df = test.dataPrep(df=df)
