@@ -1,12 +1,12 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: August 2nd 2020
-Finished on: August 6th 2020
+Date: September 2nd 2020
+Finished on: September 6th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code")
+setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Randomization Code")
 
 # install.packages("tidyverse")
 library(tidyverse) # For the unite and row_number functions
@@ -15,7 +15,7 @@ library(tidyverse) # For the unite and row_number functions
 ###                           NOTES:                                         ###
 ################################################################################
 # INPUT:
-  # A list of site codes (character)
+  # A list of site codes or the number of sites you want (string/integer)
   # The number of subjects per site (integer)
   # The randomization ratio 
   # Number of factors in your experiment (>= 0)

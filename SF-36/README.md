@@ -7,7 +7,7 @@
 	A. cd OneDrive/Consulting/SF-36
 	B. dir
 5. Run "python Testing.py"
-	A. C:/Users/miqui/OneDrive/Consulting/SF-36
+	A. C:/Users/miqui/OneDrive/CSU Classes/Consulting/SF-36
 	B. Practice SF-36 data.xlsx
 	C. Practice SF-36 data
 6. Examine your results in the "Final Scored Data" file

@@ -1,8 +1,8 @@
 """This is for the SF-36 project in Dr. Quinn's consulting class
 Author: Matthias Quinn
 Goal: Score the SF-36 item survey
-Date Began: Dec. 16, 2019
-Date End: Dec 21, 2019
+Date Began: 9/1/2020
+Date End: 9/5/2020
 
 Source 1: https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
 Source 2: https://medium.com/better-programming/two-replacements-for-switch-statements-in-python-85e09638e451
@@ -31,7 +31,7 @@ What I learned:
 
 #Set working directory where contents will be stored and accessed:
 import os
-os.chdir(path = "C:/Users/miqui/OneDrive/Consulting/SF-36")
+os.chdir(path = "C:/Users/miqui/OneDrive/CSU Classes/Consulting/SF-36")
 os.listdir()
 
 #Import the necessary libraries:
@@ -354,7 +354,7 @@ RAW_VT(np.nan, np.nan, 3,1) #8
 RAW_VT(np.nan, 3, 4, 2) #12
 RAW_VT(np.nan, 2,3,5)   #16
 RAW_VT(2, np.nan, 1,2) #9.33
-
+RAW_VT(3,np.nan, 5, 4)
 #Applying to the data set:
 df["Raw_VT"] = df.apply(lambda row: RAW_VT(row["Q9a"], row["Q9e"],
                                            row["Q9g"], row["Q9i"]), axis = 1)

@@ -265,7 +265,8 @@ class Schema:
 
     def writeResults(self, df, fileName):
         pd.DataFrame.to_csv(df, path_or_buf=fileName,
-                            header=True, index=True)
+                            header=True, index=True,
+                            decimal=".")
 
     os.listdir()
 
@@ -307,5 +308,7 @@ df = test.transformations()
 df = test.standardization()
 
 df = test.normBased()
+
+df = test.finale(df=df)
 
 test.writeResults(df, fileName="FinalScoredData.csv")
