@@ -149,12 +149,14 @@ class SF36:
         elif Missing >= 3:  # 3 or more missing
             return None
         elif (Missing == 1 or Missing == 2):
-            a2 = np.nanmean([b, c, d, e])
+            """a2 = np.nanmean([b, c, d, e])
             b2 = np.nanmean([a, c, d, e])
             c2 = np.nanmean([a, b, d, e])
             d2 = np.nanmean([a, b, c, e])
             e2 = np.nanmean([a, b, c, d])
-            return np.nansum([a2 + b2 + c2 + d2 + e2])
+            return np.nansum([a2 + b2 + c2 + d2 + e2])"""
+            result = (np.nansum(List) * 5) / (5 - Missing)
+            return result
         else:
             return "Error"
 
