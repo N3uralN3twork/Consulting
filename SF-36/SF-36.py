@@ -326,35 +326,37 @@ def RAW_VT(item9a, item9e, item9g, item9i):
     """A function to return the raw Vitality score
     Inputs: Items 9a, 9e, 9g, and 9i
     Output: Raw Vitality score"""
-    item9a = np.abs(item9a - 5) + 1 #Recode before computation
+    item9a = np.abs(item9a - 5) + 1  # Recode before computation
     item9e = np.abs(item9e - 5) + 1
-    item9g = item9g #Keep same
-    item9i = item9i #Keep same
+    item9g = item9g  # Keep same
+    item9i = item9i  # Keep same
     List = pd.Series([item9a, item9e, item9g, item9i])
     Missing = List.isna().sum()
-    if Missing >= 3: #3 or more are missing
+    if Missing >= 3:  # 3 or more are missing
         return None
-    elif Missing == 0: #None missing
+    elif Missing == 0:  # None missing
         return (item9a + item9e + item9g + item9i)
-    elif (Missing == 1): #Only 1 item missing
-       a3 = np.nanmean([item9e, item9g, item9i])
-       b3 = np.nanmean([item9a, item9g, item9i])
-       c3 = np.nanmean([item9a, item9e, item9i])
-       d3 = np.nanmean([item9a, item9e, item9g])
-       return (a3 + b3 + c3 + d3)
-    elif (Missing == 2): #Just 2 missing
-        return (2 * (item9g + item9i)) #Yes, this is cheating a bit
+    elif Missing == 1:  # Only 1 item missing
+        a3 = np.nanmean([item9e, item9g, item9i])
+        b3 = np.nanmean([item9a, item9g, item9i])
+        c3 = np.nanmean([item9a, item9e, item9i])
+        d3 = np.nanmean([item9a, item9e, item9g])
+        return a3 + b3 + c3 + d3
+    while Missing == 2:  # Just 2 missing
+        result = (np.nansum(List) * 4) / (4 - Missing)
+        return result
     else:
         return None
 
 #Testing:
-RAW_VT(3,2,1,3) #It works if all are there
+RAW_VT(3,2,1,3)  # It works if all are there
 RAW_VT(np.nan, np.nan, np.nan, 6) #It works if 3 or more aren't there
 RAW_VT(np.nan, np.nan, 3,1) #8
 RAW_VT(np.nan, 3, 4, 2) #12
 RAW_VT(np.nan, 2,3,5)   #16
 RAW_VT(2, np.nan, 1,2) #9.33
 RAW_VT(3,np.nan, 5, 4)
+RAW_VT(np.nan, 5, 3, 1)
 #Applying to the data set:
 df["Raw_VT"] = df.apply(lambda row: RAW_VT(row["Q9a"], row["Q9e"],
                                            row["Q9g"], row["Q9i"]), axis = 1)

@@ -26,12 +26,12 @@ class SF36:
         else:
             raise Exception("Please input either a .csv or .xlsx data set")
 
-    def check(self, df):
+    def check(self, df): # check the data set for non-numeric inputs
         ls = []
         for column in df:
             for row in df:
                 ls.append(row.isalpha())
-        Trues = ls.count(True)
+        Trues = ls.count(True) # Count the number of Trues in the list
         if Trues >= 1:
             raise ValueError("Must not have any characters in your data set")
         else:
@@ -158,7 +158,7 @@ class SF36:
         else:
             return "Error"
 
-    def rawVT(self, item9a, item9e, item9g, item9i):
+    def RAW_VT(self, item9a, item9e, item9g, item9i):
         """A function to return the raw Vitality score
         Inputs: Items 9a, 9e, 9g, and 9i
         Output: Raw Vitality score"""
@@ -166,27 +166,30 @@ class SF36:
         item9e = np.abs(item9e - 5) + 1
         item9g = item9g  # Keep same
         item9i = item9i  # Keep same
-        ls = pd.Series([item9a, item9e, item9g, item9i])
-        Missing = ls.isna().sum()
+        List = pd.Series([item9a, item9e, item9g, item9i])
+        Missing = List.isna().sum()
         if Missing >= 3:  # 3 or more are missing
             return None
         elif Missing == 0:  # None missing
             return (item9a + item9e + item9g + item9i)
-        elif (Missing == 1):  # Only 1 item missing
+        elif Missing == 1:  # Only 1 item missing
             a3 = np.nanmean([item9e, item9g, item9i])
             b3 = np.nanmean([item9a, item9g, item9i])
             c3 = np.nanmean([item9a, item9e, item9i])
             d3 = np.nanmean([item9a, item9e, item9g])
-            return (a3 + b3 + c3 + d3)
-        elif (Missing == 2):  # Just 2 missing
-            return (2 * (item9g + item9i))  # Yes, this is cheating a bit
+            return a3 + b3 + c3 + d3
+        while Missing == 2:  # Just 2 missing
+            result = (np.nansum(List) * 4) / (4 - Missing)
+            return result
         else:
             return None
 
     def rawSF(self, item6, item10):
-        """Function to return the raw Social-Functioning score
+        """
+        Function to return the raw Social-Functioning score
         Inputs: Items 6 and 10
-        Output: Raw Social-Functioning score"""
+        Output: Raw Social-Functioning score
+        """
         while np.isnan(item6) and np.isnan(item10):  # Both missing
             return None
         while np.isnan(item6) and item10 > 0:  # Just 6 missing
