@@ -1,8 +1,8 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: September 2nd 2020
-Finished on: September 6th 2020
+Date: September 6th 2020
+Finished on: September 10th 2020
 Class: STA 635 Consulting and Programming
 "
 
