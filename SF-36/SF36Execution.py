@@ -2,7 +2,7 @@
 Author: Matthias Quinn
 Goal: Score the SF-36 item survey
 Date Began: 9/1/2020
-Date End: 9/3/2020
+Date End: 9/4/2020
 
 Source 1: https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
 Source 2: https://medium.com/better-programming/two-replacements-for-switch-statements-in-python-85e09638e451
@@ -72,6 +72,7 @@ class SF36:
         data2 = df.copy()
 
         df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
+                        "Q3e": "float64", "Q3f": "float64", "Q3g": "float64", "Q3h": "float64", "Q3i": "float64", "Q3j": "float64",
                         "Q4a": "float64", "Q4b": "float64", "Q4c": "float64", "Q4d": "float64", "Q5a": "float64",
                         "Q5b": "float64", "Q5c": "float64", "Q6": "float64", "Q7": "float64", "Q8": "float64",
                         "Q9a": "float64", "Q9b": "float64", "Q9c": "float64", "Q9d": "float64", "Q9e": "float64",
