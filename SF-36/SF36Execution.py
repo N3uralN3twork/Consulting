@@ -72,12 +72,12 @@ class SF36:
         data2 = df.copy()
 
         df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
-                        "Q3e": "float64", "Q3f": "float64", "Q3g": "float64", "Q3h": "float64", "Q3i": "float64", "Q3j": "float64",
-                        "Q4a": "float64", "Q4b": "float64", "Q4c": "float64", "Q4d": "float64", "Q5a": "float64",
-                        "Q5b": "float64", "Q5c": "float64", "Q6": "float64", "Q7": "float64", "Q8": "float64",
-                        "Q9a": "float64", "Q9b": "float64", "Q9c": "float64", "Q9d": "float64", "Q9e": "float64",
-                        "Q9f": "float64", "Q9g": "float64", "Q9h": "float64", "Q9i": "float64", "Q10": "float64",
-                        "Q11d": "float64"})
+                        "Q3d": "float64", "Q3e": "float64", "Q3f": "float64", "Q3g": "float64", "Q3h": "float64",
+                        "Q3i": "float64", "Q3j": "float64", "Q4a": "float64", "Q4b": "float64", "Q4c": "float64",
+                        "Q4d": "float64", "Q5a": "float64", "Q5b": "float64", "Q5c": "float64", "Q6": "float64",
+                        "Q7": "float64", "Q8": "float64", "Q9a": "float64", "Q9b": "float64", "Q9c": "float64",
+                        "Q9d": "float64", "Q9e": "float64", "Q9f": "float64", "Q9g": "float64", "Q9h": "float64",
+                        "Q9i": "float64", "Q10": "float64", "Q11a": "float64", "Q11d": "float64"})
 
         df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, np.nan))
         df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, np.nan))
@@ -258,13 +258,15 @@ class SF36:
             return None
         elif Missing == 0:  # All items present
             return (item9b + item9c + item9d + item9f + item9h)
-        elif (Missing > 0 or Missing < 3):
-            b2 = np.nanmean([item9c, item9d, item9f, item9h])
+        elif Missing > 0 or Missing < 3:
+            """b2 = np.nanmean([item9c, item9d, item9f, item9h])
             c2 = np.nanmean([item9b, item9d, item9f, item9h])
             d2 = np.nanmean([item9b, item9c, item9f, item9h])
             f2 = np.nanmean([item9b, item9c, item9d, item9h])
             h2 = np.nanmean([item9b, item9c, item9d, item9f])
-            return (b2 + c2 + d2 + f2 + h2)
+            b2 + c2 + d2 + f2 + h2"""
+            result = (np.nansum(List) * 5) / (5 - Missing)
+            return result
         else:
             return "Error"
 
