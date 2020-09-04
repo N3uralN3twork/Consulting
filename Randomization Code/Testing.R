@@ -5,16 +5,8 @@ sample(ls, replace = FALSE)
 #NControl = 1-NTreats
 sample(rep(rep(sample(ls, replace = FALSE), times=3), times = 3))
 
-rep(sample(c(rep(1,6), rep(0,4)), 10))
+rep(sample(c(rep(1,6), rep(0,4)), size = 10, replace = FALSE))
     
 
-2%%1
-x=3.2
-x%%1==0
-
-ls <- c(1, 2, 3, 4, 10.2)
-for (i in ls){
-  print(ls[i]%%1==0)
-}
 
 
