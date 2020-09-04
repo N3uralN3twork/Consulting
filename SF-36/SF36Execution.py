@@ -1,3 +1,26 @@
+"""This is for the SF-36 project in Dr. Quinn's consulting class
+Author: Matthias Quinn
+Goal: Score the SF-36 item survey
+Date Began: 9/1/2020
+Date End: 9/3/2020
+
+Source 1: https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+Source 2: https://medium.com/better-programming/two-replacements-for-switch-statements-in-python-85e09638e451
+Source 3: https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html
+Source 4: https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmean.html
+Source 5: https://stackoverflow.com/questions/44033422/how-to-recode-integers-to-other-values-in-python
+Source 6: https://stackoverflow.com/questions/11904981/local-variable-referenced-before-assignment
+Source 7: https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python?page=1&tab=votes#tab-top
+
+What I learned:
+    * While loops
+    * Multi-input functions
+    * How to apply multi-input functions across a data-set (using lambda)
+    * Lambda functions
+    * If-elif-else statements
+    * Multi-key dictionaries (using ())
+    * Importance of commenting your code"""
+
 import os
 import numpy as np
 import pandas as pd
@@ -31,7 +54,7 @@ class SF36:
         for column in df:
             for row in df:
                 ls.append(row.isalpha())
-        Trues = ls.count(True) # Count the number of Trues in the list
+        Trues = ls.count(True)  # Count the number of Trues in the list
         if Trues >= 1:
             raise ValueError("Must not have any characters in your data set")
         else:
@@ -46,6 +69,8 @@ class SF36:
                      'Q9d', 'Q9e', 'Q9f', 'Q9g', 'Q9h',
                      'Q9i', 'Q10', 'Q11a', 'Q11b', 'Q11c', 'Q11d']
 
+        data2 = df.copy()
+
         df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
                         "Q4a": "float64", "Q4b": "float64", "Q4c": "float64", "Q4d": "float64", "Q5a": "float64",
                         "Q5b": "float64", "Q5c": "float64", "Q6": "float64", "Q7": "float64", "Q8": "float64",
@@ -53,14 +78,14 @@ class SF36:
                         "Q9f": "float64", "Q9g": "float64", "Q9h": "float64", "Q9i": "float64", "Q10": "float64",
                         "Q11d": "float64"})
 
-        df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, None))
-        df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, None))
+        df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, np.nan))
+        df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, np.nan))
 
         OneToThreeColumns = ['Q3a', 'Q3b', 'Q3c',
                              'Q3d', 'Q3e', 'Q3f', 'Q3g', 'Q3h',
                              'Q3i', 'Q3j']
 
-        df[OneToThreeColumns] = df[OneToThreeColumns].applymap(lambda x: np.where(x in range(1, 4), x, None))
+        df[OneToThreeColumns] = df[OneToThreeColumns].applymap(lambda x: np.where(x in range(1, 4), x, np.nan))
 
         OneToFiveColumns = ["Q1", "Q2", "Q4a", "Q4b", "Q4c", "Q4d",
                             "Q5a", "Q5b", "Q5c", "Q6", "Q8", "Q9a",
@@ -68,13 +93,13 @@ class SF36:
                             "Q9h", "Q9i", "Q10", "Q11a", "Q11b", "Q11c",
                             "Q11d"]
 
-        df[OneToFiveColumns] = df[OneToFiveColumns].applymap(lambda x: np.where(x in range(1, 6), x, None))
+        df[OneToFiveColumns] = df[OneToFiveColumns].applymap(lambda x: np.where(x in range(1, 6), x, np.nan))
 
         OneToSixColumns = ["Q7"]
 
-        df[OneToSixColumns] = df[OneToSixColumns].applymap(lambda x: np.where(x in range(1, 7), x, None))
+        df[OneToSixColumns] = df[OneToSixColumns].applymap(lambda x: np.where(x in range(1, 7), x, np.nan))
 
-        return df
+        return df, data2
 
     def rawPF(self, a,b,c,d,e,f,g,h,i,j):
         ls = pd.Series([a,b,c,d,e,f,g,h,i,j])
@@ -104,29 +129,31 @@ class SF36:
             return sum(ls)
 
     def rawBP(self, item7, item8):
-
         """
         A function to return the raw bodily-pain score
         Inputs: Items 7 and 8
         Output: Raw Bodily-Pain score
         """
+
+        def seven():  # Recode the 7th item before summation
+            return {1: 6.0, 2: 5.4, 3: 4.2, 4: 3.1, 5: 2.2, 6: 1.0}[item7]
+
+        def eight():  # Recode the 8th item if both answered
+            return {1: 5.0, 2: 4.0, 3: 3.0, 4: 2.0, 5: 1.0}[item8]
+
         while np.isnan(item7) and np.isnan(item8):  # Both are missing
             return None
         while item7 > 0 and np.isnan(item8):  # Only 7 answered and not 8
-            switcher = {1: 12, 2: 10.8, 3: 8.4, 4: 6.2, 5: 4.4, 6: 2}
-            return switcher.get(item7, None)
-        while np.isnan(item7) and item8 > 0:  # Only 8 answered
-            switcher = {  # Using a switcher case statement here
+            return 2 * seven()  # Just mean imputation, since you divide by 1, is just 2 of the same inputs
+        while np.isnan(item7) and item8 > 0:  # Only 8 answered and not 7
+            switcher = {  # Using a switcher case_when statement here
                 1: 12, 2: 9.5, 3: 7, 4: 4.5, 5: 2}
             return switcher.get(item8, None)
-        while item7 > 0 and item8 > 0:  # Both items answered
-            return {  # loops through multi-key dictionary checking for matches
-                (1, 1): 12.0, (1, 2): 10.0, (1, 3): 9, (1, 4): 8, (1, 5): 7,
-                (2, 1): 10.4, (2, 2): 9.4, (2, 3): 8.4, (2, 4): 7.4, (2, 5): 6.4,
-                (3, 1): 9.2, (3, 2): 8.2, (3, 3): 7.2, (3, 4): 6.2, (3, 5): 5.2,
-                (4, 1): 8.1, (4, 2): 7.1, (4, 3): 6.1, (4, 4): 5.1, (4, 5): 4.1,
-                (5, 1): 7.2, (5, 2): 6.2, (5, 3): 5.2, (5, 4): 4.2, (5, 5): 3.2,
-                (6, 1): 6.0, (6, 2): 5.0, (6, 3): 4.0, (6, 4): 3.0, (6, 5): 2.0}[(item7, item8)]
+        while item7 > 0 and item8 > 0:
+            if item7 == 1 and item8 == 1:  # Edge Case
+                return 12
+            else:
+                return seven() + eight()
         else:
             return None
 
@@ -134,10 +161,9 @@ class SF36:
         """A function to return the raw General Health score
         Inputs: Items 1, 11a - 11d
         Output: Raw General Health score"""
-        Item1Dict = {np.nan: np.nan, 1: 5, 2: 4.4, 3: 3.4, 4: 2, 5: 1}
-        if item1 in Item1Dict:  # Recode
-            global a  # Define "a" as a global variable (no idea what that means btw)
-            a = Item1Dict[item1]  # Go through and check dictionary
+
+        oneDict = {np.nan: np.nan, 1: 5.0, 2: 4.4, 3: 3.4, 4: 2.0, 5: 1.0}.get(item1, None)
+        a = oneDict
         b = item11a  # Don't change
         c = (np.abs(item11b - 5) + 1)  # Recode
         d = item11c
@@ -148,19 +174,13 @@ class SF36:
             return np.sum([a, b, c, d, e])
         elif Missing >= 3:  # 3 or more missing
             return None
-        elif (Missing == 1 or Missing == 2):
-            """a2 = np.nanmean([b, c, d, e])
-            b2 = np.nanmean([a, c, d, e])
-            c2 = np.nanmean([a, b, d, e])
-            d2 = np.nanmean([a, b, c, e])
-            e2 = np.nanmean([a, b, c, d])
-            return np.nansum([a2 + b2 + c2 + d2 + e2])"""
+        elif Missing == 1 or Missing == 2:
             result = (np.nansum(List) * 5) / (5 - Missing)
             return result
         else:
             return "Error"
 
-    def RAW_VT(self, item9a, item9e, item9g, item9i):
+    def rawVT(self, item9a, item9e, item9g, item9i):
         """A function to return the raw Vitality score
         Inputs: Items 9a, 9e, 9g, and 9i
         Output: Raw Vitality score"""
@@ -280,9 +300,7 @@ class SF36:
         df["NormBased_MH"] = (50 + (df["Standardized_MH"] * 10))
         return df
 
-    def finale(self, df):
-        Questions = df.iloc[:, 0:37]
-        Answers = df.iloc[:, 37:69]
+    def finale(self, Answers, Questions):
         FinalScoredData = pd.concat([Questions, Answers], axis=1)
         FinalScoredData = np.round(FinalScoredData, decimals=2)  # Round everything to 2 decimal places
         return FinalScoredData
@@ -305,7 +323,7 @@ df = test.loadData()
 test.check(df)
 
 # Prepare the data before hand by: removing decimals, fixing ranges, etc.
-df = test.dataPrep(df=df)
+df, Questions = test.dataPrep(df=df)
 
 # Calculate the raw scores:
 df["Raw_PF"] = df.apply(lambda row: test.rawPF(row["Q3a"], row["Q3b"], row["Q3c"],
@@ -336,6 +354,9 @@ df = test.standardization()
 
 df = test.normBased()
 
-df = test.finale(df=df)
+Questions = Questions.iloc[:, 0:36]
+Answers = df.iloc[:, 36:69]
 
-test.writeResults(df, fileName="FinalScoredData.csv")
+final = test.finale(Answers=Answers, Questions=Questions)
+
+test.writeResults(final, fileName="FinalScoredData.csv")

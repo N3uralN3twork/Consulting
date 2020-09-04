@@ -42,8 +42,12 @@ pd.set_option('display.max_columns', 10)
 #Read in the sample data set:
 
 data = pd.read_excel("Practice SF-36 data.xlsx",
-                     sheet_name = "Practice SF-36 data")
+                     sheet_name = "Practice SF-36 data", index_col=0)
 data.head(3)
+
+data2 = data.copy()
+
+Questions = data.iloc[:, 0:36]
 
 ##################################################################
 ###                         Data Preparation:                  ###
@@ -229,26 +233,29 @@ df["Raw_RP"].describe()
     #The first function I coded was like 42 lines of code, now it's 20!
 
 def RAW_BP(item7, item8):
-    """A function to return the raw bodily-pain score
+    """
+    A function to return the raw bodily-pain score
     Inputs: Items 7 and 8
-    Output: Raw Bodily-Pain score"""
+    Output: Raw Bodily-Pain score
+    """
+    def seven():  # Recode the 7th item before summation
+        return {1: 6.0, 2: 5.4, 3: 4.2, 4: 3.1, 5: 2.2, 6: 1.0}[item7]
+
+    def eight():  # Recode the 8th item if both answered
+        return {1: 5.0, 2: 4.0, 3: 3.0, 4: 2.0, 5: 1.0}[item8]
     while np.isnan(item7) and np.isnan(item8):  # Both are missing
         return None
     while item7 > 0 and np.isnan(item8):  # Only 7 answered and not 8
-        switcher = {1: 12, 2: 10.8, 3: 8.4, 4: 6.2, 5: 4.4, 6: 2}
-        return switcher.get(item7, None)
-    while np.isnan(item7) and item8 > 0:  # Only 8 answered
-        switcher = {  # Using a switcher case statement here
+        return 2*seven()  # Just mean imputation, since you divide by 1, is just 2 of the same inputs
+    while np.isnan(item7) and item8 > 0:  # Only 8 answered and not 7
+        switcher = {  # Using a switcher case_when statement here
             1: 12, 2: 9.5, 3: 7, 4: 4.5, 5: 2}
         return switcher.get(item8, None)
-    while item7 > 0 and item8 > 0:  # Both items answered
-        return { #loops through multi-key dictionary checking for matches
-            (1,1): 12.0, (1, 2): 10.0, (1, 3): 9, (1,4): 8, (1,5): 7,
-            (2,1): 10.4, (2,2): 9.4, (2,3): 8.4, (2,4): 7.4, (2,5): 6.4,
-            (3,1): 9.2, (3,2): 8.2, (3,3): 7.2, (3,4): 6.2, (3,5): 5.2,
-            (4,1): 8.1, (4,2): 7.1, (4,3): 6.1, (4,4): 5.1, (4,5): 4.1,
-            (5,1): 7.2, (5,2): 6.2, (5,3): 5.2, (5,4): 4.2, (5,5): 3.2,
-            (6,1): 6.0, (6,2): 5.0, (6,3): 4.0, (6,4): 3.0, (6,5): 2.0}[(item7, item8)]
+    while item7 > 0 and item8 > 0:
+        if item7 == 1 and item8 == 1:
+            return 12
+        else:
+            return seven() + eight()
     else:
         return None
 
@@ -304,11 +311,11 @@ def rawGH(item1, item11a, item11b, item11c, item11d):
         return "Error"
 
 #Testing:
-RAW_GH(2,1,5,3,2) #13.4
-RAW_GH(5,2,2,3,3) #13
-RAW_GH(2, np.nan, np.nan, np.nan, 2) #None
-RAW_GH(4,3,np.nan,3,5) #11.25
-RAW_GH(np.nan,1,3,3,1) #15
+rawGH(2,1,5,3,2) #13.4
+rawGH(5,2,2,3,3) #13
+rawGH(2, np.nan, np.nan, np.nan, 2) #None
+rawGH(4,3,np.nan,3,5) #11.25
+rawGH(np.nan,1,3,3,1) #15
 #Looks like it works for all of the test cases!!!
 
 #Applying to the data set:
@@ -582,7 +589,7 @@ But we actually managed to do it so that's really cool"""
 
 df.shape
 
-Questions = data.iloc[:, 0:37] #Select the original questions
+Questsions = Questions
 Answers = df.iloc[:, 37:69]    #Select the scored answers
 
 FinalScoredData = pd.concat([Questions, Answers], axis = 1)
