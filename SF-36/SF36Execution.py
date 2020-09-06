@@ -1,4 +1,5 @@
-"""This is for the SF-36 project in Dr. Quinn's consulting class
+"""
+This is for the SF-36 project in Dr. Quinn's consulting class
 Author: Matthias Quinn
 Goal: Score the SF-36 item survey
 Date Began: 9/1/2020
@@ -19,8 +20,10 @@ What I learned:
     * Lambda functions
     * If-elif-else statements
     * Multi-key dictionaries (using ())
-    * Importance of commenting your code"""
+    * Importance of commenting your code
+"""
 
+# Import the necessary libraries
 import os
 import numpy as np
 import pandas as pd
@@ -28,39 +31,39 @@ import pandas as pd
 
 class SF36:
 
-    def __init__(self):
+    def __init__(self):  # Nothing needs to be initialized at the start
         pass
 
-    def loadData(self):
-        path = str(input("Please enter the path to the folder: "))
-        os.chdir(path=path)
-        file_name = str(input("Please enter the name of the Excel file: "))
-        extension = os.path.splitext(file_name)[1]  # Python starts at 0
-        sheet = str(input("Please enter the Excel sheet name: "))
+    def loadData(self):  # Create a function to read in the SF-36 data set
+        path = str(input("Please enter the path to the folder: "))  # Input the path to the folder
+        os.chdir(path=path)  # Set the working directory as the path
+        file_name = str(input("Please enter the name of the Excel file: "))  # Input the name of the file
+        extension = os.path.splitext(file_name)[1]  # Python starts at 0 | Extract the file extension
+        sheet = str(input("Please enter the Excel sheet name: "))  # Specify the sheet name is extension is .xlsx
         if extension == ".csv":
-            df = pd.read_csv(path + "/" + file_name,
+            df = pd.read_csv(path + "/" + file_name,  # Concatenate the path and filename via a "/"
                              index_col=0)
             return df
         elif extension == ".xlsx":
             df = pd.read_excel(path + "/" + file_name,
                                sheet_name=sheet,
-                               index_col=0)
+                               index_col=0)  # Set the index as the first column (Python starts @ 0)
             return df
         else:
             raise Exception("Please input either a .csv or .xlsx data set")
 
-    def check(self, df): # check the data set for non-numeric inputs
+    def check(self, df):  # check the data set for non-numeric inputs
         ls = []
         for column in df:
             for row in df:
-                ls.append(row.isalpha())
+                ls.append(row.isalpha())  # is.alpha() tests whether a string has only alphabetic characters
         Trues = ls.count(True)  # Count the number of Trues in the list
-        if Trues >= 1:
+        if Trues >= 1:  # If there is even 1 alphabetic character, stop the process
             raise ValueError("Must not have any characters in your data set")
         else:
             print("Your data set looks good")
 
-    def dataPrep(self, df):
+    def dataPrep(self, df):  # Prepare data by removing decimals, negative numbers, and out-of-range values
         Questions = ['Q1', 'Q2', 'Q3a', 'Q3b', 'Q3c',
                      'Q3d', 'Q3e', 'Q3f', 'Q3g', 'Q3h',
                      'Q3i', 'Q3j', 'Q4a', 'Q4b', 'Q4c',
@@ -69,7 +72,7 @@ class SF36:
                      'Q9d', 'Q9e', 'Q9f', 'Q9g', 'Q9h',
                      'Q9i', 'Q10', 'Q11a', 'Q11b', 'Q11c', 'Q11d']
 
-        data2 = df.copy()
+        data2 = df.copy()  # For keeping the original variables later on
 
         df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
                         "Q3d": "float64", "Q3e": "float64", "Q3f": "float64", "Q3g": "float64", "Q3h": "float64",
@@ -79,16 +82,16 @@ class SF36:
                         "Q9d": "float64", "Q9e": "float64", "Q9f": "float64", "Q9g": "float64", "Q9h": "float64",
                         "Q9i": "float64", "Q10": "float64", "Q11a": "float64", "Q11d": "float64"})
 
-        df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, np.nan))
-        df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, np.nan))
+        df[Questions] = df[Questions].applymap(lambda x: np.where(x.is_integer(), x, np.nan))  # Replace decimal with NA
+        df[Questions] = df[Questions].applymap(lambda x: np.where(x > 0, x, np.nan))  # Replace negatives with NA
 
-        OneToThreeColumns = ['Q3a', 'Q3b', 'Q3c',
+        OneToThreeColumns = ['Q3a', 'Q3b', 'Q3c',  # Select only the columns that are in the range from 1 to 3
                              'Q3d', 'Q3e', 'Q3f', 'Q3g', 'Q3h',
                              'Q3i', 'Q3j']
 
         df[OneToThreeColumns] = df[OneToThreeColumns].applymap(lambda x: np.where(x in range(1, 4), x, np.nan))
 
-        OneToFiveColumns = ["Q1", "Q2", "Q4a", "Q4b", "Q4c", "Q4d",
+        OneToFiveColumns = ["Q1", "Q2", "Q4a", "Q4b", "Q4c", "Q4d", # Select only the columns that are between 1 and 5
                             "Q5a", "Q5b", "Q5c", "Q6", "Q8", "Q9a",
                             "Q9b", "Q9c", "Q9d", "Q9e", "Q9f", "Q9g",
                             "Q9h", "Q9i", "Q10", "Q11a", "Q11b", "Q11c",
@@ -96,13 +99,13 @@ class SF36:
 
         df[OneToFiveColumns] = df[OneToFiveColumns].applymap(lambda x: np.where(x in range(1, 6), x, np.nan))
 
-        OneToSixColumns = ["Q7"]
+        OneToSixColumns = ["Q7"]  # Select only the columns that are between 1 and 6
 
         df[OneToSixColumns] = df[OneToSixColumns].applymap(lambda x: np.where(x in range(1, 7), x, np.nan))
 
         return df, data2
 
-    def rawPF(self, a,b,c,d,e,f,g,h,i,j):
+    def rawPF(self, a,b,c,d,e,f,g,h,i,j):  # Calculation of the raw Physical Functioning score
         ls = pd.Series([a,b,c,d,e,f,g,h,i,j])
         Mean = np.mean(ls)
         Missing = ls.isna().sum()
@@ -351,15 +354,21 @@ df["Raw_RE"] = df.apply(lambda row: test.rawRE(row["Q5a"], row["Q5b"], row["Q5c"
 df["Raw_MH"] = df.apply(lambda row: test.rawMH(row["Q9b"], row["Q9c"], row["Q9d"],
                                                row["Q9f"], row["Q9h"]), axis=1)
 
+# Apply the transformations
 df = test.transformations()
 
+# Standardize
 df = test.standardization()
 
+# O-100
 df = test.normBased()
 
+# Selection via indexing
 Questions = Questions.iloc[:, 0:36]
 Answers = df.iloc[:, 36:69]
 
+# Clean everything up
 final = test.finale(Answers=Answers, Questions=Questions)
 
+# Write the the specified fileName
 test.writeResults(final, fileName="FinalScoredData.csv")

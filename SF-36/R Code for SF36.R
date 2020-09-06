@@ -1,6 +1,7 @@
 setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/SF-36")
 library(readxl)
 library(dplyr)
+library(DistributionUtils)
 df <- read_excel("Practice SF-36 data.xlsx", 
                  sheet = "data")
 #View(df)
@@ -17,11 +18,20 @@ Questions <- c('Q1', 'Q2', 'Q3a', 'Q3b', 'Q3c',
 str(df[Questions])
 
 # Replace negative numbers with NA
-df[df %in% seq(-100000, 0)] <- NA
+df[df < 0] <- NA
 
 # Replace characters NA:
 df[is.character(df)] <- NA
 
 # Replace decimals with NA:
+
+
+
+
+
+
+
+
+
 
 
