@@ -1,12 +1,12 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: August 2nd 2020
-Finished on: August 6th 2020
+Date: August 8th 2020
+Finished on: August 10th 2020
 Class: STA 635 Consulting and Programming
 "
 
-setwd("C:/Users/miqui/OneDrive/Consulting/Randomization Code")
+setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Randomization Code")
 
 
 ################################################################################

@@ -1,8 +1,8 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: September 6th 2020
-Finished on: September 10th 2020
+Date: September 8th 2020
+Finished on: September 11th 2020
 Class: STA 635 Consulting and Programming
 "
 
@@ -17,12 +17,15 @@ library(tidyverse) # For the unite and row_number functions
 # INPUT:
   # A list of site codes or the number of sites you want (string/integer)
   # The number of subjects per site (integer)
-  # The randomization ratio 
-  # Number of factors in your experiment (>= 0)
+  # The number of subjects per block
+  # The randomization ratio
+  # The seed for reproducibility
 
 # OUTPUT:
   # A sequential list of N codes inside a dataframe object
-  # An empty data vector for each factor
+  # The site codes
+  # Subject ID numbers
+  # The group each subject belongs to
 
 # For each site do the following:
   # Store site in dataframe N times each
@@ -41,6 +44,10 @@ library(tidyverse) # For the unite and row_number functions
 
 # Seed:
   # Do you want to reproduce the design schema?
+
+# Block Sizes:
+  # Must be a multiple of the number of sites
+  # Number of blocks = NSubjects / block size
 
 ##################################
 ###    SCHEMA for N Site(s)    ###
@@ -65,6 +72,8 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (is.character(BlockSize)){
     BlockSize = as.integer(BlockSize)
   }
+  
+  NBlocks = NSubjects/BlockSize # Compute the number of blocks
   
   ### Error-checking: ###
   # Null value for sites:
@@ -97,6 +106,11 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
+  }
+  
+  # Improper Block Size:
+  if (BlockSize>0 && NSubjects%%BlockSize != 0){
+    stop("The block size must be a multiple of the number of subjects")
   }
   
   # Improper random seed
@@ -200,11 +214,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 
 # Unit Testing:
 
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, RRatio = "1:1", seed = TRUE)
-test2 <- schema(Sites = 1, NSubjects = 10, RRatio = 1)
+test1 <- schema(Sites = c("AAA"), NSubjects = 10, BlockSize = 1, RRatio = "1:1", seed = TRUE)
+test2 <- schema(Sites = 1, NSubjects = 10, BlockSize = 1, RRatio = 1)
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
-test4 <- schema(Sites = 2, NSubjects = 30, RRatio = 2)
-test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, RRatio = 1)
-test6 <- schema(Sites = NULL, NSubjects = 10, RRatio = 1) # Should return error
-test7 <- schema(Sites = c("AAA", 1), NSubjects = 10, RRatio = 1)
-
+test4 <- schema(Sites = 2, NSubjects = 30, BlockSize = 1, RRatio = 2)
+test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, BlockSize = 1, RRatio = 1)
+test6 <- schema(Sites = NULL, NSubjects = 10, BlockSize = 1, RRatio = 1) # Should return error
+test7 <- schema(Sites = c("AAA", "BBB"), NSubjects = 20, BlockSize = 1, RRatio = 1, seed = FALSE)
