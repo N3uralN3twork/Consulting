@@ -7,7 +7,7 @@ list.files()
 #Read in the practice dataset
 library(readxl)
 data1 <- read_excel("Practice SF-36 data.xlsx", 
-                    sheet = "Practice SF-36 data")
+                    sheet = "data")
 data1 <- as.data.frame(data1)
 View(data1)
 

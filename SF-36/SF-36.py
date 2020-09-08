@@ -165,7 +165,7 @@ def RAW_PF(a,b,c,d,e,f,g,h,i,j):
         return sum(list)
 
 #Testing the function
-RAW_PF(2,1,3,2,3,2,1,1,np.nan,3) #20
+RAW_PF(2,1,3,2,3,2,1,1,np.nan,3) #20 - TRUE
 RAW_PF(3,3,2,2,2,3,3,3,2,2) #25
 RAW_PF(np.nan,3,np.nan,3,np.nan,1,np.nan,2,np.nan,np.nan) #None
 RAW_PF(1, 3, 3,	1,	1,	2,	2,	1,	2,	2) #18
@@ -196,13 +196,13 @@ def RAW_RP(item4a, item4b, item4c, item4d):
     """This function returns the raw role-physical score
     Inputs: Items 4a - 4d"""
     list = pd.Series([item4a, item4b, item4c, item4d])
-    Mean = np.mean(list)
-    Missing = list.isna().sum()
+    Mean = np.mean(list)  # Take the mean of the list
+    Missing = list.isna().sum()  # Count the number of missing in the list
     if Missing > 2: #If more than half items are missing
         return None
-    elif Missing > 0 and Missing < 2: #Replace missing items with mean of others
-        list2 = list.replace(np.nan, Mean)
-        return sum(list2)
+    elif Missing > 0 and Missing < 2:  # If missing between 0 and 2:
+        list2 = list.replace(np.nan, Mean)  #Replace missing items with mean of others
+        return sum(list2)  # Then return the sum of the new list
     else:           #All items present, then simple sum
         return sum(list)
 

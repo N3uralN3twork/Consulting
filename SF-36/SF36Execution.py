@@ -21,6 +21,7 @@ What I learned:
     * If-elif-else statements
     * Multi-key dictionaries (using ())
     * Importance of commenting your code
+    * Classes - a group of functions for a similar task
 """
 
 # Import the necessary libraries
@@ -74,6 +75,7 @@ class SF36:
 
         data2 = df.copy()  # For keeping the original variables later on
 
+        # Change the data types of each question for easier use later on:
         df = df.astype({"Q1": "float64", "Q2": "float64", "Q3a": "float64", "Q3b": "float64", "Q3c": "float64",
                         "Q3d": "float64", "Q3e": "float64", "Q3f": "float64", "Q3g": "float64", "Q3h": "float64",
                         "Q3i": "float64", "Q3j": "float64", "Q4a": "float64", "Q4b": "float64", "Q4c": "float64",
@@ -105,32 +107,40 @@ class SF36:
 
         return df, data2
 
-    def rawPF(self, a,b,c,d,e,f,g,h,i,j):  # Calculation of the raw Physical Functioning score
-        ls = pd.Series([a,b,c,d,e,f,g,h,i,j])
-        Mean = np.mean(ls)
-        Missing = ls.isna().sum()
-        if Missing > 5:
+    def rawPF(self, a, b, c, d, e, f, g, h, i, j):  # Calculation of the raw Physical Functioning score
+        """
+        Inputs: Items 3a-3j
+        Output: The raw physical functioning score
+        """
+
+        ls = pd.Series([a, b, c, d, e, f, g, h, i, j])  # Create a list of the 10 items
+        Mean = np.mean(ls)  # Calculate the mean of the list
+        Missing = ls.isna().sum()  # Tally the number of missing values in the list
+        if Missing > 5:  # When the number of missing > 5:
             return None
-        elif Missing > 0 and Missing < 5:
-            ls2 = ls.replace(np.nan, Mean)
-            return sum(ls2)
-        else:
-            return sum(ls)
+        elif 0 < Missing < 5:  # When the number of missing is between 1 and 4:
+            ls2 = ls.replace(np.nan, Mean)  # Replace the missing with the mean above
+            return sum(ls2)  # Then calculate the simple sum
+        else:  # When all of the items are present:
+            return sum(ls)  # Then calculate the simple sum
 
     def rawRP(self, item4a, item4b, item4c, item4d):
 
-        """This function returns the raw role-physical score
-        Inputs: Items 4a - 4d"""
+        """
+        This function returns the raw role-physical score
+        Inputs: Items 4a - 4d
+        Output: The raw role-physical score"""
+
         ls = pd.Series([item4a, item4b, item4c, item4d])
-        Mean = np.mean(ls)
+        Mean = np.mean(ls)  # Calculate the mean score for the four items
         Missing = ls.isna().sum()
         if Missing > 2:  # If more than half items are missing
             return None
-        elif Missing > 0 and Missing < 2:  # Replace missing items with mean of others
-            ls2 = ls.replace(np.nan, Mean)
+        elif Missing > 0 and Missing < 2:  # If num. missing between 0 and 2:
+            ls2 = ls.replace(np.nan, Mean)  # Replace missing items with mean of others
             return sum(ls2)
-        else:  # All items present, then simple sum
-            return sum(ls)
+        else:  # When all items present:
+            return sum(ls)  # Take a simple sum
 
     def rawBP(self, item7, item8):
         """
@@ -162,7 +172,8 @@ class SF36:
             return None
 
     def rawGH(self, item1, item11a, item11b, item11c, item11d):
-        """A function to return the raw General Health score
+        """
+        A function to return the raw General Health score
         Inputs: Items 1, 11a - 11d
         Output: Raw General Health score"""
 
@@ -176,16 +187,17 @@ class SF36:
         Missing = List.isna().sum()
         if Missing == 0:  # All present
             return np.sum([a, b, c, d, e])
-        elif Missing >= 3:  # 3 or more missing
-            return None
+        elif Missing >= 3:  # 3 or more missing:
+            return None  # Return NA
         elif Missing == 1 or Missing == 2:
-            result = (np.nansum(List) * 5) / (5 - Missing)
+            result = (np.nansum(List) * 5) / (5 - Missing)  # The trick lies here
             return result
         else:
             return "Error"
 
     def rawVT(self, item9a, item9e, item9g, item9i):
-        """A function to return the raw Vitality score
+        """
+        A function to return the raw Vitality score
         Inputs: Items 9a, 9e, 9g, and 9i
         Output: Raw Vitality score"""
         item9a = np.abs(item9a - 5) + 1  # Recode before computation
@@ -205,7 +217,7 @@ class SF36:
             d3 = np.nanmean([item9a, item9e, item9g])
             return a3 + b3 + c3 + d3
         while Missing == 2:  # Just 2 missing
-            result = (np.nansum(List) * 4) / (4 - Missing)
+            result = (np.nansum(List) * 4) / (4 - Missing)  # The trick lies here
             return result
         else:
             return None
@@ -228,7 +240,8 @@ class SF36:
             return None
 
     def rawRE(self, item5a, item5b, item5c):
-        """Function that returns that raw Role-Emotional score
+        """
+        Function that returns that raw Role-Emotional score
         Inputs: Items 5a-5c
         Output: Raw Role-Emotional score"""
         List = pd.Series([item5a, item5b, item5c])
@@ -247,7 +260,8 @@ class SF36:
             return None
 
     def rawMH(self, item9b, item9c, item9d, item9f, item9h):
-        """A function that returns the raw mental health score
+        """
+        A function that returns the raw mental health score
         Inputs: Items 9b, 9c, 9d, 9f, and 9h
         Output: Raw Mental Health score"""
         item9b = item9b  # Keep same
@@ -268,12 +282,14 @@ class SF36:
             f2 = np.nanmean([item9b, item9c, item9d, item9h])
             h2 = np.nanmean([item9b, item9c, item9d, item9f])
             b2 + c2 + d2 + f2 + h2"""
-            result = (np.nansum(List) * 5) / (5 - Missing)
+            result = (np.nansum(List) * 5) / (5 - Missing)  # The trick lies here
             return result
         else:
             return "Error"
 
     def transformations(self):
+        """Input the raw scores and output the transformed scales
+           Uses the minimum and range of each scale to compute"""
         df["Transformed_PF"] = ((df["Raw_PF"] - 10) / 20) * 100
         df["Transformed_RP"] = ((df["Raw_RP"] - 4) / 16) * 100
         df["Transformed_BP"] = ((df["Raw_BP"] - 2) / 10) * 100
@@ -372,3 +388,5 @@ final = test.finale(Answers=Answers, Questions=Questions)
 
 # Write the the specified fileName
 test.writeResults(final, fileName="FinalScoredData.csv")
+
+
