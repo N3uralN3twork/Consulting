@@ -200,7 +200,7 @@ def RAW_RP(item4a, item4b, item4c, item4d):
     Missing = list.isna().sum()  # Count the number of missing in the list
     if Missing > 2: #If more than half items are missing
         return None
-    elif Missing > 0 and Missing < 2:  # If missing between 0 and 2:
+    elif Missing > 0 and Missing <= 2:  # If missing between 0 and 2:
         list2 = list.replace(np.nan, Mean)  #Replace missing items with mean of others
         return sum(list2)  # Then return the sum of the new list
     else:           #All items present, then simple sum
@@ -210,6 +210,7 @@ def RAW_RP(item4a, item4b, item4c, item4d):
 #Testing:
 RAW_RP(5,2,1,1) #9
 RAW_RP(np.nan, 1,2,5) #10.67
+RAW_RP(2, np.nan, 4, np.nan)
 
 
 #Applying to the data set:

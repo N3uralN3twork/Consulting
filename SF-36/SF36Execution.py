@@ -136,7 +136,7 @@ class SF36:
         Missing = ls.isna().sum()
         if Missing > 2:  # If more than half items are missing
             return None
-        elif Missing > 0 and Missing < 2:  # If num. missing between 0 and 2:
+        elif Missing > 0 and Missing <= 2:  # If num. missing between 0 and 2:
             ls2 = ls.replace(np.nan, Mean)  # Replace missing items with mean of others
             return sum(ls2)
         else:  # When all items present:

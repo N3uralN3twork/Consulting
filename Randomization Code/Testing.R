@@ -7,4 +7,16 @@ table(blocks, Z)
 table(Z)
 
 
+typeof(1.00)
+
+as.integer(1.20)
 colMeans()
+
+for (i in 1:51){
+  print(i)
+}
+
+
+for (i in (1:51)){
+  print(i)
+}
