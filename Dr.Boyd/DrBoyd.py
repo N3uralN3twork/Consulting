@@ -5,8 +5,6 @@ End: 9th September 2020
 Source: https://academic.csuohio.edu/holcombj/clean/bigtable.htm
 """
 
-"Import the data from 178 separate links:"
-
 # Import the necessary libraries:
 import pandas as pd
 import numpy as np
@@ -38,11 +36,12 @@ B = np.reshape(A, newshape=(-1, 16))  # Reshape the array into a dataframe with 
 
 C = pd.DataFrame(B)  # Turn the array into a Pandas DataFrame
 
-finale = C.iloc[:, [1, 3, 5, 7, 9, 11, 13, 15]]  # Select only the odd columns
+finale = C.iloc[:, [1, 3, 5, 7, 9, 11, 13, 15]]  # Select all rows and only the odd columns
 
 finale.columns = ["Obs.", "Age", "Sex", "AlkPhos", "Lab", "CamMOL", "PhosMOL", "AgeGroup"]  # Supply column names
 
 # Write to Excel:
 pd.DataFrame.to_excel(finale, "CleanedCalcium.xlsx",
                       header=True, index=False)
+
 
