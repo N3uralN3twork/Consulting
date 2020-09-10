@@ -1,3 +1,5 @@
+
+# Look at how the list is structured:
 a1 = pd.DataFrame(data[0][0].T)
 a2 = pd.DataFrame(data[1][0].T)
 a3 = pd.DataFrame(data[2][0].T)
@@ -176,3 +178,14 @@ r6 = pd.DataFrame(data[174][0].T)
 r7 = pd.DataFrame(data[175][0].T)
 r8 = pd.DataFrame(data[176][0].T)
 r9 = pd.DataFrame(data[177][0].T)
+
+# Combine the results of each dataframe:
+df = pd.concat([a1, a2, a3, a4, a5, a6, a7, a8, a9, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10,
+               c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10,
+               e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10,
+               g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10,
+               i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, j1, j2, j3, j4, j5, j6, j7, j8, j9, j10,
+               k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, l1, l2, l3, l4, l5, l6, l7, l8, l9, l10,
+               m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, n1, n2, n3, n4, n5, n6, n7, n8, n9, n10,
+               o1, o2, o3, o4, o5, o6, o7, o8, o9, o10, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10,
+               q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, r1, r2, r3, r4, r5, r6, r7, r8, r9], axis=0)

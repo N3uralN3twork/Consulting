@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="63ed3cda-a52d-44d6-8bf8-c23a8ce0bf6f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Dr.Boyd.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dr.Boyd.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CleanedCalcium.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/CleanedCalcium.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DrBoyd.py" beforeDir="false" afterPath="$PROJECT_DIR$/DrBoyd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calcium.xls" beforeDir="false" afterPath="$PROJECT_DIR$/calcium.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SF-36/Check the Scoring of SF-36 DATASET 3.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../SF-36/Check the Scoring of SF-36 DATASET 3.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SF-36/FinalScoredData3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../SF-36/FinalScoredData3.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JupyterTrust" id="23cb6793-7c8f-4622-9f6e-1afc072f5d55" />
+  <component name="ProjectId" id="1hFX6Nr20u5vm9eW62wEfrl0FRa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="63ed3cda-a52d-44d6-8bf8-c23a8ce0bf6f" name="Default Changelist" comment="" />
+      <created>1599607637950</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599607637950</updated>
+      <workItem from="1599607639257" duration="289000" />
+      <workItem from="1599608050624" duration="5617000" />
+      <workItem from="1599618539223" duration="6481000" />
+      <workItem from="1599664858008" duration="3768000" />
+      <workItem from="1599668704743" duration="162000" />
+      <workItem from="1599670301654" duration="348000" />
+      <workItem from="1599676678055" duration="1011000" />
+      <workItem from="1599692099503" duration="135000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1599665450879">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1599618052993" />
+    <state width="969" height="529" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1599665450879" />
+    <state x="538" y="183" width="672" height="678" key="search.everywhere.popup" timestamp="1599619997179">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="430" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599614995039" />
+    <state x="538" y="183" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1599619997179" />
+  </component>
+</project>

@@ -1,22 +1,13 @@
-library(randomizr)
+library(readxl)
+vector <- read_excel("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Dr.Boyd/vector.xlsx")
+View(vector)
 
-blocks <- rep(c("T", "C"), times = c(50, 50))
-Z <- block_ra(blocks = blocks)
-Z
-table(blocks, Z)
-table(Z)
+vector <- as.matrix(vector)
 
+test <- as.data.frame(matrix(vector, ncol = 8, byrow = T))
 
-typeof(1.00)
+# For a discrete random variable:
+plot(ecdf(iris$Species))
 
-as.integer(1.20)
-colMeans()
-
-for (i in 1:51){
-  print(i)
-}
-
-
-for (i in (1:51)){
-  print(i)
-}
+# For a continuous random variable:
+plot(ecdf(iris$Sepal.Length))
