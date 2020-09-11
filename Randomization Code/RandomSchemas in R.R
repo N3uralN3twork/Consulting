@@ -179,7 +179,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
                                                        yes = Sites,
                                                        no = length(Sites))))
   # Shuffle the data randomly:
-  matt = sample(matt)
+  "matt = sample(matt)"
   
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)

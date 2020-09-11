@@ -1,20 +1,7 @@
-library(ggplot2)
-library(readxl)
-Calcium <- read_excel("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Dr.Boyd/CleanedCalcium.xlsx", 
-                             sheet = "Sheet1")
-View(Calcium)
+BlockSize of 10 = size to sample from
+break up subjects into blocks
+split those 100 subjects into blocks
+use the blocksize to determine how big of a sample to take
+use the replicate function to determine how many times the function you want to run
 
-names(Calcium)
-str(Calcium)
-
-Calcium$Sex <- as.factor(Calcium$Sex)
-Calcium$Lab <- as.factor(Calcium$Lab)
-
-
-ggplot(data = Calcium, aes(x = Sex, y = AlkPhos, fill = Sex)) +
-  geom_boxplot()
-ggplot(data = Calcium, aes(x = Sex, y = CamMOL, fill = Sex)) +
-  geom_boxplot()
-ggplot(data = Calcium, aes(x = Sex, y = PhosMOL, fill = Sex)) +
-  geom_boxplot()
 
