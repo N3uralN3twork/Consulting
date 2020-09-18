@@ -1,7 +1,7 @@
 Package: Randomizations
 Title: Create a Randomization Schema
 Version: 1.0
-Date: 2020-08-24
+Date: 2020-09-17
 Authors@R: 
     person(given = "Matthias",
            family = "Quinn",
@@ -17,4 +17,7 @@ RoxygenNote: 7.1.1
 URL: https://github.com/N3uralN3twork
 Depends:
         tidyverse,
-        dplyr
+        dplyr,
+        psych,
+        randomizr
+        

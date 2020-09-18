@@ -26,7 +26,7 @@ print(a)
 # To parse the data from multiple links (via a for loop):
 data = []
 for link in links:  # For each link in the above list:
-    data.append(pd.read_html(link, ))  # Append the table to the new list
+    data.append(pd.read_html(link))  # Append the table to the new list
 
 A = np.array([np.array(x) for x in data])  # Turn the list of data into an NDarray
 

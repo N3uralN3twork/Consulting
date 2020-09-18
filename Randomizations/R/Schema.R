@@ -17,10 +17,10 @@
 #' @section Warning:
 #' Please don't use this function outside of the classroom
 #'
-#' @import tidyverse dplyr
+#' @import tidyverse dplyr psych randomizr
 #'
 #' @export
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
 
   # Set the seed for reproducibility:
   if (seed == TRUE){
@@ -39,6 +39,8 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   if (is.character(BlockSize)){
     BlockSize = as.integer(BlockSize)
   }
+
+  NBlocks = NSubjects/BlockSize # Compute the number of blocks
 
   ### Error-checking: ###
   # Null value for sites:
@@ -73,6 +75,11 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("The randomization ratio must be greater than 0")
   }
 
+  # Improper Block Size:
+  if (BlockSize>0 && NSubjects%%BlockSize != 0){
+    stop("The block size must be a multiple of the number of subjects")
+  }
+
   # Improper random seed
   "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
 
@@ -90,11 +97,11 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
       result = paste(result, collapse = "") # Combine the result into 1 string
       matt[letter] = result # Assigns the result to the previously empty vector "matt"
     } # Now that we have assigned the letters to the vector "matt"
-    matt = data.frame(t(matt)) # Transpose "matt"
+    matt = data.frame(t(matt)) # Transpose the vector
     matt = matt %>% # For each site code in your input:
       uncount(NSubjects) # Duplicate the site code NSubjects number of times
     matt = matt[1:NSubjects, 1:Sites] # Removing redundant codes
-    rownames(matt) = NULL
+    rownames(matt) = NULL # Aesthetics
   }
   # If the input to sites is a CHARACTER vector
   else if (is.vector(Sites) == TRUE){
@@ -128,18 +135,17 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
 
-  for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
-    timesT = NSubjects*(RRatio/(RRatio+1)) # Calculates the number of Ts to assign
-    timesC = (NSubjects - timesT) # Calculates the number of Cs to assign
-    TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC))))) # Concatenates and puts into a dataframe
-  }
-  # Repeat the process above for each site
-  # Must assign special cases for 1 dimensional and N>1 dimensional matrices
-  TLC = data.frame(TorC = rep(TLC$TorC, times = ifelse(is.numeric(Sites),
-                                                       yes = Sites,
-                                                       no = length(Sites))))
+  # Adding the Ts and Cs:
+  blocks = block.random(n = NSubjects, ncond = BlockSize)
+  Ts = RRatio/(RRatio+1)
+  Cs = 1-Ts
+  TorC = block_ra(blocks = blocks[ , 1],
+                  conditions = c("T", "C"),
+                  prob_each = c(Ts, Cs))
+  TLC = data.frame(TorC)
+
   # Shuffle the data randomly:
-  matt = sample(matt)
+  "matt = sample(matt)"
 
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)

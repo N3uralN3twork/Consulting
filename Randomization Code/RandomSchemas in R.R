@@ -10,6 +10,8 @@ setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Randomization Code")
 
 # install.packages("tidyverse")
 library(tidyverse) # For the unite and row_number functions
+library(psych) # For the block.random function
+library(randomizr) # For the block_ra function
 
 ################################################################################
 ###                           NOTES:                                         ###
@@ -53,7 +55,7 @@ library(tidyverse) # For the unite and row_number functions
 ###    SCHEMA for N Site(s)    ###
 ##################################
 
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
   
   # Set the seed for reproducibility:
   if (seed == TRUE){
@@ -167,17 +169,16 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     row.names(matt) = NULL
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
-  
-  for (i in (NSubjects+1)){ # +1 because it will drop off at NSubjects otherwise
-    timesT = NSubjects*(RRatio/(RRatio+1)) # Calculates the number of Ts to assign
-    timesC = (NSubjects - timesT) # Calculates the number of Cs to assign
-    TLC = data.frame(TorC = sample(t(rep(c("T", "C"), times = c(timesT, timesC))))) # Concatenates and puts into a dataframe
-  }
-  # Repeat the process above for each site
-  # Must assign special cases for 1 dimensional and N>1 dimensional matrices
-  TLC = data.frame(TorC = rep(TLC$TorC, times = ifelse(is.numeric(Sites),
-                                                       yes = Sites,
-                                                       no = length(Sites))))
+
+  # Adding the Ts and Cs:
+  blocks = block.random(n = NSubjects, ncond = BlockSize)
+  Ts = RRatio/(RRatio+1)
+  Cs = 1-Ts
+  TorC = block_ra(blocks = blocks[ , 1],
+                  conditions = c("T", "C"),
+                  prob_each = c(Ts, Cs))
+  TLC = data.frame(TorC)
+
   # Shuffle the data randomly:
   "matt = sample(matt)"
   
@@ -214,8 +215,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 
 # Unit Testing:
 
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, BlockSize = 1, RRatio = "1:1", seed = TRUE)
-test2 <- schema(Sites = 1, NSubjects = 10, BlockSize = 1, RRatio = 1)
+test1 <- schema(Sites = c("AAA"), NSubjects = 10, BlockSize = 5, RRatio = "1:1", seed = FALSE)
+test1
+test2 <- schema(Sites = 1, NSubjects = 10, BlockSize = 2, RRatio = 1, seed = FALSE)
+test2
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
 test4 <- schema(Sites = 2, NSubjects = 30, BlockSize = 1, RRatio = 2)
 test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, BlockSize = 1, RRatio = 1)
