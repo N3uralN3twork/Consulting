@@ -48,21 +48,21 @@ devtools::install_github("N3uralN3twork/Consulting/Randomizations", INSTALL_opts
 library(Randomizations)
 library(knitr)
 
-schema(Sites = 1, NSubjects = 10, BlockSize = 6, RRatio = 1, seed = TRUE) %>%
+schema(Sites = 1, NSubjects = 10, BlockSize = 5, RRatio = 1, seed = TRUE) %>%
   kable()
 ```
 
 | Code   | Site | Subject | Group |
 | :----- | :--- | :------ | :---- |
-| AAA01T | AAA  | 01      | T     |
+| AAA01C | AAA  | 01      | C     |
 | AAA02C | AAA  | 02      | C     |
 | AAA03T | AAA  | 03      | T     |
 | AAA04C | AAA  | 04      | C     |
-| AAA05C | AAA  | 05      | C     |
+| AAA05T | AAA  | 05      | T     |
 | AAA06C | AAA  | 06      | C     |
 | AAA07T | AAA  | 07      | T     |
-| AAA08C | AAA  | 08      | C     |
-| AAA09T | AAA  | 09      | T     |
+| AAA08T | AAA  | 08      | T     |
+| AAA09C | AAA  | 09      | C     |
 | AAA10T | AAA  | 10      | T     |
 
 # Resources :notebook:

@@ -4,7 +4,7 @@
 \alias{schema}
 \title{Create a Random Design Schema}
 \usage{
-schema(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = TRUE)
+schema(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE)
 }
 \arguments{
 \item{Sites}{A number of sites / a list of site codes to be used}
