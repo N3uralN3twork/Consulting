@@ -1,7 +1,7 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: August 8th 2020
+Date: September 18th 2020
 Finished on: August 10th 2020
 Class: STA 635 Consulting and Programming
 "
@@ -18,7 +18,7 @@ library(shiny)        # For the UI and server-side app
 library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
 library(DT)           # For displaying the data table
-library(randomizr)   # For the block_ra function
+library(randomizr)    # For the block_ra function
 library(psych)        # For the block.random function
 
 ################################################################################

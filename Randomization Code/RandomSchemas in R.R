@@ -2,13 +2,13 @@
 Title: Randomization Schema
 Author: Matt Quinn
 Date: September 8th 2020
-Finished on: September 11th 2020
+Finished on: September 18th 2020
 Class: STA 635 Consulting and Programming
 "
 
 setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Randomization Code")
 
-# install.packages("tidyverse")
+
 library(tidyverse) # For the unite and row_number functions
 library(psych) # For the block.random function
 library(randomizr) # For the block_ra function
@@ -221,6 +221,7 @@ test2 <- schema(Sites = 1, NSubjects = 10, BlockSize = 2, RRatio = 1, seed = FAL
 test2
 test3 <- schema(Sites = c("AAA"), NSubjects = 30, RRatio = 2)
 test4 <- schema(Sites = 2, NSubjects = 30, BlockSize = 1, RRatio = 2)
+test4
 test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, BlockSize = 1, RRatio = 1)
 test6 <- schema(Sites = NULL, NSubjects = 10, BlockSize = 1, RRatio = 1) # Should return error
 test7 <- schema(Sites = c("AAA", "BBB"), NSubjects = 20, BlockSize = 1, RRatio = 1, seed = FALSE)
