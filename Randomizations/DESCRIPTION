@@ -1,7 +1,7 @@
 Package: Randomizations
 Title: Create a Randomization Schema
 Version: 1.0
-Date: 2020-09-17
+Date: 2020-09-24
 Authors@R: 
     person(given = "Matthias",
            family = "Quinn",
@@ -9,7 +9,7 @@ Authors@R:
            email = "miq_qedquinn@yahoo.com")
 Description: Given a series of inputs, creates a completely randomized 
              design schema.
-License: use_gpl3_license()
+License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -18,6 +18,5 @@ URL: https://github.com/N3uralN3twork
 Depends:
         tidyverse,
         dplyr,
-        psych,
         randomizr
         

@@ -2,6 +2,5 @@
 
 export(schema)
 import(dplyr)
-import(psych)
 import(randomizr)
 import(tidyverse)

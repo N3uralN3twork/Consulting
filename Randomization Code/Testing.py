@@ -24,3 +24,12 @@ test = Schema()
 
 test.emptyList()
 
+ls = []
+NSubjects = 48
+BlockSize = 12
+for i in range(1, (NSubjects/BlockSize)+1):
+    for j in range(1, BlockSize):
+        print(i)
+
+
+

@@ -19,7 +19,6 @@ library(shinythemes)  # For aesthetics
 library(shinyWidgets) # For aesthetics
 library(DT)           # For displaying the data table
 library(randomizr)    # For the block_ra function
-library(psych)        # For the block.random function
 
 ################################################################################
 ###                           NOTES:                                         ###
@@ -131,6 +130,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("The block size must be a multiple of the number of subjects")
   }
   
+  if (BlockSize%%RRatio >= 1){
+    stop("Block Size and Ratio are Incompatible: cannot assign subjects with given ratio")
+  }
+  
   # Improper random seed
   "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
   
@@ -186,11 +189,16 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     matt = matt[NSubjects+1:(nrow(matt)-NSubjects), 1] # Only keep the first column and a subset of rows
   }
   
-  # Adding the Ts and Cs:
-  blocks = block.random(n = NSubjects, ncond = BlockSize) # Create blocks first
-  Ts = RRatio/(RRatio+1) # Compute the number of Ts needed
-  Cs = 1-Ts # Compute the number of Cs needed
-  TorC = block_ra(blocks = blocks[ , 1], # Using the first column:
+  # Assigning the Ts and Cs:
+  # Start with assigning the blocks:
+  vector <- c() # Initiate an empty vector
+  for (i in seq(1:(NSubjects/BlockSize))){ # For each block
+    for (j in 1:BlockSize){ # Print "BlockSize" times
+      vector = append(vector, i)} # Append the results to the previously empty vector
+  }
+  Ts = RRatio/(RRatio+1) # Compute the proportion of Ts needed
+  Cs = 1-Ts # Compute the proportion of Cs needed
+  TorC = block_ra(blocks = vector, # Using the first column:
                   conditions = c("T", "C"), # 2 groups are the Ts and Cs
                   prob_each = c(Ts, Cs)) # The prob. that T or C appears
   TLC = data.frame(TorC)
