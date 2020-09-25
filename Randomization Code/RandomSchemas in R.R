@@ -100,8 +100,8 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Improper Randomization Ratio:
-  test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
-  if (test3 == TRUE){
+  test3 <- NSubjects*(RRatio/(RRatio+1))%%RRatio == 0
+  if (test3 == FALSE){
     stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
   }
   
@@ -234,3 +234,7 @@ test4
 test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, BlockSize = 1, RRatio = 1)
 test6 <- schema(Sites = NULL, NSubjects = 10, BlockSize = 1, RRatio = 1) # Should return error
 test7 <- schema(Sites = c("AAA", "BBB"), NSubjects = 20, BlockSize = 1, RRatio = 1, seed = FALSE)
+
+test8 <- schema(Sites = 1, NSubjects = 50, BlockSize = 10, RRatio = 2) # Should return error
+
+
