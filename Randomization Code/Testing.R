@@ -1,7 +1,4 @@
-Sites = 1
-BlockSize = 10
-NSubjects = 50
-RRatio = 2
+plot(ecdf(iris$Sepal.Length))
 
-test3 <- NSubjects*(RRatio/(RRatio+1))%%RRatio == 0
-test3
+data <- data.frame(X=c(1,2,3,4), Px=c(0.12,0.18,0.28,0.42))
+plot(ecdf(data$Px))
