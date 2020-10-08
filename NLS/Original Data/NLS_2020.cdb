@@ -1,0 +1,2684 @@
+E50217.09    [SCH_TERM_1997.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1997 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 1997; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+    7529        1000 TO 1099: Attended public school
+      76        2000 TO 2099: Attended private school
+     412        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+    8017
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)     106
+TOTAL =========>    8123   VALID SKIP(-4)     861     NON-INTERVIEW(-5)       0
+ 
+Min:           1004        Max:           3012        Mean:             1121.58
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50217.08[Default]
+Default Next Question: E50217.10
+--------------------------------------------------------------------------------
+E50218.09    [SCH_TERM_1998.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1998 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 1998; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+    7040        1000 TO 1099: Attended public school
+      77        2000 TO 2099: Attended private school
+     377        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+    7494
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      83
+TOTAL =========>    7577   VALID SKIP(-4)    1407     NON-INTERVIEW(-5)       0
+ 
+Min:           1000        Max:           3012        Mean:             1120.93
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50218.08[Default]
+Default Next Question: E50218.10
+--------------------------------------------------------------------------------
+E50219.09    [SCH_TERM_1999.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1999 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 1999; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+    5401        1000 TO 1099: Attended public school
+      63        2000 TO 2099: Attended private school
+     287        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+    5751
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      54
+TOTAL =========>    5805   VALID SKIP(-4)    3179     NON-INTERVIEW(-5)       0
+ 
+Min:           1005        Max:           3012        Mean:             1121.29
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50219.08[Default]
+Default Next Question: E50219.10
+--------------------------------------------------------------------------------
+E50220.09    [SCH_TERM_2000.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2000 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2000; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+    3777        1000 TO 1099: Attended public school
+      42        2000 TO 2099: Attended private school
+     197        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+    4016
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      41
+TOTAL =========>    4057   VALID SKIP(-4)    4927     NON-INTERVIEW(-5)       0
+ 
+Min:           1006        Max:           3012        Mean:             1119.59
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50220.08[Default]
+Default Next Question: E50220.10
+--------------------------------------------------------------------------------
+E50221.09    [SCH_TERM_2001.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2001 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2001; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+    2194        1000 TO 1099: Attended public school
+      25        2000 TO 2099: Attended private school
+     106        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+    2325
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      38
+TOTAL =========>    2363   VALID SKIP(-4)    6621     NON-INTERVIEW(-5)       0
+ 
+Min:           1005        Max:           3012        Mean:             1113.41
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50221.08[Default]
+Default Next Question: E50221.10
+--------------------------------------------------------------------------------
+E50222.09    [SCH_TERM_2002.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2002 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2002; calculated for each month in primary/secondary school
+ 
+COMMENT: THE RNUMBERS ON THE SCH_TERM_2002.01 TO SCH_TERM_2002.05 WERE CHANGED 
+BETWEEN THE ROUND 5 AND ROUND 6 EVENT HISTORY RELEASES.  THE PREVIOUS RNUMBERS 
+ARE THE FOLLOWING R9037900 THROUGH R9038300.
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+     758        1000 TO 1099: Attended public school
+      10        2000 TO 2099: Attended private school
+      27        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+     795
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      26
+TOTAL =========>     821   VALID SKIP(-4)    8163     NON-INTERVIEW(-5)       0
+ 
+Min:           1008        Max:           3012        Mean:             1092.12
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50222.08[Default]
+Default Next Question: E50222.10
+--------------------------------------------------------------------------------
+E50223.09    [SCH_TERM_2003.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2003 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2003; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+     147        1000 TO 1099: Attended public school
+       4        2000 TO 2099: Attended private school
+       2        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+     153
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      21
+TOTAL =========>     174   VALID SKIP(-4)    8810     NON-INTERVIEW(-5)       0
+ 
+Min:           1007        Max:           3011        Mean:             1063.48
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50223.08[Default]
+Default Next Question: E50223.10
+--------------------------------------------------------------------------------
+E50224.09    [SCH_TERM_2004.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2004 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2004; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+      46        1000 TO 1099: Attended public school
+       0        2000 TO 2099: Attended private school
+       1        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+      47
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      20
+TOTAL =========>      67   VALID SKIP(-4)    8917     NON-INTERVIEW(-5)       0
+ 
+Min:           1008        Max:           3011        Mean:             1053.43
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50224.08[Default]
+Default Next Question: E50224.10
+--------------------------------------------------------------------------------
+E50225.09    [SCH_TERM_2005.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2005 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2005; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+      22        1000 TO 1099: Attended public school
+       0        2000 TO 2099: Attended private school
+       0        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+      22
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      15
+TOTAL =========>      37   VALID SKIP(-4)    8947     NON-INTERVIEW(-5)       0
+ 
+Min:           1008        Max:           1012        Mean:             1010.73
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50225.08[Default]
+Default Next Question: E50225.10
+--------------------------------------------------------------------------------
+E50226.09    [SCH_TERM_2006.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2006 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2006; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+      17        1000 TO 1099: Attended public school
+       0        2000 TO 2099: Attended private school
+       1        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+      18
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      14
+TOTAL =========>      32   VALID SKIP(-4)    8952     NON-INTERVIEW(-5)       0
+ 
+Min:           1008        Max:           3011        Mean:             1121.78
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50226.08[Default]
+Default Next Question: E50226.10
+--------------------------------------------------------------------------------
+E50227.09    [SCH_TERM_2007.09]                             Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2007 SCHOOL: SCHOOL TYPE AND TERM/GRADE IN MONTH 09
+ 
+Rs school type (first two digits) and grade (K-12) attended (last two digits) 
+during this month in 2007; calculated for each month in primary/secondary school
+NOTE:  THE LAST TWO DIGITS OF THIS VARIABLE REFER TO THE GRADES (12) OR OTHER  
+(95) THAT THE RESPONDENT ATTENDED IN THIS MONTH.  USE IN CONJUNCTION WITH 
+SCHOOL_STATUS TO DETERMINE SCHOOL TYPE IN A PARTICULR MONTH.
+ 
+      14        1000 TO 1099: Attended public school
+       0        2000 TO 2099: Attended private school
+       1        3000 TO 3099: Attended school with religious affiliation
+       0        4000 TO 4099: Attended unknown school type
+  -------
+      15
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      11
+TOTAL =========>      26   VALID SKIP(-4)    8958     NON-INTERVIEW(-5)       0
+ 
+Min:           1006        Max:           3012        Mean:             1143.47
+ 
+Hard Minimum: [1000]
+Hard Maximum: [4095]
+ 
+Lead In: E50227.08[Default]
+Default Next Question: E50227.10
+--------------------------------------------------------------------------------
+E52705.00    [SCH_SUSPENSIONS_1985]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1985 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1985-1986 school
+year
+ 
+       0           1 TO 2: Days
+       2           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       0           9 TO 10: Days
+       0          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)    8982     NON-INTERVIEW(-5)       0
+ 
+Min:              3        Max:              3        Mean:                   3
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52706.00[Default]
+Default Next Question: E52707.00
+--------------------------------------------------------------------------------
+E52706.00    [SCH_SUSPENSIONS_1986]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1986 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1986-1987 school
+year
+ 
+       2           1 TO 2: Days
+       1           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       1           9 TO 10: Days
+       0          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       4
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       4   VALID SKIP(-4)    8980     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             10        Mean:                3.75
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52627.00[Default]
+Default Next Question: E52705.00
+--------------------------------------------------------------------------------
+E52707.00    [SCH_SUSPENSIONS_1987]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1987 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1987-1988 school
+year
+ 
+       2           1 TO 2: Days
+       3           3 TO 4: Days
+       2           5 TO 6: Days
+       0           7 TO 8: Days
+       1           9 TO 10: Days
+       1          11 TO 15: Days
+       1          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+      10
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      10   VALID SKIP(-4)    8974     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             20        Mean:                 6.6
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52705.00[Default]
+Default Next Question: E52708.00
+--------------------------------------------------------------------------------
+E52708.00    [SCH_SUSPENSIONS_1988]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1988 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1988-1989 school
+year
+ 
+      14           1 TO 2: Days
+      11           3 TO 4: Days
+       5           5 TO 6: Days
+       1           7 TO 8: Days
+       2           9 TO 10: Days
+       1          11 TO 15: Days
+       1          16 TO 20: Days
+       1          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       1          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+      37
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      37   VALID SKIP(-4)    8947     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             60        Mean:                6.11
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52707.00[Default]
+Default Next Question: E52709.00
+--------------------------------------------------------------------------------
+E52709.00    [SCH_SUSPENSIONS_1989]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1989 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1989-1990 school
+year
+ 
+      28           1 TO 2: Days
+      18           3 TO 4: Days
+       9           5 TO 6: Days
+       2           7 TO 8: Days
+       4           9 TO 10: Days
+       1          11 TO 15: Days
+       0          16 TO 20: Days
+       1          21 TO 25: Days
+       1          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+      64
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      64   VALID SKIP(-4)    8920     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.17
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52708.00[Default]
+Default Next Question: E52710.00
+--------------------------------------------------------------------------------
+E52710.00    [SCH_SUSPENSIONS_1990]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1990 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1990-1991 school
+year
+ 
+      40           1 TO 2: Days
+      39           3 TO 4: Days
+      17           5 TO 6: Days
+       3           7 TO 8: Days
+       8           9 TO 10: Days
+       0          11 TO 15: Days
+       1          16 TO 20: Days
+       1          21 TO 25: Days
+       2          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     111
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     111   VALID SKIP(-4)    8873     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.24
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52709.00[Default]
+Default Next Question: E52711.00
+--------------------------------------------------------------------------------
+E52711.00    [SCH_SUSPENSIONS_1991]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1991 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1991-1992 school
+year
+ 
+      62           1 TO 2: Days
+      44           3 TO 4: Days
+      29           5 TO 6: Days
+      10           7 TO 8: Days
+       9           9 TO 10: Days
+       3          11 TO 15: Days
+       3          16 TO 20: Days
+       0          21 TO 25: Days
+       1          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     161
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     161   VALID SKIP(-4)    8823     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.19
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52710.00[Default]
+Default Next Question: E52712.00
+--------------------------------------------------------------------------------
+E52712.00    [SCH_SUSPENSIONS_1992]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1992 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1992-1993 school
+year
+ 
+     122           1 TO 2: Days
+     103           3 TO 4: Days
+      62           5 TO 6: Days
+       6           7 TO 8: Days
+      18           9 TO 10: Days
+      11          11 TO 15: Days
+       9          16 TO 20: Days
+       1          21 TO 25: Days
+       1          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     333
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     333   VALID SKIP(-4)    8651     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.31
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52711.00[Default]
+Default Next Question: E52713.00
+--------------------------------------------------------------------------------
+E52713.00    [SCH_SUSPENSIONS_1993]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1993 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1993-1994 school
+year
+ 
+     194           1 TO 2: Days
+     173           3 TO 4: Days
+      92           5 TO 6: Days
+      13           7 TO 8: Days
+      34           9 TO 10: Days
+      11          11 TO 15: Days
+      13          16 TO 20: Days
+       7          21 TO 25: Days
+       5          26 TO 30: Days
+       5          31 TO 40: Days
+       0          41 TO 50: Days
+       3          51 TO 100: Days
+       1         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     551
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     551   VALID SKIP(-4)    8433     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            150        Mean:                5.48
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52712.00[Default]
+Default Next Question: E52714.00
+--------------------------------------------------------------------------------
+E52714.00    [SCH_SUSPENSIONS_1994]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1994 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1994-1995 school
+year
+ 
+     279           1 TO 2: Days
+     282           3 TO 4: Days
+     126           5 TO 6: Days
+      19           7 TO 8: Days
+      78           9 TO 10: Days
+      27          11 TO 15: Days
+      11          16 TO 20: Days
+       8          21 TO 25: Days
+      17          26 TO 30: Days
+       6          31 TO 40: Days
+       2          41 TO 50: Days
+       7          51 TO 100: Days
+       1         101 TO 150: Days
+       1         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     864
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     864   VALID SKIP(-4)    8120     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            172        Mean:                6.03
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52713.00[Default]
+Default Next Question: E52715.00
+--------------------------------------------------------------------------------
+E52715.00    [SCH_SUSPENSIONS_1995]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1995 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1995-1996 school
+year
+ 
+     372           1 TO 2: Days
+     366           3 TO 4: Days
+     169           5 TO 6: Days
+      43           7 TO 8: Days
+      90           9 TO 10: Days
+      56          11 TO 15: Days
+      24          16 TO 20: Days
+       8          21 TO 25: Days
+      19          26 TO 30: Days
+      11          31 TO 40: Days
+       5          41 TO 50: Days
+       8          51 TO 100: Days
+       3         101 TO 150: Days
+       1         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+    1175
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1175   VALID SKIP(-4)    7809     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                6.46
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52714.00[Default]
+Default Next Question: E52716.00
+--------------------------------------------------------------------------------
+E52716.00    [SCH_SUSPENSIONS_1996]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1996 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1996-1997 school
+year
+ 
+     382           1 TO 2: Days
+     365           3 TO 4: Days
+     196           5 TO 6: Days
+      68           7 TO 8: Days
+      91           9 TO 10: Days
+      59          11 TO 15: Days
+      40          16 TO 20: Days
+      23          21 TO 25: Days
+      24          26 TO 30: Days
+      14          31 TO 40: Days
+       8          41 TO 50: Days
+      20          51 TO 100: Days
+       9         101 TO 150: Days
+       6         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+    1305
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1305   VALID SKIP(-4)    7679     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                8.86
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52715.00[Default]
+Default Next Question: E52717.00
+--------------------------------------------------------------------------------
+E52717.00    [SCH_SUSPENSIONS_1997]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1997 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1997-1998 school
+year
+ 
+     277           1 TO 2: Days
+     261           3 TO 4: Days
+     175           5 TO 6: Days
+      38           7 TO 8: Days
+      95           9 TO 10: Days
+      59          11 TO 15: Days
+      38          16 TO 20: Days
+      23          21 TO 25: Days
+      25          26 TO 30: Days
+       8          31 TO 40: Days
+      12          41 TO 50: Days
+      14          51 TO 100: Days
+       5         101 TO 150: Days
+      11         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+    1041
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    1041   VALID SKIP(-4)    7943     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:               10.27
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52716.00[Default]
+Default Next Question: E52718.00
+--------------------------------------------------------------------------------
+E52718.00    [SCH_SUSPENSIONS_1998]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1998 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1998-1999 school
+year
+ 
+     210           1 TO 2: Days
+     174           3 TO 4: Days
+     127           5 TO 6: Days
+      40           7 TO 8: Days
+      54           9 TO 10: Days
+      36          11 TO 15: Days
+      21          16 TO 20: Days
+      13          21 TO 25: Days
+      15          26 TO 30: Days
+       3          31 TO 40: Days
+       7          41 TO 50: Days
+       8          51 TO 100: Days
+       3         101 TO 150: Days
+       1         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     712
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     712   VALID SKIP(-4)    8272     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                7.97
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52717.00[Default]
+Default Next Question: E52719.00
+--------------------------------------------------------------------------------
+E52719.00    [SCH_SUSPENSIONS_1999]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             1999 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 1999-2000 school
+year
+ 
+     140           1 TO 2: Days
+     116           3 TO 4: Days
+      85           5 TO 6: Days
+      20           7 TO 8: Days
+      36           9 TO 10: Days
+      21          11 TO 15: Days
+      12          16 TO 20: Days
+       4          21 TO 25: Days
+       6          26 TO 30: Days
+       4          31 TO 40: Days
+       2          41 TO 50: Days
+       7          51 TO 100: Days
+       0         101 TO 150: Days
+       5         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     458
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     458   VALID SKIP(-4)    8526     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                8.62
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52718.00[Default]
+Default Next Question: E52720.00
+--------------------------------------------------------------------------------
+E52720.00    [SCH_SUSPENSIONS_2000]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2000 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2000-2001 school
+year
+ 
+      81           1 TO 2: Days
+      74           3 TO 4: Days
+      50           5 TO 6: Days
+       8           7 TO 8: Days
+      28           9 TO 10: Days
+      14          11 TO 15: Days
+       8          16 TO 20: Days
+       3          21 TO 25: Days
+       4          26 TO 30: Days
+       7          31 TO 40: Days
+       3          41 TO 50: Days
+       2          51 TO 100: Days
+       0         101 TO 150: Days
+       2         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     284
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     284   VALID SKIP(-4)    8700     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                8.21
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52719.00[Default]
+Default Next Question: E52721.00
+--------------------------------------------------------------------------------
+E52721.00    [SCH_SUSPENSIONS_2001]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2001 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2001-2002 school
+year
+ 
+      54           1 TO 2: Days
+      33           3 TO 4: Days
+      28           5 TO 6: Days
+       5           7 TO 8: Days
+      14           9 TO 10: Days
+       9          11 TO 15: Days
+       3          16 TO 20: Days
+       1          21 TO 25: Days
+       3          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       1          51 TO 100: Days
+       1         101 TO 150: Days
+       1         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+     153
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     153   VALID SKIP(-4)    8831     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                7.67
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52720.00[Default]
+Default Next Question: E52722.00
+--------------------------------------------------------------------------------
+E52722.00    [SCH_SUSPENSIONS_2002]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2002 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2002-2003 school
+year
+ 
+      11           1 TO 2: Days
+      10           3 TO 4: Days
+       7           5 TO 6: Days
+       3           7 TO 8: Days
+       3           9 TO 10: Days
+       0          11 TO 15: Days
+       2          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       2          51 TO 100: Days
+       1         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+      39
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      39   VALID SKIP(-4)    8945     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            120        Mean:                10.9
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52721.00[Default]
+Default Next Question: E52723.00
+--------------------------------------------------------------------------------
+E52723.00    [SCH_SUSPENSIONS_2003]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2003 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2003-2004 school
+year
+ 
+       4           1 TO 2: Days
+       0           3 TO 4: Days
+       1           5 TO 6: Days
+       2           7 TO 8: Days
+       1           9 TO 10: Days
+       1          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       9
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       9   VALID SKIP(-4)    8975     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             11        Mean:                5.11
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52722.00[Default]
+Default Next Question: E52724.00
+--------------------------------------------------------------------------------
+E52724.00    [SCH_SUSPENSIONS_2004]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2004 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2004-2005 school
+year
+ 
+       0           1 TO 2: Days
+       1           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       0           9 TO 10: Days
+       0          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    8983     NON-INTERVIEW(-5)       0
+ 
+Min:              4        Max:              4        Mean:                   4
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52723.00[Default]
+Default Next Question: E52725.00
+--------------------------------------------------------------------------------
+E52725.00    [SCH_SUSPENSIONS_2005]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2005 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2005-2006 school
+year
+ 
+       1           1 TO 2: Days
+       0           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       0           9 TO 10: Days
+       0          11 TO 15: Days
+       1          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       2
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       2   VALID SKIP(-4)    8982     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             20        Mean:                10.5
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52724.00[Default]
+Default Next Question: E52726.00
+--------------------------------------------------------------------------------
+E52726.00    [SCH_SUSPENSIONS_2006]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2006 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2006-2007 school
+year
+ 
+       0           1 TO 2: Days
+       0           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       0           9 TO 10: Days
+       0          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       1          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    8983     NON-INTERVIEW(-5)       0
+ 
+Min:             80        Max:             80        Mean:                  80
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52725.00[Default]
+Default Next Question: E52727.00
+--------------------------------------------------------------------------------
+E52727.00    [SCH_SUSPENSIONS_2007]                         Survey Year: XRND
+  PRIMARY VARIABLE
+
+ 
+             2007 SCHOOLING: SUSPENSION
+ 
+Number of days suspended from a primary/secondary school during 2007-2008 school
+year
+ 
+       1           1 TO 2: Days
+       0           3 TO 4: Days
+       0           5 TO 6: Days
+       0           7 TO 8: Days
+       0           9 TO 10: Days
+       0          11 TO 15: Days
+       0          16 TO 20: Days
+       0          21 TO 25: Days
+       0          26 TO 30: Days
+       0          31 TO 40: Days
+       0          41 TO 50: Days
+       0          51 TO 100: Days
+       0         101 TO 150: Days
+       0         151 TO 200: Days
+       0         201 TO 250: Days
+       0         251 TO 300: Days
+       0         301 TO 365: Days
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    8983     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              1        Mean:                   1
+ 
+Hard Minimum: [0]
+Hard Maximum: [365]
+ 
+Lead In: E52726.00[Default]
+Default Next Question: E51117.01
+--------------------------------------------------------------------------------
+R00001.00    [PUBID]                                        Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             PUBID, YOUTH CASE IDENTIFICATION CODE
+ 
+COMMENT: YOUTH CASE IDENTIFICATION CODE
+ 
+       0           0
+     998           1 TO 999
+     999        1000 TO 1999
+     997        2000 TO 2999
+     996        3000 TO 3999
+     998        4000 TO 4999
+     996        5000 TO 5999
+     994        6000 TO 6999
+     994        7000 TO 7999
+     989        8000 TO 8999
+      23        9000 TO 9999
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:           9022        Mean:              4504.3
+ 
+Hard Minimum: [0]
+Hard Maximum: [99999999]
+ 
+Lead In: R72976.00[Default]
+Default Next Question: R05363.00
+--------------------------------------------------------------------------------
+R00372.00    [YSCH-6300.01]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 01
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+      36           1 TO 4
+       8           5 TO 9
+       5          10 TO 14
+       0          15 TO 19
+       1          20 TO 24
+       1          25 TO 29
+       1          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+      52
+ 
+Refusal(-1)            0
+Don't Know(-2)         6
+TOTAL =========>      58   VALID SKIP(-4)    8926     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.79
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00351.00[1:1]
+Default Next Question: R00352.00
+--------------------------------------------------------------------------------
+R00373.00    [YSCH-6300.02]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 02
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+      48           1 TO 4
+       8           5 TO 9
+       3          10 TO 14
+       1          15 TO 19
+       3          20 TO 24
+       1          25 TO 29
+       2          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+      66
+ 
+Refusal(-1)            0
+Don't Know(-2)        11
+TOTAL =========>      77   VALID SKIP(-4)    8907     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                4.98
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00352.00[1:1]
+Default Next Question: R00353.00
+--------------------------------------------------------------------------------
+R00374.00    [YSCH-6300.03]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 03
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+      91           1 TO 4
+      24           5 TO 9
+       9          10 TO 14
+       1          15 TO 19
+       1          20 TO 24
+       0          25 TO 29
+       1          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+     127
+ 
+Refusal(-1)            0
+Don't Know(-2)        16
+TOTAL =========>     143   VALID SKIP(-4)    8841     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:                3.86
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00353.00[1:1]
+Default Next Question: R00354.00
+--------------------------------------------------------------------------------
+R00375.00    [YSCH-6300.04]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 04
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     142           1 TO 4
+      44           5 TO 9
+      12          10 TO 14
+       3          15 TO 19
+       6          20 TO 24
+       0          25 TO 29
+       0          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+     207
+ 
+Refusal(-1)            0
+Don't Know(-2)        16
+TOTAL =========>     223   VALID SKIP(-4)    8761     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             23        Mean:                4.11
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00354.00[1:1]
+Default Next Question: R00355.00
+--------------------------------------------------------------------------------
+R00376.00    [YSCH-6300.05]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 05
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     313           1 TO 4
+      60           5 TO 9
+      14          10 TO 14
+       6          15 TO 19
+       5          20 TO 24
+       1          25 TO 29
+       4          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       1          50 TO 99999999: 50+
+  -------
+     404
+ 
+Refusal(-1)            2
+Don't Know(-2)        22
+TOTAL =========>     428   VALID SKIP(-4)    8556     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             90        Mean:                4.01
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00355.00[1:1]
+Default Next Question: R00356.00
+--------------------------------------------------------------------------------
+R00377.00    [YSCH-6300.06]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 06
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     523           1 TO 4
+     157           5 TO 9
+      52          10 TO 14
+      13          15 TO 19
+      20          20 TO 24
+       3          25 TO 29
+      12          30 TO 34
+       2          35 TO 39
+       2          40 TO 44
+       0          45 TO 49
+       7          50 TO 99999999: 50+
+  -------
+     791
+ 
+Refusal(-1)            0
+Don't Know(-2)        38
+TOTAL =========>     829   VALID SKIP(-4)    8155     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            150        Mean:                5.65
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00356.00[1:1]
+Default Next Question: R00357.00
+--------------------------------------------------------------------------------
+R00378.00    [YSCH-6300.07]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 07
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     627           1 TO 4
+     204           5 TO 9
+      81          10 TO 14
+      21          15 TO 19
+      21          20 TO 24
+       6          25 TO 29
+      12          30 TO 34
+       3          35 TO 39
+       5          40 TO 44
+       4          45 TO 49
+      20          50 TO 99999999: 50+
+  -------
+    1004
+ 
+Refusal(-1)            0
+Don't Know(-2)        36
+TOTAL =========>    1040   VALID SKIP(-4)    7944     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            999        Mean:                8.76
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00357.00[1:1]
+Default Next Question: R00358.00
+--------------------------------------------------------------------------------
+R00379.00    [YSCH-6300.08]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 08
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     554           1 TO 4
+     161           5 TO 9
+      83          10 TO 14
+      32          15 TO 19
+      14          20 TO 24
+       6          25 TO 29
+      13          30 TO 34
+       3          35 TO 39
+       5          40 TO 44
+       4          45 TO 49
+      12          50 TO 99999999: 50+
+  -------
+     887
+ 
+Refusal(-1)            1
+Don't Know(-2)        26
+TOTAL =========>     914   VALID SKIP(-4)    8070     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                7.09
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00358.00[1:1]
+Default Next Question: R00359.00
+--------------------------------------------------------------------------------
+R00380.00    [YSCH-6300.09]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 09
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     365           1 TO 4
+     126           5 TO 9
+      70          10 TO 14
+      17          15 TO 19
+       9          20 TO 24
+       8          25 TO 29
+      13          30 TO 34
+       1          35 TO 39
+       3          40 TO 44
+       0          45 TO 49
+      17          50 TO 99999999: 50+
+  -------
+     629
+ 
+Refusal(-1)            1
+Don't Know(-2)        10
+TOTAL =========>     640   VALID SKIP(-4)    8344     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            180        Mean:                8.26
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00359.00[1:1]
+Default Next Question: R00360.00
+--------------------------------------------------------------------------------
+R00381.00    [YSCH-6300.10]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 10
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+     141           1 TO 4
+      60           5 TO 9
+      23          10 TO 14
+       8          15 TO 19
+       5          20 TO 24
+       2          25 TO 29
+       7          30 TO 34
+       0          35 TO 39
+       2          40 TO 44
+       0          45 TO 49
+       3          50 TO 99999999: 50+
+  -------
+     251
+ 
+Refusal(-1)            0
+Don't Know(-2)         2
+TOTAL =========>     253   VALID SKIP(-4)    8731     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            150        Mean:                7.07
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00360.00[1:1]
+Default Next Question: R00361.00
+--------------------------------------------------------------------------------
+R00382.00    [YSCH-6300.11]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 11
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+      47           1 TO 4
+      11           5 TO 9
+       7          10 TO 14
+       1          15 TO 19
+       0          20 TO 24
+       0          25 TO 29
+       0          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       1          45 TO 49
+       2          50 TO 99999999: 50+
+  -------
+      69
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>      69   VALID SKIP(-4)    8915     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:            120        Mean:                6.77
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00361.00[1:1]
+Default Next Question: R00362.00
+--------------------------------------------------------------------------------
+R00383.00    [YSCH-6300.12]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 12
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+       2           1 TO 4
+       0           5 TO 9
+       0          10 TO 14
+       0          15 TO 19
+       0          20 TO 24
+       0          25 TO 29
+       1          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+       3
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       3   VALID SKIP(-4)    8981     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             30        Mean:               11.67
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00362.00[1:1]
+Default Next Question: R00363.00
+--------------------------------------------------------------------------------
+R00384.00    [YSCH-6300.14]                                 Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             # DAYS SUSPENDED IN PARTICULAR GRADE SUSPENSION 14
+ 
+Altogether, how many days were you suspended in the [1st-20th grade]?
+ 
+UNIVERSE: R with history of formal schooling; missing prior info on school 
+suspension; has been suspended from school; reports grade/s that was suspended
+ 
+       0           0
+       1           1 TO 4
+       0           5 TO 9
+       0          10 TO 14
+       0          15 TO 19
+       0          20 TO 24
+       0          25 TO 29
+       0          30 TO 34
+       0          35 TO 39
+       0          40 TO 44
+       0          45 TO 49
+       0          50 TO 99999999: 50+
+  -------
+       1
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>       1   VALID SKIP(-4)    8983     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              1        Mean:                   1
+ 
+Hard Minimum: [1]
+Hard Maximum: [999]
+Soft Minimum: [1]
+Soft Maximum: [999]
+ 
+Lead In: R00364.00[1:1]
+Default Next Question: R00365.00
+--------------------------------------------------------------------------------
+R05363.00    [KEY!SEX]                                      Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             KEY!SEX, RS GENDER (SYMBOL)
+ 
+COMMENT: Gender of Youth
+ 
+    4599       1 Male
+    4385       2 Female
+       0       0 No Information
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              2        Mean:                1.49
+ 
+Lead In: R00001.00[Default]
+Default Next Question: R05364.00
+--------------------------------------------------------------------------------
+R05364.01    [KEY!BDATE_M]                                  Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             KEY!BDATE, RS BIRTHDATE MONTH/YEAR (SYMBOL)
+ 
+COMMENT: Birthdate of Youth
+ 
+     816           1: January
+     693           2: February
+     760           3: March
+     659           4: April
+     689           5: May
+     720           6: June
+     762           7: July
+     782           8: August
+     839           9: September
+     765          10: October
+     763          11: November
+     736          12: December
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:             12        Mean:                6.56
+ 
+Earliest (NonMissing): JANUARY/1980
+Latest   (NonMissing): DECEMBER/1984
+ 
+Hard Minimum: [01/01/1880]
+Hard Maximum: [the current date]
+ 
+Lead In: None.
+Default Next Question: R05364.02
+--------------------------------------------------------------------------------
+R05364.02    [KEY!BDATE_Y]                                  Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             KEY!BDATE, RS BIRTHDATE MONTH/YEAR (SYMBOL)
+ 
+COMMENT: Birthdate of Youth
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:           1980        Max:           1984        Mean:             1982.01
+ 
+Earliest (NonMissing): JANUARY/1980
+Latest   (NonMissing): DECEMBER/1984
+ 
+Hard Minimum: [01/01/1880]
+Hard Maximum: [the current date]
+ 
+Lead In: R05364.01[Default]
+Default Next Question: R05366.00
+--------------------------------------------------------------------------------
+R05515.00    [P2-001]                                       Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WAS PR BORN IN U.S.?
+ 
+Now we would like to ask you some questions about your background.
+ 
+Were you born in the United States?
+ 
+UNIVERSE: All
+ 
+    6754       1 Yes   (Go To R05519.00)
+    1182       0 No   (Go To R05518.00)
+  -------
+    7936
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    7936   VALID SKIP(-4)    1048     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .85
+ 
+Lead In: R05416.00[1:1]
+Default Next Question: R05519.00
+--------------------------------------------------------------------------------
+R05518.00    [P2-008]                                       Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WHAT YEAR PR 1ST CAME TO LIVE IN U.S.?
+ 
+In what year did you first come to the United States to live?
+ 
+UNIVERSE: R was not born in US
+ 
+       1           0 TO 1940: < 1940
+       0        1941 TO 1945
+      10        1946 TO 1950
+      32        1951 TO 1955
+      38        1956 TO 1960
+      91        1961 TO 1965
+     120        1966 TO 1970
+     167        1971 TO 1975
+     306        1976 TO 1980
+     201        1981 TO 1985
+     126        1986 TO 1990
+      90        1991 TO 1995
+      13        1996 TO 2000: 1996+
+  -------
+    1195
+ 
+Refusal(-1)            6
+Don't Know(-2)         6
+TOTAL =========>    1207   VALID SKIP(-4)    7777     NON-INTERVIEW(-5)       0
+ 
+Min:             53        Max:           1997        Mean:             1975.39
+ 
+Hard Minimum: [{PARENT.DOB2}]
+Hard Maximum: [{CURDATE2}]
+ 
+Lead In: R05515.00[0:0]
+Default Next Question: R05519.00
+--------------------------------------------------------------------------------
+R05519.00    [P2-009]                                       Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             PR SPEAK ANY LANGUAGE BESIDES ENGLISH IN HOME?
+ 
+Do you now speak any language other than English at home?
+ 
+UNIVERSE: All
+ 
+    1543       1 Yes   (Go To R05520.00)
+    6393       0 No
+  -------
+    7936
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    7936   VALID SKIP(-4)    1048     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .19
+ 
+Lead In: R05515.00[Default] R05518.00[Default]  R05515.00[1:1]
+Default Next Question: R05521.00
+--------------------------------------------------------------------------------
+R05550.00    [P2-037]                                       Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WAS PRS SPOUSE/PARTNER BORN IN U.S.?
+ 
+Now I would like to ask you some questions about [this spouse/partner]'s 
+background.
+ 
+Was [this spouse/partner] born in the United States?
+ 
+UNIVERSE: R lives with S/P
+ 
+    4299       1 Yes   (Go To R05554.00)
+     908       0 No   (Go To R05553.00)
+  -------
+    5207
+ 
+Refusal(-1)            7
+Don't Know(-2)         2
+TOTAL =========>    5216   VALID SKIP(-4)    3768     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .83
+ 
+Lead In: R05549.00[1:1]
+Default Next Question: R05554.00
+--------------------------------------------------------------------------------
+R05595.00    [P2-101.01]                                    Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WAS NONRESP PARENT 01 BORN IN U.S.?
+ 
+Was [this non-responding parent] born in the United States?
+ 
+UNIVERSE: R has contact with nonresponding parent
+ 
+    2037       1 Yes   (Go To R05604.00)
+     257       0 No   (Go To R05601.00)
+  -------
+    2294
+ 
+Refusal(-1)            1
+Don't Know(-2)        16
+TOTAL =========>    2311   VALID SKIP(-4)    6673     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .89
+ 
+Lead In: R05593.00[Default]
+Default Next Question: R05604.00
+--------------------------------------------------------------------------------
+R05596.00    [P2-101.02]                                    Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WAS NONRESP PARENT 02 BORN IN U.S.?
+ 
+Was [this non-responding parent] born in the United States?
+ 
+UNIVERSE: R has contact with nonresponding parent
+ 
+     245       1 Yes   (Go To R05605.00)
+      37       0 No   (Go To R05602.00)
+  -------
+     282
+ 
+Refusal(-1)            1
+Don't Know(-2)         5
+TOTAL =========>     288   VALID SKIP(-4)    8696     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .87
+ 
+Lead In: R05594.00[Default]
+Default Next Question: R05605.00
+--------------------------------------------------------------------------------
+R05601.00    [P2-108A.01]                                   Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WHAT YEAR NONRESP PARENT 01 1ST CAME TO LIVE IN U.S.?
+ 
+In what year did [this non-responding parent] first come to the United States to
+live?
+ 
+UNIVERSE: R has contact with nonresponding parent
+ 
+     225       1 SELECT TO ENTER YEAR   (Go To R05620.00)
+      33       0 NEVER CAME TO THE UNITED STATES
+  -------
+     258
+ 
+Refusal(-1)            1
+Don't Know(-2)        15
+TOTAL =========>     274   VALID SKIP(-4)    8710     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .87
+ 
+Lead In: R05595.00[0:0]
+Default Next Question: R05604.00
+--------------------------------------------------------------------------------
+R05602.00    [P2-108A.02]                                   Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             WHAT YEAR NONRESP PARENT 02 1ST CAME TO LIVE IN U.S.?
+ 
+In what year did [this non-responding parent] first come to the United States to
+live?
+ 
+UNIVERSE: R has contact with nonresponding parent
+ 
+      27       1 SELECT TO ENTER YEAR   (Go To R05621.00)
+      12       0 NEVER CAME TO THE UNITED STATES
+  -------
+      39
+ 
+Refusal(-1)            0
+Don't Know(-2)         1
+TOTAL =========>      40   VALID SKIP(-4)    8944     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .69
+ 
+Lead In: R05596.00[0:0]
+Default Next Question: R05605.00
+--------------------------------------------------------------------------------
+R12013.00    [CV_CITIZENSHIP]                               Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             CITIZENSHIP STATUS BASED ON BIRTH
+ 
+U.S. citizenship status based on place of birth.
+ 
+    6869       1 Citizen, born in the U.S.
+     279       2 Unknown, not born in U.S.
+     794       3 Unknown, can't determine birthplace
+  -------
+    7942
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    7942   VALID SKIP(-4)    1042     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              3        Mean:                1.24
+ 
+Lead In: R12012.00[Default]
+Default Next Question: R12014.00
+--------------------------------------------------------------------------------
+R12358.00    [CV_SAMPLE_TYPE]                               Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             SAMPLE TYPE.  CROSS-SECTIONAL OR OVERSAMPLE
+ 
+Sample type: Is the respondent a member of the cross-sectional sample or the 
+oversample?
+ 
+    6748       1 Cross-sectional
+    2236       0 Oversample
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              0        Max:              1        Mean:                 .75
+ 
+Lead In: R12338.00[Default]
+Default Next Question: R12359.00
+--------------------------------------------------------------------------------
+R14826.00    [KEY!RACE_ETHNICITY]                           Survey Year: 1997
+  PRIMARY VARIABLE
+
+ 
+             KEY!RACE_ETHNICITY, COMBINED RACE AND ETHNICITY (SYMBOL)
+ 
+COMMENT: Combined race - ethnicity variable
+ 
+    2335       1 Black
+    1901       2 Hispanic
+      83       3 Mixed Race (Non-Hispanic)
+    4665       4 Non-Black / Non-Hispanic
+  -------
+    8984
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    8984   VALID SKIP(-4)       0     NON-INTERVIEW(-5)       0
+ 
+Min:              1        Max:              4        Mean:                2.79
+ 
+Lead In: R05387.00[Default]
+Default Next Question: R05389.00
+--------------------------------------------------------------------------------
+R72956.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2001
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7409       1 Citizen, born in the U.S.
+     162       2 Citizen, naturalized
+      59       3 Applicant for Naturalization
+     151       4 Permanent Resident
+      38       5 Applicant for Residence
+      59       6 Other
+  -------
+    7878
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       4
+TOTAL =========>    7882   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1102
+ 
+Min:              1        Max:              6        Mean:                1.15
+ 
+Lead In: R72741.00[Default]
+Default Next Question: R72157.00
+--------------------------------------------------------------------------------
+S15523.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2002
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7428       1 Citizen, born in the U.S.
+     166       2 Citizen, naturalized
+      58       3 Applicant for Naturalization
+     144       4 Permanent Resident
+      35       5 Applicant for Residence
+      61       6 Other
+  -------
+    7892
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       4
+TOTAL =========>    7896   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1088
+ 
+Min:              1        Max:              6        Mean:                1.15
+ 
+Lead In: S15522.00[Default]
+Default Next Question: S15524.00
+--------------------------------------------------------------------------------
+S20221.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2003
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7288       1 Citizen, born in the U.S.
+     160       2 Citizen, naturalized
+      56       3 Applicant for Naturalization
+     149       4 Permanent Resident
+      36       5 Applicant for Residence
+      61       6 Other
+  -------
+    7750
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       4
+TOTAL =========>    7754   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1230
+ 
+Min:              1        Max:              6        Mean:                1.15
+ 
+Lead In: S20220.00[Default]
+Default Next Question: S20222.00
+--------------------------------------------------------------------------------
+S38230.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2004
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7050       1 Citizen, born in the U.S.
+     157       2 Citizen, naturalized
+      56       3 Applicant for Naturalization
+     146       4 Permanent Resident
+      33       5 Applicant for Residence
+      57       6 Other
+  -------
+    7499
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       3
+TOTAL =========>    7502   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1482
+ 
+Min:              1        Max:              6        Mean:                1.15
+ 
+Lead In: S38229.00[Default]
+Default Next Question: S38231.00
+--------------------------------------------------------------------------------
+S75096.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7121       1 Citizen, born in the U.S.
+     210       2 Citizen, naturalized
+      25       3 Applicant for Naturalization
+     115       4 Permanent Resident
+      16       5 Applicant for Residence
+      62       6 Other
+  -------
+    7549
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      10
+TOTAL =========>    7559   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1425
+ 
+Min:              1        Max:              6        Mean:                1.13
+ 
+Lead In: S75095.00[Default]
+Default Next Question: S75097.00
+--------------------------------------------------------------------------------
+S76395.00    [YHHI-55711]                                   Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             WAS BIO MAT GRANDMOTHER BORN IN U.S., ITS TERRITORIES OR PUERTO 
+             RICO
+ 
+Was your biological mother's mother born in the United States, its territories, 
+or Puerto Rico?
+ 
+UNIVERSE: All
+ 
+    5876       1 YES
+    1425       0 NO
+      30       2 R WAS ADOPTED AND DOESN'T KNOW ABOUT ANY BIOLOGICAL 
+                      GRANDPARENTS   (Go To S76407.00)
+  -------
+    7331
+ 
+Refusal(-1)            4
+Don't Know(-2)       224
+TOTAL =========>    7559   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1425
+ 
+Min:              0        Max:              2        Mean:                 .81
+ 
+Lead In: S76282.00[Default]  S76276.00[5:5]
+Default Next Question: S76398.00
+--------------------------------------------------------------------------------
+S76398.00    [YHHI-55714]                                   Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             WAS BIO MAT GRANDFATHER BORN IN U.S., ITS TERRITORIES OR PUERTO 
+             RICO
+ 
+Was your biological mother's father born in the United States, its territories, 
+or Puerto Rico?
+ 
+UNIVERSE: All excepted those adopted who have no knowledge about bio 
+grandparents
+ 
+    5587       1 YES
+    1405       0 NO
+       3       2 R WAS ADOPTED AND DOESN'T KNOW ABOUT ANY BIOLOGICAL 
+                      GRANDPARENTS   (Go To S76407.00)
+  -------
+    6995
+ 
+Refusal(-1)            4
+Don't Know(-2)       530
+TOTAL =========>    7529   VALID SKIP(-4)      30     NON-INTERVIEW(-5)    1425
+ 
+Min:              0        Max:              2        Mean:                  .8
+ 
+Lead In: S76395.00[Default]
+Default Next Question: S76401.00
+--------------------------------------------------------------------------------
+S76401.00    [YHHI-55717]                                   Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             WAS BIO PAT GRANDMOTHER BORN IN U.S., ITS TERRITORIES OR PUERTO 
+             RICO
+ 
+Was your biological father's mother born in the United States, its territories, 
+or Puerto Rico?
+ 
+UNIVERSE: All excepted those adopted who have no knowledge about bio 
+grandparents
+ 
+    5338       1 YES
+    1459       0 NO
+      14       2 R WAS ADOPTED AND DOESN'T KNOW ABOUT ANY BIOLOGICAL 
+                      GRANDPARENTS   (Go To S76407.00)
+  -------
+    6811
+ 
+Refusal(-1)            6
+Don't Know(-2)       709
+TOTAL =========>    7526   VALID SKIP(-4)      33     NON-INTERVIEW(-5)    1425
+ 
+Min:              0        Max:              2        Mean:                 .79
+ 
+Lead In: S76398.00[Default]
+Default Next Question: S76404.00
+--------------------------------------------------------------------------------
+S76404.00    [YHHI-55720]                                   Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             WAS BIO FAT GRANDFATHER BORN IN U.S., ITS TERRITORIES OR PUERTO 
+             RICO
+ 
+Was your biological father's father born in the United States, its territories, 
+or Puerto Rico?
+ 
+UNIVERSE: All excepted those adopted who have no knowledge about bio 
+grandparents
+ 
+    5081       1 YES
+    1445       0 NO
+       5       2 R WAS ADOPTED AND DOESN'T KNOW ABOUT ANY BIOLOGICAL 
+                      GRANDPARENTS
+  -------
+    6531
+ 
+Refusal(-1)            5
+Don't Know(-2)       976
+TOTAL =========>    7512   VALID SKIP(-4)      47     NON-INTERVIEW(-5)    1425
+ 
+Min:              0        Max:              2        Mean:                 .78
+ 
+Lead In: S76401.00[Default]
+Default Next Question: S76407.00
+--------------------------------------------------------------------------------
+S76422.00    [YHHI-55701]                                   Survey Year: 2006
+  PRIMARY VARIABLE
+
+ 
+             WAS R BORN IN U.S., ITS TERRITORIES OR PUERTO RICO
+ 
+Now let's begin to talk about you.
+ 
+Were you born in the United States, its territories, or Puerto Rico?
+ 
+UNIVERSE: R who have not previously reported that they are US citizens
+ 
+      87       1 YES
+     294       0 NO
+  -------
+     381
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>     381   VALID SKIP(-4)    7178     NON-INTERVIEW(-5)    1425
+ 
+Min:              0        Max:              1        Mean:                 .23
+ 
+Lead In: S76421.00[Default]
+Default Next Question: S76425.00
+--------------------------------------------------------------------------------
+T00129.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2007
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    6983       1 Citizen, born in the U.S.
+     207       2 Citizen, naturalized
+      25       3 Applicant for Naturalization
+     117       4 Permanent Resident
+      16       5 Applicant for Residence
+      61       6 Other
+  -------
+    7409
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)       9
+TOTAL =========>    7418   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1566
+ 
+Min:              1        Max:              6        Mean:                1.13
+ 
+Lead In: T00128.00[Default]
+Default Next Question: T00130.00
+--------------------------------------------------------------------------------
+T20158.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2008
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7049       1 Citizen, born in the U.S.
+     249       2 Citizen, naturalized
+      17       3 Applicant for Naturalization
+      82       4 Permanent Resident
+      20       5 Applicant for Residence
+      59       6 Other
+  -------
+    7476
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      14
+TOTAL =========>    7490   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1494
+ 
+Min:              1        Max:              6        Mean:                1.12
+ 
+Lead In: T20157.00[Default]
+Default Next Question: T20159.00
+--------------------------------------------------------------------------------
+T36061.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2009
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7112       1 Citizen, born in the U.S.
+     265       2 Citizen, naturalized
+      12       3 Applicant for Naturalization
+      77       4 Permanent Resident
+      17       5 Applicant for Residence
+      61       6 Other
+  -------
+    7544
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      15
+TOTAL =========>    7559   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1425
+ 
+Min:              1        Max:              6        Mean:                1.12
+ 
+Lead In: T36060.00[Default]
+Default Next Question: T36062.00
+--------------------------------------------------------------------------------
+T52065.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2010
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    7047       1 Citizen, born in the U.S.
+     256       2 Citizen, naturalized
+      13       3 Applicant for Naturalization
+      73       4 Permanent Resident
+      17       5 Applicant for Residence
+      59       6 Other
+  -------
+    7465
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      14
+TOTAL =========>    7479   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1505
+ 
+Min:              1        Max:              6        Mean:                1.12
+ 
+Lead In: T52064.00[Default]
+Default Next Question: T52066.00
+--------------------------------------------------------------------------------
+T66563.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2011
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    6997       1 Citizen, born in the U.S.
+     255       2 Citizen, naturalized
+      13       3 Applicant for Naturalization
+      72       4 Permanent Resident
+      18       5 Applicant for Residence
+      55       6 Other
+  -------
+    7410
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      13
+TOTAL =========>    7423   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1561
+ 
+Min:              1        Max:              6        Mean:                1.11
+ 
+Lead In: T66562.00[Default]
+Default Next Question: T66564.00
+--------------------------------------------------------------------------------
+T81287.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2013
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    6738       1 Citizen, born in the U.S.
+     239       2 Citizen, naturalized
+      12       3 Applicant for Naturalization
+      66       4 Permanent Resident
+      17       5 Applicant for Residence
+      56       6 Other
+  -------
+    7128
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      12
+TOTAL =========>    7140   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1844
+ 
+Min:              1        Max:              6        Mean:                1.11
+ 
+Lead In: T81286.00[Default]
+Default Next Question: T81288.00
+--------------------------------------------------------------------------------
+U00086.00    [CV_CITIZEN_CURRENT]                           Survey Year: 2015
+  PRIMARY VARIABLE
+
+ 
+             RS CURRENT CITIZENSHIP
+ 
+Rs current citizenship status.
+ 
+    6704       1 Citizen, born in the U.S.
+     238       2 Citizen, naturalized
+      11       3 Applicant for Naturalization
+      72       4 Permanent Resident
+      17       5 Applicant for Residence
+      50       6 Other
+  -------
+    7092
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+Invalid Skip(-3)      11
+TOTAL =========>    7103   VALID SKIP(-4)       0     NON-INTERVIEW(-5)    1881
+ 
+Min:              1        Max:              6        Mean:                1.11
+ 
+Lead In: U00085.00[Default]
+Default Next Question: U00087.00
