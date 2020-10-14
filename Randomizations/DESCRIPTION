@@ -1,7 +1,7 @@
 Package: Randomizations
 Title: Create a Randomization Schema
 Version: 1.0
-Date: 2020-09-24
+Date: 2020-10-13
 Authors@R: 
     person(given = "Matthias",
            family = "Quinn",

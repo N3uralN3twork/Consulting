@@ -2,7 +2,7 @@
 #'
 #' @description This function creates a completely randomized design of experiments
 #' design schema in the form of a data.frame. It assumes that you know
-#' what the various inputs of a designing a randomization schema are.
+#' what the various inputs of designing a randomization schema are.
 #'
 #' @param Sites A number of sites / a list of site codes to be used
 #' @param NSubjects The number of subjects assigned to each site
@@ -22,22 +22,31 @@
 #' @export
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
 
+  # Define a helper function to test if input is an integer:
+  check.integer <- function(N){
+    !grepl("[^[:digit:]]", format(N,  digits = 20, scientific = FALSE)) # Looks for whole numbers only using regex
+  }
+
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
 
   # Input morphism:
+  if (is.character(Sites)){ # If the input for sites are site prefixes
+    NSites = length(Sites)  # Create a variable that tracks the number of prefixes entered
+  }
+
   if (is.character(RRatio)){ # If the input is a character ratio
     nums = as.integer(unlist(str_split(string = RRatio, pattern = ":"))) # Extract the chars and turn into integers
     RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
   }
 
-  if (is.character(NSubjects)){
-    NSubjects = as.integer(NSubjects)
+  if (is.character(NSubjects)){ # Test if the number of subjects is a character value
+    NSubjects = as.integer(NSubjects) # If it is: turn the input into an integer
   }
 
-  if (is.character(BlockSize)){
-    BlockSize = as.integer(BlockSize)
+  if (is.character(BlockSize)){ # Test if the block size is a character value
+    BlockSize = as.integer(BlockSize) # If it is: turn the input into an integer
   }
 
   NBlocks = NSubjects/BlockSize # Compute the number of blocks
@@ -66,9 +75,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
 
   # Improper Randomization Ratio:
-  test3 <- NSubjects*(RRatio/(RRatio+1))%%1 == 0
-  if (test3 == TRUE){
-    stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
+  test3 <- check.integer(NSubjects*(RRatio/(RRatio+1)))
+  if (test3 == FALSE){
+    stop("The following must be an integer: number of subjects * (RRatio/RRatio+1). Check for yourself.")
   }
 
   if (RRatio <= 0){
@@ -159,17 +168,23 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
 
-  # Concatenate both objects into a single dataframe
-  result = data.frame(c(TLC, matt))
+  ls <- c()
+  count <- 1
+  repeat {
+    ls = append(ls, sample_frac(TLC, 1))
+    count = count + 1
+    if (count > NSites){
+      break
+    }
+  }
+
+  TLC <- data.frame(unlist(ls))
+
+  result <- data.frame(c(matt, TLC))
 
   # Use the "unite" function to concatenate both columns into a single column
-  result = result %>% # using the pipe operator from the dplyr syntax
-    unite(Codes, c("matt", "TorC"), sep = "")
-
-  # For each column, append the result to the previously empty matrix above
-  for(column in 0:1){
-    final[, column] <- result[ , 1] # Copy only the first column
-  }
+  final <- result %>% # using the pipe operator from the dplyr syntax
+    unite(result, c("matt", "unlist.ls."), sep = "")
 
   # Turn into a dataframe:
   final <- as.data.frame(final)
@@ -186,4 +201,3 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Return the end result:
   return(final)
 }
-

@@ -2,7 +2,7 @@
 Title: Randomization Schema
 Author: Matt Quinn
 Date: September 8th 2020
-Finished on: September 18th 2020
+Finished on: October 13th 2020
 Class: STA 635 Consulting and Programming
 "
 
@@ -16,39 +16,39 @@ library(randomizr) # For the block_ra function
 ###                           NOTES:                                         ###
 ################################################################################
 # INPUT:
-  # A list of site codes or the number of sites you want (string/integer)
-  # The number of subjects per site (integer)
-  # The number of subjects per block
-  # The randomization ratio
-  # The seed for reproducibility
+# A list of site codes or the number of sites you want (string/integer)
+# The number of subjects per site (integer)
+# The number of subjects per block
+# The randomization ratio
+# The seed for reproducibility
 
 # OUTPUT:
-  # A sequential list of N codes inside a dataframe object
-  # The site codes
-  # Subject ID numbers
-  # The group each subject belongs to
+# A sequential list of N codes inside a dataframe object
+# The site codes
+# Subject ID numbers
+# The group each subject belongs to
 
 # For each site do the following:
-  # Store site in dataframe N times each
-  # Add numbers (1-K) to end of each site code in dataframe
-  # Randomly assign (T/C) to end of each site code in dataframe
+# Store site in dataframe N times each
+# Add numbers (1-K) to end of each site code in dataframe
+# Randomly assign (T/C) to end of each site code in dataframe
 
 # Assigning the numbers:
-   # Based on your row number for each site
-   # If less than 10, assign a "0" between the code and the number
-   # Otherwise, assign no space between the code and the number
+# Based on your row number for each site
+# If less than 10, assign a "0" between the code and the number
+# Otherwise, assign no space between the code and the number
 
 # Randomization Ratio:
-  # Number of Treatment subjects == (N/(N+D))*NSubjects:
-  # Number of Control subjects == (NSubjects - TSubjects)
-  # (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
+# Number of Treatment subjects == (N/(N+D))*NSubjects:
+# Number of Control subjects == (NSubjects - TSubjects)
+# (1, 1/2) , (2, 2/3), (3, 3/4), (4, 4/5), etc. = (n, n/n+1)
 
 # Seed:
-  # Do you want to reproduce the design schema?
+# Do you want to reproduce the design schema?
 
 # Block Sizes:
-  # Must be a multiple of the number of sites
-  # Number of blocks = NSubjects / block size
+# Must be a multiple of the number of sites
+# Number of blocks = NSubjects / block size
 
 ##################################
 ###    SCHEMA for N Site(s)    ###
@@ -56,22 +56,31 @@ library(randomizr) # For the block_ra function
 
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
   
+  # Define a helper function to test if input is an integer:
+  check.integer <- function(N){
+    !grepl("[^[:digit:]]", format(N,  digits = 20, scientific = FALSE)) # Looks for whole numbers only using regex
+  }
+  
   # Set the seed for reproducibility:
   if (seed == TRUE){
     set.seed(123)}
   
   # Input morphism:
+  if (is.character(Sites)){ # If the input for sites are site prefixes
+    NSites = length(Sites)  # Create a variable that tracks the number of prefixes entered
+  }
+  
   if (is.character(RRatio)){ # If the input is a character ratio
     nums = as.integer(unlist(str_split(string = RRatio, pattern = ":"))) # Extract the chars and turn into integers
     RRatio = nums[1]/nums[2] # Turn the above ratio into a fraction for later use
   }
   
-  if (is.character(NSubjects)){
-    NSubjects = as.integer(NSubjects)
+  if (is.character(NSubjects)){ # Test if the number of subjects is a character value
+    NSubjects = as.integer(NSubjects) # If it is: turn the input into an integer
   }
   
-  if (is.character(BlockSize)){
-    BlockSize = as.integer(BlockSize)
+  if (is.character(BlockSize)){ # Test if the block size is a character value
+    BlockSize = as.integer(BlockSize) # If it is: turn the input into an integer
   }
   
   NBlocks = NSubjects/BlockSize # Compute the number of blocks
@@ -100,9 +109,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Improper Randomization Ratio:
-  test3 <- NSubjects*(RRatio/(RRatio+1))%%RRatio == 0
+  test3 <- check.integer(NSubjects*(RRatio/(RRatio+1)))
   if (test3 == FALSE){
-    stop("The randomization ratio must adhere to NSubjects*(RRatio/RRatio+1)%%1 = 0")
+    stop("The following must be an integer: number of subjects * (RRatio/RRatio+1). Check for yourself.")
   }
   
   if (RRatio <= 0){
@@ -174,7 +183,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Assigning the Ts and Cs:
-    # Start with assigning the blocks:
+  # Start with assigning the blocks:
   vector <- c() # Initiate an empty vector
   for (i in seq(1:(NSubjects/BlockSize))){ # For each block
     for (j in 1:BlockSize){ # Print "BlockSize" times
@@ -193,17 +202,23 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
   
-  # Concatenate both objects into a single dataframe
-  result = data.frame(c(TLC, matt))
+  ls <- c()
+  count <- 1
+  repeat {
+    ls = append(ls, sample_frac(TLC, 1))
+    count = count + 1
+    if (count > NSites){
+      break
+    }
+  }
+  
+  TLC <- data.frame(unlist(ls))
+  
+  result <- data.frame(c(matt, TLC))
   
   # Use the "unite" function to concatenate both columns into a single column
-  result = result %>% # using the pipe operator from the dplyr syntax
-    unite(Codes, c("matt", "TorC"), sep = "")
-  
-  # For each column, append the result to the previously empty matrix above
-  for(column in 0:1){
-    final[, column] <- result[ , 1] # Copy only the first column
-  }
+  final <- result %>% # using the pipe operator from the dplyr syntax
+    unite(result, c("matt", "unlist.ls."), sep = "")
   
   # Turn into a dataframe:
   final <- as.data.frame(final)
@@ -224,7 +239,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 # Unit Testing:
 
 
-test1 <- schema(Sites = c("AAA"), NSubjects = 10, BlockSize = 2, RRatio = "1:1", seed = FALSE)
+test1 <- schema(Sites = "AAA", NSubjects = 10, BlockSize = 2, RRatio = "1:1", seed = FALSE)
 test1
 test2 <- schema(Sites = 1, NSubjects = 10, BlockSize = 2, RRatio = 1, seed = FALSE)
 test2
@@ -234,7 +249,8 @@ test4
 test5 <- schema(Sites = c("AAA", "BBB"), NSubjects = 10, BlockSize = 1, RRatio = 1)
 test6 <- schema(Sites = NULL, NSubjects = 10, BlockSize = 1, RRatio = 1) # Should return error
 test7 <- schema(Sites = c("AAA", "BBB"), NSubjects = 20, BlockSize = 1, RRatio = 1, seed = FALSE)
-
 test8 <- schema(Sites = 1, NSubjects = 50, BlockSize = 10, RRatio = 2) # Should return error
+test9 <- schema(Sites =2, NSubjects = 6, BlockSize = 3, RRatio = "1:2", seed = TRUE)
+test9
 
-
+schema(Sites = 2, NSubjects = 6, BlockSize = 3, RRatio = 1)

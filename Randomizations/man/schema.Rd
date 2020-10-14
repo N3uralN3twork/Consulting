@@ -23,7 +23,7 @@ A dataframe containing the design matrix
 \description{
 This function creates a completely randomized design of experiments
 design schema in the form of a data.frame. It assumes that you know
-what the various inputs of a designing a randomization schema are.
+what the various inputs of designing a randomization schema are.
 }
 \section{Warning}{
 
