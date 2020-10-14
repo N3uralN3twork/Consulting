@@ -70,7 +70,6 @@ library(randomizr)    # For the block_ra function
 ###                         Creating the Design Schema
 ###
 ################################################################################
-
 schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
   
   # Define a helper function to test if input is an integer:
@@ -85,6 +84,9 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Input morphism:
   if (is.character(Sites)){ # If the input for sites are site prefixes
     NSites = length(Sites)  # Create a variable that tracks the number of prefixes entered
+  }
+  else {
+    NSites = Sites
   }
   
   if (is.character(RRatio)){ # If the input is a character ratio
@@ -219,19 +221,21 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
   
-  ls <- c()
-  count <- 1
-  repeat {
+  # Randomizing the order of the T's and C's for each site:
+  ls <- c() # Start with an empty vector
+  count <- 1 # Remember, R starts at 1, not 0
+  repeat { # Using the repeat function
     ls = append(ls, sample_frac(TLC, 1))
-    count = count + 1
-    if (count > NSites){
-      break
+    # Shuffle the T's and C's in the block and append to the once empty vector
+    count = count + 1 # Increment the count for each run of the loop by 1
+    if (count > NSites){ # Stop when the count reaches the number of sites
+      break # Use a break statement to exit the repeat loop, else trouble
     }
   }
   
-  TLC <- data.frame(unlist(ls))
+  TLC <- data.frame(unlist(ls)) # Turn the list of lists into a single object
   
-  result <- data.frame(c(matt, TLC))
+  result <- data.frame(c(matt, TLC)) # Combine TLC and matt into one dataframe
   
   # Use the "unite" function to concatenate both columns into a single column
   final <- result %>% # using the pipe operator from the dplyr syntax
