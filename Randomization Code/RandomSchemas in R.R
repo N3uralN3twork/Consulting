@@ -1,8 +1,8 @@
 "
 Title: Randomization Schema
 Author: Matt Quinn
-Date: September 8th 2020
-Finished on: October 13th 2020
+Date: September 18th 2020
+Finished on: October 15th 2020
 Class: STA 635 Consulting and Programming
 "
 
@@ -11,12 +11,15 @@ setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Randomization Code")
 
 library(tidyverse) # For the unite and row_number functions
 library(randomizr) # For the block_ra function
+library(Randomizations)
 
 ################################################################################
 ###                           NOTES:                                         ###
 ################################################################################
 # INPUT:
 # A list of site codes or the number of sites you want (string/integer)
+  # Up to 50 sites (26 letters + 24 Greek letters)
+  # [AAA-ZZZ] => 1 <= Sites <= 26
 # The number of subjects per site (integer)
 # The number of subjects per block
 # The randomization ratio
@@ -53,8 +56,12 @@ library(randomizr) # For the block_ra function
 ##################################
 ###    SCHEMA for N Site(s)    ###
 ##################################
-
-schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = FALSE){
+schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, seed = NULL){
+  
+  greeks <- list("\U03B1", "\U03B2", "\U03B3", "\U03B4", "\U03B5", "\U03B6",
+                 "\U03B7", "\U03B8", "\U03B9", "\U03BA", "\U03BB", "\U03BC",
+                 "\U03BD", "\U03BE", "\U03BF", "\U03C0", "\U03C1", "\U03C3",
+                 "\U03C4", "\U03C5", "\U03C6", "\U03C7", "\U03C8", "\U03C9")
   
   # Define a helper function to test if input is an integer:
   check.integer <- function(N){
@@ -62,8 +69,8 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Set the seed for reproducibility:
-  if (seed == TRUE){
-    set.seed(123)}
+  if (!is.null(seed)){
+    set.seed(seed)}
   
   # Input morphism:
   if (is.character(Sites)){ # If the input for sites are site prefixes
@@ -112,11 +119,11 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   }
   
   # Improper Randomization Ratio:
-  test3 <- check.integer(NSubjects*(RRatio/(RRatio+1)))
+"  test3 <- check.integer(NSubjects*(RRatio/(RRatio+1)))
   if (test3 == FALSE){
-    stop("The following must be an integer: number of subjects * (RRatio/RRatio+1). Check for yourself.")
+    stop('The following must be an integer: number of subjects * (RRatio/RRatio+1). Check for yourself.')
   }
-  
+  "
   if (RRatio <= 0){
     stop("The randomization ratio must be greater than 0")
   }
@@ -130,16 +137,10 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("Block Size and Ratio are Incompatible: cannot assign subjects with given ratio")
   }
   
-  # Improper random seed
-  "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
-  
-  if (seed %!in% c(TRUE, FALSE)){ # If seed not TRUE or FALSE:
-    stop("The seed should be a boolean input") # Return this error message
-  }
-  
   # Designing the schema:
   # If the input to sites is a NUMERIC number
-  if (is.numeric(Sites) == TRUE){ # Test if a numeric number
+  
+  if (is.numeric(Sites) == TRUE & Sites >= 1 & Sites <= 26){ # Test if a numeric number
     matt = c() # Start with an empty vector
     final = matrix(NA, nrow = Sites*NSubjects, ncol = 1) # Add an empty matrix
     for (letter in LETTERS){ # For each letter in the uppercase(Alphabet):
@@ -152,6 +153,31 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
       uncount(NSubjects) # Duplicate the site code NSubjects number of times
     matt = matt[1:NSubjects, 1:Sites] # Removing redundant codes
     rownames(matt) = NULL # Aesthetics
+  }
+  else if (is.numeric(Sites) == TRUE & Sites > 26 & Sites <= 50){ # Test if a numeric number
+    matt = c() # Start with an empty vector
+    final = matrix(NA, nrow = Sites*NSubjects, ncol = 1) # Add an empty matrix
+    for (letter in LETTERS){ # For each letter in the uppercase(Alphabet):
+      result = rep(letter, times = 3) # Repeat each letter 3 times
+      result = paste(result, collapse = "") # Combine the result into 1 string
+      matt[letter] = result # Assigns the result to the previously empty vector "matt"
+    } # Now that we have assigned the letters to the vector "matt"
+    matt = data.frame(t(matt)) # Transpose the vector
+    matt = matt %>% # For each site code in your input:
+      uncount(NSubjects) # Duplicate the site code NSubjects number of times
+    rownames(matt) = NULL
+    gmatt = c() # Start with an empty vector
+    for (symbol in greeks){
+      result = rep(symbol, times=3)
+      result = paste(result, collapse="")
+      gmatt[symbol] = result
+    }
+    gmatt = data.frame(t(gmatt))
+    gmatt = gmatt %>% uncount(NSubjects)
+    colnames(gmatt) = NULL
+    rownames(gmatt) = NULL
+    gmatt = gmatt[1:NSubjects, 1:(Sites-26)]
+    matt = cbind(matt, gmatt)
   }
   # If the input to sites is a CHARACTER vector
   else if (is.vector(Sites) == TRUE){
@@ -167,6 +193,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     rownames(matt) = NULL # Replace unnecessary rownames
     matt = data.frame(matt)
   }
+
   # Adding the numbers to the end via a simple if-then-else statement
   if (is.numeric(Sites) && Sites == 1){
     matt = ifelse(row_number(matt) < 10, # If the row-number is less than 10:
@@ -188,7 +215,7 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Assigning the Ts and Cs:
   # Start with assigning the blocks:
   vector <- c() # Initiate an empty vector
-  for (i in seq(1:(NSubjects/BlockSize))){ # For each block
+  for (i in seq(1:(NSites*(NSubjects/BlockSize)))){ # For each block
     for (j in 1:BlockSize){ # Print "BlockSize" times
       vector = append(vector, i)} # Append the results to the previously empty vector
   }
@@ -205,25 +232,25 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
   # Turn the data matrix into a data.frame:
   matt = as.data.frame(matt)
   
-  # Randomizing the order of the T's and C's for each site:
+  "# Randomizing the order of the T's and C's for each site:
   ls <- c() # Start with an empty vector
   count <- 1 # Remember, R starts at 1, not 0
   repeat { # Using the repeat function
     ls = append(ls, sample_frac(TLC, 1))
-      # Shuffle the T's and C's in the block and append to the once empty vector
+    # Shuffle the T's and C's in the block and append to the once empty vector
     count = count + 1 # Increment the count for each run of the loop by 1
     if (count > NSites){ # Stop when the count reaches the number of sites
       break # Use a break statement to exit the repeat loop, else trouble
     }
   }
   
-  TLC <- data.frame(unlist(ls)) # Turn the list of lists into a single object
+  TLC <- data.frame(unlist(ls))" # Turn the list of lists into a single object
   
   result <- data.frame(c(matt, TLC)) # Combine TLC and matt into one dataframe
   
   # Use the "unite" function to concatenate both columns into a single column
   final <- result %>% # using the pipe operator from the dplyr syntax
-    unite(result, c("matt", "unlist.ls."), sep = "")
+    unite("Code", matt:TorC, sep = "")
   
   # Turn into a dataframe:
   final <- as.data.frame(final)
@@ -258,4 +285,22 @@ test8 <- schema(Sites = 1, NSubjects = 50, BlockSize = 10, RRatio = 2) # Should 
 test9 <- schema(Sites =2, NSubjects = 6, BlockSize = 3, RRatio = "1:2", seed = TRUE)
 test9
 
-schema(Sites = 2, NSubjects = 6, BlockSize = 3, RRatio = 1)
+test10 <- schema(Sites = 30, NSubjects = 2, BlockSize = 2, RRatio = 1)
+test11 <- schema(Sites = 3, NSubjects = 14, BlockSize = 7, RRatio = 4/3)
+View(test10)
+
+test <- schema(Sites=2, NSubjects=20, BlockSize=10, RRatio="1:1", seed=FALSE)
+
+max(rle(test11$Group)$lengths)
+
+
+
+
+
+
+
+
+
+
+
+

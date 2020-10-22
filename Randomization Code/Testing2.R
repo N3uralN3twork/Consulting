@@ -66,7 +66,6 @@ library(randomizr)    # For the block_ra function
 "https://stackoverflow.com/questions/38351820/negation-of-in-in-r" # Negation of %in%
 "https://stackoverflow.com/questions/3476782/check-if-the-number-is-integer" # Test if number is an integer
 "https://stackoverflow.com/questions/36665492/how-to-combine-two-lists-in-r/36672341" # Combining lists
-
 ################################################################################
 ###                         Creating the Design Schema
 ###
@@ -152,6 +151,12 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
     stop("Block Size and Ratio are Incompatible: cannot assign subjects with given ratio")
   }
   
+  # Improper random seed
+  "%!in%" = Negate("%in%") # Handy function to include the negation of an IN statement
+  
+  if (seed %!in% c(TRUE, FALSE)){ # If seed not TRUE or FALSE:
+    stop("The seed should be a boolean input") # Return this error message
+  }
   
   # Designing the schema:
   # If the input to sites is a NUMERIC number
@@ -289,145 +294,144 @@ schema <- function(Sites = NULL, NSubjects, BlockSize = NULL, RRatio = NULL, see
 
 # Define UI for the schema viewer app --->
 ui <- fluidPage(
-
-    # Application theme --->
-    theme = shinytheme("cerulean"),
-
-    # App title --->
-    titlePanel(title = "Project: Randomization Schema"),
-
-    # Sidebar layout with input and output definitions --->
-    sidebarLayout(position = "left",
-                  fluid = TRUE, # For mobile use
-
-                  # Sidebar panel for inputs --->
-                  sidebarPanel(
-
-                      # Input: Text for providing a caption --->
-                      # Note: Changes made to the caption in the textInput control
-                      # are updated in the output area immediately as you type
-                      textInput(inputId = "caption",
-                                label = "Title:",
-                                value = "Randomization Schema"),
-
-                      selectInput(inputId = "SiteType",
-                                  label = "Please select the type of site input you would like:",
-                                  choices = c(Numbers = "numeric",
-                                              Letters = "character")),
-                      conditionalPanel(
-                          condition = "input.SiteType == 'numeric'",
-                          # Input: Numeric entry for choosing the number of sites --->
-                          numericInput(inputId = "NumericSites",
-                                       label = "Please enter the number of sites you would like:",
-                                       value = 1,
-                                       min = 1,
-                                       max = 50,
-                                       step = 1)),
-
-                      conditionalPanel(
-                          condition = "input.SiteType == 'character'",
-                          # Multiple input for sites:
-                          multiInput(
-                              inputId = "CharSites",
-                              label = "Please select the site codes you would like:",
-                              choices = c("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH",
-                                          "III", "JJJ", "KKK", "LLL", "MMM", "NNN", "OOO", "PPP",
-                                          "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX",
-                                          "YYY", "ZZZ"),
-                              selected = "AAA", width = "350px")),
-
-                      # Input: Numeric entry for choosing the number of subjects per site --->
-                      numericInput(inputId = "NSubjects",
-                                   label = "Please input the number of subjects at each site:",
-                                   value = 10),
-
-                      # Input: Selector for choosing the randomization ratio --->
-                      numericInput(inputId = "RRatio",
-                                   label = "Please choose a randomization ratio:",
-                                   value = 1),
-
-                      # Input: Numeric entry for choosing the block size --->
-                      numericInput(inputId = "BlockSize",
-                                   label = "Please input the number of subjects per block:",
-                                   value = 1),
-
-                      switchInput(inputId = "Copy",
-                                  label = "Reproducible",
-                                  labelWidth = "80px",
-                                  value = FALSE),
-                      
-                      conditionalPanel(
-                        condition = "input.Copy == TRUE",
-                        numericInput(inputId = "SeedNum",
-                                     label = "Seed:",
-                                     value = 123)),
-                      
-                      # Ownership
-                      tags$strong("Author: Matt Quinn",
-                                  tags$br(),
-                                  "Class: STA 635",
-                                  tags$br(),
-                                  "Date: 10/1/2020"),
-
-                      br(),
-
-                      # Instructions
-                      actionButton(
-                          inputId = "Instructions",
-                          label = "Instructions",
-                          icon = icon("cog"))
-
-                  ),
-
-                  # Main panel for displaying outputs --->
-                  mainPanel(
-
-                      # Output: Formatted text for caption --->
-                      h2(textOutput(outputId = "caption",
-                                    container = span)),
-
-                      # Output: HTML table with requested number of observations --->
-                      DT::dataTableOutput("table"),
-
-                      # Sources:
-                      # Written in HTML format
-                      # a() is for hyperlinks
-
-                      h2("References"),
-                      a("1. Table Options",
-                        href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
-                      br(),
-                      a("2. Pretty Options",
-                        href = "https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"),
-                      br(),
-                      a("3. Shiny Tutorial",
-                        href = "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"),
-                      br(),
-                      a("4. Error Handling in R",
-                        href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
-                      br(),
-                      a("5. FOR Loops in R",
-                        href = "https://www.datamentor.io/r-programming/for-loop/"),
-                      br(),
-                      a("6. Substrings in R",
-                        href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string"),
-                      br(),
-                      a("7. rep() in R",
-                        href = "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"),
-                      br(),
-                      a("8. Boolean && Operator",
-                        href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1"),
-                      br(),
-                      a("9. Multi User Input in Shiny",
-                        href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html"),
-                      br(),
-                      a("10. Making an R Package",
-                        href = "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"),
-                      br(),
-                      a("11. Negation in R",
-                        href = "https://stackoverflow.com/questions/38351820/negation-of-in-in-r")
-                  )
-    )
+  
+  # Application theme --->
+  theme = shinytheme("cerulean"),
+  
+  # App title --->
+  titlePanel(title = "Project: Randomization Schema"),
+  
+  # Sidebar layout with input and output definitions --->
+  sidebarLayout(position = "left",
+                fluid = TRUE, # For mobile use
+                
+                # Sidebar panel for inputs --->
+                sidebarPanel(
+                  
+                  # Input: Text for providing a caption --->
+                  # Note: Changes made to the caption in the textInput control
+                  # are updated in the output area immediately as you type
+                  textInput(inputId = "caption",
+                            label = "Title:",
+                            value = "Randomization Schema"),
+                  
+                  selectInput(inputId = "SiteType",
+                              label = "Please select the type of site input you would like:",
+                              choices = c(Numbers = "numeric",
+                                          Letters = "character")),
+                  conditionalPanel(
+                    condition = "input.SiteType == 'numeric'",
+                    # Input: Numeric entry for choosing the number of sites --->
+                    numericInput(inputId = "NumericSites",
+                                 label = "Please enter the number of sites you would like:",
+                                 value = 1,
+                                 min = 1,
+                                 max = 50,
+                                 step = 1)),
+                  
+                  conditionalPanel(
+                    condition = "input.SiteType == 'character'",
+                    # Multiple input for sites:
+                    multiInput(
+                      inputId = "CharSites",
+                      label = "Please select the site codes you would like:",
+                      choices = c("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG", "HHH",
+                                  "III", "JJJ", "KKK", "LLL", "MMM", "NNN", "OOO", "PPP",
+                                  "QQQ", "RRR", "SSS", "TTT", "UUU", "VVV", "WWW", "XXX",
+                                  "YYY", "ZZZ"),
+                      selected = "AAA", width = "350px")),
+                  
+                  # Input: Numeric entry for choosing the number of subjects per site --->
+                  numericInput(inputId = "NSubjects",
+                               label = "Please input the number of subjects at each site:",
+                               value = 10),
+                  
+                  # Input: Selector for choosing the randomization ratio --->
+                  numericInput(inputId = "RRatio",
+                               label = "Please choose a randomization ratio:",
+                               value = 1),
+                  
+                  # Input: Numeric entry for choosing the block size --->
+                  numericInput(inputId = "BlockSize",
+                               label = "Please input the number of subjects per block:",
+                               value = 1),
+                  
+                  switchInput(inputId = "Copy",
+                              label = "Reproducible",
+                              labelWidth = "80px"),
+                  
+                  conditionalPanel(
+                    condition = "input.Copy == TRUE",
+                    numericInput(inputId = "SeedNum",
+                                 label = "Seed:",
+                                 value = 123)),
+                  
+                  # Ownership
+                  tags$strong("Author: Matt Quinn",
+                              tags$br(),
+                              "Class: STA 635",
+                              tags$br(),
+                              "Date: 10/1/2020"),
+                  
+                  br(),
+                  
+                  # Instructions
+                  actionButton(
+                    inputId = "Instructions",
+                    label = "Instructions",
+                    icon = icon("cog"))
+                  
+                ),
+                
+                # Main panel for displaying outputs --->
+                mainPanel(
+                  
+                  # Output: Formatted text for caption --->
+                  h2(textOutput(outputId = "caption",
+                                container = span)),
+                  
+                  # Output: HTML table with requested number of observations --->
+                  DT::dataTableOutput("table"),
+                  
+                  # Sources:
+                  # Written in HTML format
+                  # a() is for hyperlinks
+                  
+                  h2("References"),
+                  a("1. Table Options",
+                    href = "https://stackoverflow.com/questions/44504759/shiny-r-download-the-result-of-a-table"),
+                  br(),
+                  a("2. Pretty Options",
+                    href = "https://rdrr.io/cran/shinyWidgets/man/prettyCheckboxGroup.html"),
+                  br(),
+                  a("3. Shiny Tutorial",
+                    href = "https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/"),
+                  br(),
+                  a("4. Error Handling in R",
+                    href = "https://bookdown.org/rdpeng/RProgDA/error-handling-and-generation.html"),
+                  br(),
+                  a("5. FOR Loops in R",
+                    href = "https://www.datamentor.io/r-programming/for-loop/"),
+                  br(),
+                  a("6. Substrings in R",
+                    href = "https://statisticsglobe.com/r-extract-first-or-last-n-characters-from-string"),
+                  br(),
+                  a("7. rep() in R",
+                    href = "https://astrostatistics.psu.edu/su07/R/html/base/html/rep.html"),
+                  br(),
+                  a("8. Boolean && Operator",
+                    href = "https://stackoverflow.com/questions/6558921/boolean-operators-and?noredirect=1&lq=1"),
+                  br(),
+                  a("9. Multi User Input in Shiny",
+                    href = "https://rdrr.io/cran/shinyWidgets/man/multiInput.html"),
+                  br(),
+                  a("10. Making an R Package",
+                    href = "https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html"),
+                  br(),
+                  a("11. Negation in R",
+                    href = "https://stackoverflow.com/questions/38351820/negation-of-in-in-r")
+                )
+  )
 )
 
 ################################################################################
@@ -436,65 +440,59 @@ ui <- fluidPage(
 
 # Define server logic to summarize and view selected data set ----
 server <- function(input, output, session){
-
-    # Create caption ----
-    # The output$caption is computed based on a reactive expression
-    # that returns input$caption. When the user changes the
-    # "caption" field:
-    #
-    # 1. This function is automatically called to recompute the output
-    # 2. New caption is pushed back to the browser for re-display
-    #
-    # Note that because the data-oriented reactive expressions
-    # below don't depend on input$caption, those expressions are
-    # NOT called when input$caption changes
-    output$caption <- renderText({
-        input$caption
-    })
-
-    # Using the above inputs, put into a reactive environment the
-    # elements that you created above in the user interface
-    FINAL <- reactive({schema(
-        if (input$SiteType == "numeric"){
-          Sites = input$NumericSites}
-        else {
-          Sites = input$CharSites
-        },
-        NSubjects = input$NSubjects,
-        RRatio = input$RRatio,
-        BlockSize = input$BlockSize,
-        if (input$Copy == TRUE){
-          seed = input$SeedNum}
-        else {
-          seed = NULL})})
-
-    # Output the schema:
-    output$table <- DT::renderDataTable({
-        FINAL()}
+  
+  # Create caption ----
+  # The output$caption is computed based on a reactive expression
+  # that returns input$caption. When the user changes the
+  # "caption" field:
+  #
+  # 1. This function is automatically called to recompute the output
+  # 2. New caption is pushed back to the browser for re-display
+  #
+  # Note that because the data-oriented reactive expressions
+  # below don't depend on input$caption, those expressions are
+  # NOT called when input$caption changes
+  output$caption <- renderText({
+    input$caption
+  })
+  
+  # Using the above inputs, put into a reactive environment the
+  # elements that you created above in the user interface
+  FINAL <- reactive({schema(
+    if (input$SiteType == "numeric"){
+      Sites = input$NumericSites}
+    else {
+      Sites = input$CharSites
+    },
+    NSubjects = input$NSubjects,
+    RRatio = input$RRatio,
+    BlockSize = input$BlockSize,
+    seed = input$Copy)})
+  
+  # Output the schema:
+  output$table <- DT::renderDataTable({
+    FINAL()}
+  )
+  
+  # Instructions via HTML:
+  observeEvent(input$Instructions, {
+    show_alert(
+      title = "Instructions",
+      text =  p("1. Choose the sites you would like",
+                br(),
+                "2. Input the number of subjects per site",
+                br(),
+                "3. Input the randomization ratio in the form of a floating-point number",
+                br(),
+                "4. Input the number of subjects per block",
+                br(),
+                "5. You can reproduce your results if you use the handy switch",
+                br(),
+                "Note: The program will automatically update after each change you make")
     )
-
-    # Instructions via HTML:
-    observeEvent(input$Instructions, {
-        show_alert(
-            title = "Instructions",
-            text =  p("1. Choose the sites you would like",
-                      br(),
-                      "2. Input the number of subjects per site",
-                      br(),
-                      "3. Input the randomization ratio in the form of a floating-point number",
-                      br(),
-                      "4. Input the number of subjects per block",
-                      br(),
-                      "5. You can reproduce your results if you use the handy switch",
-                      br(),
-                      "Note: The program will automatically update after each change you make")
-        )
-    })
-
+  })
+  
 }
 
 "Wrapping it all together:"
 shinyApp(ui, server)
-
-
-
