@@ -1,30 +1,24 @@
-NSites <- 3
-Sites <- 3
-NSubjects <- 14
-BlockSize <- 7
-RRatio <- 4/3
+library(ggplot2)
+library(ggthemes)
 
+exp(cbind("Odds ratio" = coef(test), confint.default(test, level = 0.95)))
 
-vector <- c() # Initiate an empty vector
-for (i in seq(1:(NSites*(NSubjects/BlockSize)))){ # For each block
-  for (j in 1:BlockSize){ # Print "BlockSize" times
-    vector = append(vector, i)} # Append the results to the previously empty vector
-}
-Ts = RRatio/(RRatio+1) # Compute the proportion of Ts needed
-Cs = 1-Ts # Compute the proportion of Cs needed
-TorC = block_ra(blocks = vector, # Using the first column:
-                conditions = c("T", "C"), # 2 groups are the Ts and Cs
-                prob_each = c(Ts, Cs)) # The prob. that T or C appears
-TLC = data.frame(TorC)
+boxLabels = c("Immigrant", "Days MS Suspension", "Black", "Schools Attended")
 
-max(rle(as.vector(TLC$TorC))$lengths)
+# Create the dataframe of results:
+df <- data.frame(yAxis = length(boxLabels):1, 
+                 boxOdds = c(0.7264, 0.9714, 0.6866, 0.7648), 
+                 boxCILow = c(0.6199, 0.9672, 0.6071, 0.7280), 
+                 boxCIHigh = c(0.8511, 0.9756, 0.7766, 0.8033))
 
-
-
-
-
-
-
-
-
-
+# Create the Odds Ratio plot:
+ggplot(df, aes(x = boxOdds, y = boxLabels)) +
+  geom_point(color = "orange", size = 3.5) +
+  geom_vline(aes(xintercept = 1), size = 0.25, linetype = "dashed") +
+  geom_errorbarh(aes(xmax = boxCIHigh, xmin = boxCILow), size = 0.5, color = "gray50") +
+  geom_text(aes(label = boxOdds), vjust = -3) +
+  theme_economist() +
+  theme(panel.grid.minor = element_blank()) +
+  ylab("Variable") + 
+  xlab("Odds Ratio") +
+  ggtitle("High School Graduation Model by Various Factors\n(Odds Ratios, p-value<0.001, CI=95%)")
