@@ -1,24 +1,17 @@
-library(ggplot2)
-library(ggthemes)
+table(clean$highest_degree)
+table(clean$years_education_completed)
 
-exp(cbind("Odds ratio" = coef(test), confint.default(test, level = 0.95)))
+linear <- lm(years_education_completed ~ days_ms_suspension + hs_grad,
+             data = clean)
+summary(linear)
 
-boxLabels = c("Immigrant", "Days MS Suspension", "Black", "Schools Attended")
 
-# Create the dataframe of results:
-df <- data.frame(yAxis = length(boxLabels):1, 
-                 boxOdds = c(0.7264, 0.9714, 0.6866, 0.7648), 
-                 boxCILow = c(0.6199, 0.9672, 0.6071, 0.7280), 
-                 boxCIHigh = c(0.8511, 0.9756, 0.7766, 0.8033))
 
-# Create the Odds Ratio plot:
-ggplot(df, aes(x = boxOdds, y = boxLabels)) +
-  geom_point(color = "orange", size = 3.5) +
-  geom_vline(aes(xintercept = 1), size = 0.25, linetype = "dashed") +
-  geom_errorbarh(aes(xmax = boxCIHigh, xmin = boxCILow), size = 0.5, color = "gray50") +
-  geom_text(aes(label = boxOdds), vjust = -3) +
-  theme_economist() +
-  theme(panel.grid.minor = element_blank()) +
-  ylab("Variable") + 
-  xlab("Odds Ratio") +
-  ggtitle("High School Graduation Model by Various Factors\n(Odds Ratios, p-value<0.001, CI=95%)")
+summary(clean$years_education_completed)
+table(clean$years_education_completed)
+
+
+t.test(years_education_completed ~ hs_grad,
+       data = clean)
+
+table(clean$hs_grad)

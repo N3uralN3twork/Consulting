@@ -13,6 +13,9 @@ library(dplyr)
 mallett <- read_csv("C:/Users/miqui/OneDrive/CSU Classes/Consulting/NLS/mallett.csv")
 View(mallett)
 
+
+
+"EDA:"
 table(mallett$age_first_incarcerated)
 # SAT = highest SAT Math score as of 2007
 
@@ -30,13 +33,6 @@ ggplot(data = mallett, aes(x=age)) +
 # Income:
 summary(mallett$income2017)
 table(mallett$income1996)
-
-ggplot(data = mallett, aes(x=income2016)) +
-  geom_bar()
-ggplot(data = mallett, aes(x=income_20)) +
-  geom_bar()
-ggplot(data = mallett, aes(x=income_25)) +
-  geom_bar()
 
 summary(mallett$assets_20)
 table(mallett$assets_20)
@@ -200,6 +196,137 @@ table(mallett$NumSchoolsAttended)
 
 # Convert to a numeric variable:
 mallett$NumSchoolsAttended <- as.numeric(mallett$NumSchoolsAttended)
+
+
+"Type of School attended in 1997:"
+table(mallett$E5021709)
+# Public = [1000-1099]
+# Private = [2000-2099]
+# Religious = [3000-3099] => Private?
+# Valid Skip = -4
+
+mallett <- mallett %>%
+  mutate(SchoolType = case_when(
+  E5021709 %in% seq(from=1000, to=1099, by=1) ~ "Public",
+  E5021709 %in% seq(from=2000, to=2099, by=1) ~ "Private",
+  E5021709 %in% seq(from=3000, to=3099, by=1) ~ "Private"))
+
+table(mallett$SchoolType) # Check if they match up with actual frequencies
+
+
+"Household Size in 1997:"
+table(mallett$R1205400)
+table(is.na(mallett$R1205400))
+
+mallett <- mallett %>%
+  mutate(HHSize = R1205400)
+
+summary(mallett$HHSize)
+
+
+"Urban/Rural:"
+table(mallett$urban1997)
+
+"Years of Education Completed:"
+table(mallett$years_education_completed)
+
+mallett <- mallett %>%
+  mutate(years_education_completed = replace(years_education_completed, years_education_completed %in% c("I"), NA))
+
+table(mallett$years_education_completed)
+
+mallett$years_education_completed <- as.numeric(mallett$years_education_completed)
+
+
+#### TRAUMA VARIABLES ####
+
+"Victim of Violent Crime:"
+table(mallett$S1242700)
+
+mallett <- mallett %>%
+  mutate(VictViolentCrime = replace(S1242700, S1242700 %in% c(-5, -2, -1), NA))
+
+table(mallett$VictViolentCrime)
+
+"Close Relative Died:"
+table(mallett$S1240700)
+
+mallett <- mallett %>%
+  mutate(RelativeDied = replace(S1240700, S1240700 %in% c(-5, -2, -1), NA))
+
+table(mallett$RelativeDied)
+
+"Homelessness:"
+table(mallett$S1242900)
+
+mallett <- mallett %>%
+  mutate(Homeless = replace(S1242900, S1242900 %in% c(-5, -2, -1), NA))
+
+table(mallett$Homeless)
+
+"Household Member Hospitalized:"
+table(mallett$S1243100)
+
+mallett <- mallett %>%
+  mutate(HHHospital = replace(S1243100, S1243100 %in% c(-5, -2, -1), NA))
+
+table(mallett$HHHospital)
+
+"Household Member been in Jail:"
+table(mallett$S1246500)
+
+mallett <- mallett %>%
+  mutate(HHJail = replace(S1246500, S1246500 %in% c(-5, -2, -1), NA))
+
+table(mallett$HHJail)
+
+"Parents have Divorced (1997-2002):"
+table(mallett$divorced)
+#DONE####
+
+"Create the Analytic Dataset:"
+
+clean <- mallett %>%
+  select(immigrant, female, black, hispanic, white, mixedrace,
+         urban1997, rural1997, never_married, married, separated,
+         divorced, widowed, ever_in_gang, victim_breakin_lt12yrs, victim_bully_lt12yrs,
+         victim_shooting_lt12yrs, victim_breakin_12to18, victim_bully_12to18,
+         victim_shooting_12to18, VictViolentCrime, ms_suspension, hs_suspension,
+         hs_grad, college_degree, ged, special_education_history, bilingual_education_history,
+         gifted_education_history, veteran, age, days_ms_suspension, days_hs_suspension,
+         number_grades_repeated, number_grades_skipped, years_education_completed,
+         highest_degree, SAT_math_score_2007, SAT_verbal_score_2007, ACT_score_2007,
+         number_schools_attended, parent_expectation_in_jail_by20, age_first_incarcerated,
+         income1996IA, income1997IA, income1998IA, income1999IA, income2000IA,
+         income2001IA, income2002IA, income2003IA, income2004IA, income2005IA,
+         income2006IA, income2007IA, income2008IA, income2009IA, income2010IA,
+         income2012IA, income2014IA, income2016IA, income_20, income_25, income_30,
+         income_35, assets_20, assets_25, assets_30, assets_35, debts_20, debts_25,
+         debts_30, debts_35, total_n_incarcerated, total_months_incarcerated,
+         months_longest_incarceration, months_first_incarceration, age_first_incarcerated,
+         number_jobs_since20, Incarcerated, RelativeDied, Homeless, HHHospital, HHJail,
+         NumSchoolsAttended)
+
+names(clean)
+
+
+
+
+
+
+
+"Cleaning up our environment:"
+rm(Income20Race)
+rm(Income30Race)
+rm(Income25Race)
+rm(Income35Race)
+rm(incomes)
+rm(new_income)
+
+
+
+
+
 
 
 
