@@ -26,20 +26,11 @@ import numpy as np
 import plotly.express as px
 import plotly
 import matplotlib.pyplot as plt
+import scikitplot as skplt
 from sklearn.model_selection import train_test_split
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
-
-# Deep learning stuff
-import tensorflow as tf
-print(tf.__version__)
-tf.config.experimental.list_physical_devices()
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-import tensorflow_addons as tfa
-import tensorflow.keras.metrics as metrics
-from tensorflow.keras.layers.experimental import preprocessing
 
 pd.set_option('display.max_columns', 10)
 pd.set_option('display.max_rows', 200)
@@ -80,6 +71,27 @@ for name in Categorical:
     print(name, ":")
     print(df[name].unique(), "\n")
 
+
+"Convert various numeric variables to categorical:"
+Numeric = list(df.select_dtypes(include=["int64", "float64"]).columns)
+for name in Numeric:
+    print(name, ",")
+
+categorical = ["immigrant", "female", "black", "hispanic", "white", "mixedrace", "urban1997", "rural1997",
+               "never_married", "married", "separated", "divorced", "victim_breakin_12to18", "victim_bully_12to18",
+               "victim_shooting_12to18", "VictViolentCrime", "ms_suspension", "hs_suspension", "hs_grad", "college_degree",
+               "ged", "Incarcerated", "RelativeDied", "Homeless", "HHHospital", "HHJail", "EverSmoke", "EverArrested",
+               "widowed", "veteran"]
+df[categorical] = df[categorical].astype(str)
+# Check your work:
+Numeric = list(df.select_dtypes(include=["int64", "float64"]).columns)
+for name in Numeric:
+    print(name, ",")
+
+"Correlation Matrix to check for Collinearity:"
+corr_matrix = df[Numeric].corr(method="pearson")
+fig = px.imshow(corr_matrix)
+plotly.offline.plot(fig, auto_open=True, filename="test.html")
 ###############################################################################
 ###                     7. Train-Test Split                                 ###
 ###############################################################################
@@ -88,7 +100,11 @@ for name in Categorical:
 df.columns
 
 # Take rows where hs_grad is not NA:
-df = df[df["hs_grad"].notna()]
+df = df[df["hs_grad"].notnull()]
+test = df.dropna(subset=["hs_grad"], inplace=False)
+
+test = df.dropna(axis=0, subset=["hs_grad"])
+
 
 # Replace Class with your response variable
 y = df["hs_grad"]
@@ -124,7 +140,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn import tree
 
 "Logistic Regression Model:"
-predictors = ["immigrant", "days_ms_suspension", "black", "NumSchoolsAttended"]  # Add as needed
+predictors = ["immigrant", "hispanic"]  # Add as needed
 x = df[predictors]
 exog = sm.add_constant(x)
 
@@ -135,7 +151,7 @@ print(log_reg.summary())
 # Get the odds ratios for each of the parameters:
 np.exp(log_reg.params)
 ###############################################################################
-###                      10. Hyper-parameter Tuning for RF                   ###
+###                      10. Random Forest                                  ###
 ###############################################################################
 help(RandomForestClassifier)
 
@@ -153,7 +169,7 @@ BestModel.fit(X=x_train1, y=y_train)
 dir(BestModel)
 
 RF_preds = BestModel.predict(X=x_test)
-RF_probs = BestModel.predict_proba(X=x_test)
+RF_probs = BestModel.predict_proba(X=x_test)[:, 1]
 
 ###############################################################################
 ###                      11. Feature Importances                            ###
@@ -195,6 +211,15 @@ BestModel.score(x_test, y_test)  # Test the mean accuracy on unseen data
 ###############################################################################
 ###                      14. Deep Learning                                  ###
 ###############################################################################
+# Deep learning stuff
+import tensorflow as tf
+print(tf.__version__)
+tf.config.experimental.list_physical_devices()
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+import tensorflow_addons as tfa
+import tensorflow.keras.metrics as metrics
+from tensorflow.keras.layers.experimental import preprocessing
 
 """When the network is small relative to the dataset, regularization is usually unnecessary.
 If the model capacity is already low, lowering it further by adding regularization will hurt performance.
@@ -290,8 +315,5 @@ from pycm import ConfusionMatrix
 # Yes, both Sci-kit learn and PYCM give the same confusion matrix, thankfully.
 
 cm = ConfusionMatrix(actual_vector=np.array(y_test), predict_vector=np.array(RF_preds))
+cm.relabel(mapping={0:"Non-graduate", 1:"Graduate"})
 print(cm)
-
-# Plotting the ROC_AUC Curve:
-skplot.metrics.plot_roc(y_test, probs_multi)
-plt.show()

@@ -284,6 +284,25 @@ table(mallett$HHJail)
 table(mallett$divorced)
 #DONE####
 
+
+#### CRIME AND DELINQUENCY ####
+"Ever Smoked (1997):"
+table(mallett$R0357900)
+mallett <- mallett %>%
+  mutate(EverSmoke = replace(R0357900, R0357900 %in% c(-1, -2, -3), NA))
+table(mallett$EverSmoke)
+
+"Ever Arrested for Delinquent / Illegal Offense (1997):"
+table(mallett$R0365900)
+mallett <- mallett %>%
+  mutate(EverArrested = replace(R0365900, R0365900 %in% c(-1, -2, -3), NA))
+table(mallett$EverArrested)
+#### DONE ####
+
+
+
+
+
 "Create the Analytic Dataset:"
 
 clean <- mallett %>%
@@ -305,11 +324,9 @@ clean <- mallett %>%
          debts_30, debts_35, total_n_incarcerated, total_months_incarcerated,
          months_longest_incarceration, months_first_incarceration, age_first_incarcerated,
          number_jobs_since20, Incarcerated, RelativeDied, Homeless, HHHospital, HHJail,
-         NumSchoolsAttended)
+         NumSchoolsAttended, EverSmoke, EverArrested)
 
 names(clean)
-
-
 
 
 
