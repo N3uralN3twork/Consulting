@@ -4,7 +4,6 @@ library(semPlot)
 library(DiagrammeR)
 library(rpart)
 library(rpart.plot)
-library(C50)
 names(clean)
 
 "Incarceration Status SEM:"
@@ -244,18 +243,26 @@ grViz("
       12 -> 14 ;
       }")
 
-# Decision Trees:
-tree <- rpart(hs_grad ~ days_ms_suspension + NumSchoolsAttended + HHJail + Homeless + ever_in_gang + 
-                VictViolentCrime + female + HHHospital + black + immigrant,
-              data = clean,
-              split = "information")
-
-summary(tree)
-
-rpart.plot(tree, box.palette="RdBu", shadow.col = "gray", nn=TRUE)
 
 
-tree2 <- C5.0(as.factor(hs_grad) ~ days_ms_suspension + NumSchoolsAttended + HHJail + Homeless + ever_in_gang + 
-                VictViolentCrime + female + HHHospital + black + immigrant,
-              data = clean)
-plot(tree2, subtree = 1)
+
+
+# RandomForest:
+library(rpart)
+
+fit <- rpart(hs_grad ~ days_ms_suspension + NumSchoolsAttended + HHJail + ever_in_gang +
+               VictViolentCrime + female + HHHospital + black + immigrant,
+             data=clean,
+             method="class")
+
+prp(fit, main="Beautiful Tree",
+    extra=106, nn=TRUE,
+    fallen.leaves = TRUE,
+    split.prefix = "is ",
+    split.suffix = "?",
+    branch = 0.5,
+    split.round = 0.5,
+    faclen=0,
+    trace=1)
+
+summary(fit)
