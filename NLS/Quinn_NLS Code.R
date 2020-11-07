@@ -10,6 +10,8 @@ setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/NLS")
 library(readr)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
+library(Hmisc)
 mallett <- read_csv("C:/Users/miqui/OneDrive/CSU Classes/Consulting/NLS/mallett.csv")
 View(mallett)
 
@@ -339,19 +341,3 @@ rm(Income25Race)
 rm(Income35Race)
 rm(incomes)
 rm(new_income)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

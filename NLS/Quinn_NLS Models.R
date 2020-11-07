@@ -71,6 +71,8 @@ fit3 <- cfa(HS, data=clean, std.lv=TRUE)
 summary(fit3, fit.measures=TRUE, standardized=TRUE)
 exp(coef(fit3))
 
+
+
 HS2 <-
   "
 ### Latent Variables ###
@@ -88,7 +90,7 @@ exp(coef(fit3))
 
 
 "High School Graduate SEM:"
-HS <-
+HS3 <-
   "
 ### Latent Variables ###
 TRAUMA =~ VictViolentCrime + Homeless + HHHospital + HHJail
@@ -97,25 +99,29 @@ DELINQUENCY =~ ever_in_gang + EverSmoke + EverArrested
   
   
 ### Regressions ###
-hs_grad ~ TRAUMA + DELINQUENCY + immigrant + days_ms_suspension + black + female
+hs_grad ~ TRAUMA + DELINQUENCY + immigrant + days_ms_suspension + black + female + age
   "
 
-fit3 <- cfa(HS, data=clean, std.lv=TRUE)
-summary(fit3, fit.measures=TRUE, standardized=TRUE)
-exp(coef(fit3))
+fit4 <- cfa(HS3, data=clean, std.lv=TRUE)
+summary(fit4, fit.measures=TRUE, standardized=TRUE, rsq=TRUE)
+exp(coef(fit4))
+
+
+"Comparing Models:"
+round(cbind(m1=inspect(fit3, "fit.measures"), m2=inspect(fit4, "fit.measures")), 3)
+anova(fit3, fit4)
+
+
+residuals(fit4, type="cor")
 
 
 
 "Plotting the High School Model:"
-lavaanPlot(model = fit3, coef=TRUE)
+lavaanPlot(model = fit4, coef=TRUE)
 
-semPaths(object=fit3, whatLabels = "std",
+semPaths(object=fit4, whatLabels = "std",
          intercepts = FALSE, layout = "tree",
          style = "lisrel", optimizeLatRes = TRUE)
-
-
-
-
 
 
 # Plotting the Odds Ratios and 95% CIs:
@@ -205,6 +211,7 @@ J[HHHospital] --0.118 --> M((Trauma))
 K[HHJail] --0.280 --> M((Trauma))
 L((Delinquency)) --0.979 --> N[HS Graduate]
 M((Trauma)) --0.903 --> N[HS Graduate]
+O[Age] --1.014 --> N[HS Graduate]
         ")
 
 # Plotting one of the Decision Trees:
