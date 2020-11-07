@@ -1,5 +1,9 @@
-model <- glm(hs_grad ~ immigrant + days_ms_suspension + black + NumSchoolsAttended + female,
-             data = clean,
-             family=binomial(link="logit"))
-summary(model)
-exp(coef(model))
+library(MLeval)
+
+
+
+res <- evalm(glm, gnames = c("glm"))
+
+resamps <- resamples(list(GLM = glm,
+                          RF = rf,
+                          ))
