@@ -64,7 +64,7 @@ DELINQUENCY =~ ever_in_gang
   
   
 ### Regressions ###
-hs_grad ~ TRAUMA + DELINQUENCY + immigrant + days_ms_suspension + black + female
+hs_grad ~ TRAUMA + DELINQUENCY + immigrant + days_ms_suspension + black + female + hispanic
   "
 
 fit3 <- cfa(HS, data=clean, std.lv=TRUE)
@@ -105,7 +105,7 @@ hs_grad ~ TRAUMA + DELINQUENCY + immigrant + days_ms_suspension + black + female
 fit4 <- cfa(HS3, data=clean, std.lv=TRUE)
 summary(fit4, fit.measures=TRUE, standardized=TRUE, rsq=TRUE)
 exp(coef(fit4))
-
+parameterEstimates(fit4)
 
 "Comparing Models:"
 round(cbind(m1=inspect(fit3, "fit.measures"), m2=inspect(fit4, "fit.measures")), 3)

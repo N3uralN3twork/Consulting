@@ -299,6 +299,16 @@ table(mallett$R0365900)
 mallett <- mallett %>%
   mutate(EverArrested = replace(R0365900, R0365900 %in% c(-1, -2, -3), NA))
 table(mallett$EverArrested)
+
+"Creating the Race variable:"
+mallett <- mallett %>%
+  mutate(Race = case_when(
+    white == 1 ~ "White",
+    black == 1 ~ "Black",
+    mixedrace == 1 ~ "Mixed",
+    hispanic == 1 ~ "Hispanic",
+    TRUE ~ "Other"))
+table(mallett$Race)
 #### DONE ####
 
 
@@ -308,7 +318,7 @@ table(mallett$EverArrested)
 "Create the Analytic Dataset:"
 
 clean <- mallett %>%
-  select(immigrant, female, black, hispanic, white, mixedrace,
+  select(immigrant, female, black, hispanic, white, mixedrace, Race,
          urban1997, rural1997, never_married, married, separated,
          divorced, widowed, ever_in_gang, victim_breakin_lt12yrs, victim_bully_lt12yrs,
          victim_shooting_lt12yrs, victim_breakin_12to18, victim_bully_12to18,
