@@ -31,3 +31,26 @@ e = parameterEstimates(fit4, level = 0.95)$ci.upper
 
 result = cbind(a, b, c, exp(d), exp(e))
 result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
