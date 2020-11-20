@@ -1,3 +1,9 @@
+"""
+Sources:
+https://stackoverflow.com/questions/6528180/ggplot2-plot-without-axes-legends-etc
+https://www.kaggle.com/captcalculator/wildfire-exploratory-analysis
+"""
+
 setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Farmers Insurance Case Study")
 "https://www.fire.ca.gov/incidents"
 library(readr)
@@ -30,6 +36,7 @@ leaflet(data = cali) %>%
   addMarkers(lat = ~incident_latitude, lng = ~incident_longitude, popup = ~popup) %>%
   addProviderTiles("CartoDB.DarkMatter")
 
+names(cali)
 
 
 
@@ -101,3 +108,43 @@ fires %>%
 
 
 
+
+# create db connection
+conn <- dbConnect(SQLite(), 'archive/FPA_FOD_20170508.sqlite')
+
+# pull the fires table into RAM
+fires <- tbl(conn, "Fires") %>% collect()
+
+# check size
+print(object.size(fires), units = 'Gb')
+dbDisconnect(conn)
+
+# Add codes for DC and Puerto Rico to the default state lists
+state.abb <- append(state.abb, c("DC", "PR"))
+state.name <- append(state.name, c("District of Columbia", "Puerto Rico"))
+
+# Map the state abbreviations to state names so we can join with the map data
+fires$region <- map_chr(fires$STATE, function(x) { tolower(state.name[grep(x, state.abb)]) })
+fires$BURN_TIME <- fires$CONT_DATE - fires$DISCOVERY_DATE
+
+
+county_map <- map_data('county', 'california')
+
+"Creating the Final Map of California:"
+
+fires %>%
+  filter(region == "california") %>% # Filter by state here!
+  group_by(region, subregion = tolower(FIPS_NAME)) %>%
+  summarize(mean_burn_time = mean(BURN_TIME, na.rm = TRUE)) %>%
+  right_join(county_map, by = c('region', 'subregion')) %>%
+  ggplot(aes(x = long, y = lat, group = group, fill = mean_burn_time)) + 
+  geom_polygon() + 
+  geom_path(color = 'red', size = 0.1) + # Divide by counties
+  scale_fill_continuous(low = "yellow", 
+                        high = "darkred",
+                        name = 'Burn time (days)',
+                        type = "gradient") + 
+  theme_map() +
+  coord_map('albers', lat0=30, lat1=40) + # Center the map
+  ggtitle("Mean Burn Time of CA Wildfires by County from 1992-2015") + 
+  theme(plot.title = element_text(hjust = 0.5)) # Center the title

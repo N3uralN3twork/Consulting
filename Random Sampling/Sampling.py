@@ -15,23 +15,72 @@
     Sources:
             https://stackoverflow.com/questions/16096627/selecting-a-row-of-pandas-series-dataframe-by-integer-index
             https://github.com/flaboss/python_stratified_sampling/blob/master/stratifiedSample.py
+            https://smoosavi.org/datasets/us_accidents
+            https://stats.stackexchange.com/questions/324702/is-the-month-ordinal-or-nominal-variable
+            http://halweb.uc3m.es/esp/Personal/personas/jmmarin/esp/MetQ/Talk2.pdf
+            https://stackoverflow.com/questions/8194959/how-to-multiply-individual-elements-of-a-list-with-a-number
+
     - - - - - -- - - - - - - - - - - - - - - - - - - - - - -
 """
-
+###############################################################################
+###                     1.  Define Working Directory                        ###
+###############################################################################
+import os
+abspath = os.path.abspath("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Random Sampling")
+os.chdir(abspath)
+os.listdir()
+###############################################################################
+###                      2. Import Libraries                                ###
+###############################################################################
 import random
 from random import sample
 import numpy as np
 import pandas as pd
 
-iris = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')
+accidents = pd.read_excel("SummerAccidents2020.xlsx", sheet_name="Data", header=0, verbose=True)
+
+Categorical = list(accidents.select_dtypes(include=['object', 'category']).columns)
+Continuous = list(accidents.select_dtypes(include=['int64', 'float64']).columns)
+
+Continuous
+Categorical
+
+"Tabulation Data"
+for name in Categorical:
+    print(name, ":")
+    print(accidents[name].value_counts(), "\n")
+
+"Select the 30 variables we want to include in a list:"
+vars_want = ["ID", "Source", "TMC", "Severity", "Start_Time", "End_Time",
+             "Start_Lat", "Start_Lng", "Distance(mi)", "Description", "Side",
+             "City", "County", "State", "Zipcode", "Temperature(F)", "Wind_Chill(F)",
+             "Humidity(%)", "Pressure(in)", "Visibility(mi)", "Wind_Direction",
+             "Wind_Speed(mph)", "Precipitation(in)", "Astronomical_Twilight", "Weather_Timestamp",
+             "Airport_Code", "Timezone", "Street", "Month", "Year"]
+len(vars_want)
+
+df = accidents[vars_want]   # Filter by the variables we chose
+
+"Missing Value Analysis"
+# To see what % of the data is missing for each variable
+missing_values = df.isnull().sum() / len(df) * 100
+missing_values[missing_values > 0].sort_values(ascending=False)
+print(missing_values)
+
+
+
+
+
+
+
 
 "1. Simple Random Sample without replacement:"
 random.seed(1234)
-test = iris.sample(n=50, random_state=123, replace=False)
+test = df.sample(n=500, random_state=123, replace=False)
 
 "2. Simple Random Sample with replacement:"
 random.seed(1234)
-test2 = iris.sample(n=50, random_state=123, replace=True)
+test2 = df.sample(n=50, random_state=123, replace=True)
 
 "3. Systematic Random Sample:"
 def systematic(df, step):
@@ -44,7 +93,7 @@ def systematic(df, step):
     sys_sample = df.iloc[indices]
     return sys_sample
 
-systematic(iris, step=3)
+systematic(df, step=3)
 
 "4. Stratified Random Sample:"
 def sample_size(population, size):
@@ -70,8 +119,6 @@ def sample_size(population, size):
     Returns
     -------
     Calculated sample size to be used in the functions:
-        - stratified_sample
-        - stratified_sample_report
     '''
     if size is None:
         cochran_n = round(((1.96)**2 * 0.5 * 0.5)/ 0.02**2)
@@ -158,13 +205,13 @@ def stratified_sample(df, strata, size=None, seed=None, keep_index=True):
     return stratified_df
 
 
-stratified_sample(iris, strata=["species"], size=6, seed=1234, keep_index=True)
+stratified_sample(df, strata=["species"], size=6, seed=1234, keep_index=True)
 
 "5. Cluster Random Sample:"
 def cluster(df, nClusters: int, size: int):
     check = len(df)/nClusters
     if check.is_integer() is not True:
-        raise ValueError("STOP:")
+        raise ValueError(f"STOP: can't divide {len(df)} by {nClusters}")
     test = np.array_split(df, nClusters)
     ls = []
     for dfs in test:
@@ -173,4 +220,81 @@ def cluster(df, nClusters: int, size: int):
     return result
 
 
-cluster(iris, nClusters=3, size=10)
+cluster(df, nClusters=3, size=10)
+
+
+
+
+
+
+
+class Sampling:
+    random.seed(1234)
+
+    def __init__(self, df):
+        self.df = df
+
+    def Shape(self):
+        print(f"Your dataset has {len(self.df)} rows and {len(self.df.columns)} columns")
+
+    def SRS_no_replace(self, n: int):
+        """
+        :param n: the sample size you would like to have
+        :return: a dataframe
+        """
+        result = self.df.sample(n=n, random_state=123, replace=False)
+        return result
+
+    def SRS_replace(self, n: int):
+        """
+        Returns a simple random sample with replacement.
+        :param n: the sample size you would like to have
+        :return: a dataframe
+        """
+        result = df.sample(n=n, random_state=123, replace=True)
+        return result
+
+    def Systematic(self, size: int):
+        """
+        Returns a systematic random sample that starts at the beginning.
+        Simply take every k-th element after a random start.
+        Simply take every k-th element after a random start
+        :param size: the sample size you would like
+        :return: a systematic random sample of the data you want
+        """
+        step = np.floor(len(self.df) / size)
+        initial = random.randint(0, step)
+        indices = np.arange(initial, len(self.df), step=step)
+        result = self.df.iloc[indices]
+        return result
+
+    def Cluster(self, nClusters: int, size: int):
+        """
+        Returns a cluster random sample from the clusters that you randomly created
+        :param nClusters: the number of clusters to select from
+        :param size: the sample size you would like for each cluster
+        :return: a cluster random sample of the data you want
+        """
+        check = len(self.df) / nClusters
+        if check.is_integer() is not True:
+            raise ValueError(f"STOP: You cannot divide {len(self.df)} by {self.nClusters}")
+        splits = np.array_split(self.df, nClusters)
+        ls = []
+        for dfs in splits:
+            ls.append(dfs.sample(size))
+        result = pd.concat(ls)
+        return result
+
+    def Stratified(self, strata: list, size: int):
+        """
+        Returns a stratified random sample without replacement.
+        :param strata: A list of categorical variables to stratify by
+        :param size: An integer that represents the sample size you would like
+        :return: A dataframe
+        """
+
+test = Sampling(df=df)
+test.Shape()
+test.SRS_no_replace(n=500)
+test.Cluster(nClusters=2, size=500)
+
