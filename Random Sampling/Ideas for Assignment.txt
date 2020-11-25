@@ -1,0 +1,62 @@
+     - - - - - -- - - - - - - - - - - - - - - - - - - - - - -
+    Name - Consulting # 9 - Sampling Methods
+    Class: STA 635 - Consulting
+    Goal - Random Sampling
+    Detail：Create sampling functions for the following:
+            * Simple Random Sampling (without replacement)
+            * Simple Random Sampling (with replacement)
+            * Systematic Random Sampling
+            * Stratified Random Sampling
+            * Cluster Random Sampling
+    Author: Matthias Quinn
+    GitHub: https://github.com/N3uralN3twork
+    Date: 13th November 2020
+    Sources:
+            https://stackoverflow.com/questions/16096627/selecting-a-row-of-pandas-series-dataframe-by-integer-index
+            https://github.com/flaboss/python_stratified_sampling/blob/master/stratifiedSample.py
+            https://smoosavi.org/datasets/us_accidents
+            https://stats.stackexchange.com/questions/324702/is-the-month-ordinal-or-nominal-variable
+            http://halweb.uc3m.es/esp/Personal/personas/jmmarin/esp/MetQ/Talk2.pdf
+            https://stackoverflow.com/questions/8194959/how-to-multiply-individual-elements-of-a-list-with-a-number
+            https://stackoverflow.com/questions/19790790/splitting-dataframe-into-multiple-dataframes
+
+    - - - - - -- - - - - - - - - - - - - - - - - - - - - - -
+
+A. Stratified Sampling Algorithm:
+	^ Indices start @ 0
+	1. Proportional Sampling:
+		* The number of participants from each subgroup is determined by their number relative to the entire population
+		* Let n_{i} = (n/N)*N_{i}
+		* sum(n_{i}) == size == desired sample size
+		* Let C = number of classes in the stratum
+	2. Taking Samples for each level of the stratum:
+		* Take a sample of each level n_{i} times each
+		* Combine the (size*C) samples into one dataframe
+		* Sort the dataframe by the stratum
+		* Reset the index to identify where each observation came from
+	3. Sampling from the dataframe:
+		* To select certain rows of the dataframe, you need a starting index and an ending index together
+			- Ex: starting:ending
+		* The number of indices needed = 2*C
+			- need C indices for both the start and the end locations
+		* Starting Indices:
+			- First index starts at 0 and every other one (the next C-1 starting index) starts at C*size
+		* Ending Indices:
+			- Let the first ending index =  n_{0} + (0*size)
+			- Let the second ending index = n_{1} + (1* size)
+			- Let the third ending index =  n_{2} + (2*size)
+			- Let the i^{th} ending index = n_{i} + ((i-1)*size)
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -89,6 +89,9 @@ summary(fit3, fit.measures=TRUE, standardized=TRUE)
 exp(coef(fit3))
 
 
+
+
+
 "High School Graduate SEM:"
 HS3 <-
   "
