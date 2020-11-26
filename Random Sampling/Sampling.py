@@ -75,7 +75,7 @@ missing_values[missing_values > 0].sort_values(ascending=False)
 print(missing_values)
 
 
-# Final class:
+# Final Sampling class:
 class Sampling:
     random.seed(1234)
 
@@ -124,10 +124,10 @@ class Sampling:
         check = len(self.df) / nClusters
         if check.is_integer() is not True:
             raise ValueError(f"STOP: You cannot divide {len(self.df)} by {self.nClusters}")
-        splits = np.array_split(self.df, nClusters)
+        splits = np.array_split(self.df, nClusters)  # Split the df into n clusters
         ls = []
         for dfs in splits:
-            ls.append(dfs.sample(size))
+            ls.append(dfs.sample(size))  # This is where the random sampling occurs
         result = pd.concat(ls)
         return result
 
@@ -185,11 +185,17 @@ class Sampling:
 
     @staticmethod
     def write(wbName, df_list, sheets_list):
+        """
+        Writes the results of your random samples to an Excel workbook
+        :param wbName: the name you would like to call your file
+        :param df_list: a list of dataframes that contain your samples
+        :param sheets_list: the names of the Excel worksheets
+        :return: an Excel workbook
+        """
         writer = pd.ExcelWriter(wbName, engine='xlsxwriter')
         for dataframe, sheet in zip(df_list, sheets_list):
             dataframe.to_excel(writer, sheet_name=sheet, startrow=0, startcol=0)
         writer.save()
-
 
 
 # Testing:
