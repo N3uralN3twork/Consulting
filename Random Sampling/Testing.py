@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 
-
 def Cluster(df, nClusters: int, size: int):
     """
     Returns a cluster random sample from the clusters that you randomly created
@@ -12,12 +11,9 @@ def Cluster(df, nClusters: int, size: int):
     check = len(df) / nClusters
     if check.is_integer() is not True:
         raise ValueError(f"STOP: You cannot divide {len(df)} by {nClusters}")
-    splits = np.array_split(df, nClusters)
+    splits = np.array_split(df, nClusters)  # Split the df into n clusters
     ls = []
     for dfs in splits:
-        ls.append(dfs.sample(size))
+        ls.append(dfs.sample(size))  # This is where the random sampling occurs
     result = pd.concat(ls)
     return result
-
-
-Cluster(df, nClusters=2, size=250)
