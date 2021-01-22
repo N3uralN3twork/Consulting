@@ -17,3 +17,13 @@ def Cluster(df, nClusters: int, size: int):
         ls.append(dfs.sample(size))  # This is where the random sampling occurs
     result = pd.concat(ls)
     return result
+
+
+
+
+
+ls = []
+for prop in self.df[stratum].value_counts(normalize=True):  # Obtain a list of proportions for each level of the stratum
+    ls.append(prop)
+
+df["Source"].value_counts(normalize=True)

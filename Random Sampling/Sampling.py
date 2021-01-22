@@ -16,6 +16,7 @@ Beware the dragon!
     Name - Consulting # 9 - Sampling Methods
     Class: STA 635 - Consulting
     Goal - Random Sampling
+    
     Detail：Create sampling functions for the following:
             * Simple Random Sampling (without replacement)
             * Simple Random Sampling (with replacement)
@@ -80,12 +81,6 @@ vars_want = ["ID", "Source", "TMC", "Severity", "Start_Time", "End_Time",
 len(vars_want)
 
 df = accidents[vars_want]   # Filter by the variables we chose
-
-"Missing Value Analysis"
-# To see what % of the data is missing for each variable
-missing_values = df.isnull().sum() / len(df) * 100
-missing_values[missing_values > 0].sort_values(ascending=False)
-print(missing_values)
 
 
 # Final Sampling class:
@@ -160,7 +155,7 @@ class Sampling:
 
         UniqueNames = self.df[stratum].unique()  # Get the levels of the stratum
 
-        groupSizes = pd.DataFrame(index=range(0, len(UniqueNames)),
+        groupSizes = pd.DataFrame(index=range(0, len(UniqueNames)),  # Turn the above into a dataframe
                                   columns=[stratum, "samp_size"])
         groupSizes[stratum] = UniqueNames
         groupSizes["samp_size"] = sizes
@@ -206,9 +201,9 @@ class Sampling:
         :return: an Excel workbook
         """
         writer = pd.ExcelWriter(wbName, engine='xlsxwriter')
-        for dataframe, sheet in zip(df_list, sheets_list):
-            dataframe.to_excel(writer, sheet_name=sheet, startrow=0, startcol=0)
-        writer.save()
+        for dataframe, sheet in zip(df_list, sheets_list):  # For each dataframe created
+            dataframe.to_excel(writer, sheet_name=sheet, startrow=0, startcol=0)  # Write to a unique excel sheet
+        writer.save()  # Save the workbook
 
 
 # Testing:

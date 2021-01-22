@@ -22,15 +22,15 @@
 
     - - - - - -- - - - - - - - - - - - - - - - - - - - - - -
 
-A. Stratified Sampling Algorithm:
+A. Stratified Sampling Algorithm 1:
 	^ Indices start @ 0
 	1. Proportional Sampling:
 		* The number of participants from each subgroup is determined by their number relative to the entire population
-		* Let n_{i} = (n/N)*N_{i}
+		* Let n_{i} = (N_{i}/N)*n
 		* sum(n_{i}) == size == desired sample size
 		* Let C = number of classes in the stratum
 	2. Taking Samples for each level of the stratum:
-		* Take a sample of each level n_{i} times each
+		* Take a sample  of each level n_{i} times each
 		* Combine the (size*C) samples into one dataframe
 		* Sort the dataframe by the stratum
 		* Reset the index to identify where each observation came from
@@ -46,11 +46,19 @@ A. Stratified Sampling Algorithm:
 			- Let the second ending index = n_{1} + (1* size)
 			- Let the third ending index =  n_{2} + (2*size)
 			- Let the i^{th} ending index = n_{i} + ((i-1)*size)
-	
 
-
-
-
+B. Stratified Sampling Algorithm 2:
+	^ Indices start @ 0
+	1. Proportional Sampling:
+		* Create a table of proportions for each stratum
+		* Round (Size*prop) for each proportion calculated above
+	2. Create a list of unique levels for each class
+	3. Combine both the sizes and unique levels into a singular dataframe
+	4. Create the SQL queries (excluding the groupby statement):
+		* For each stratum in each group size:
+			- n = sample size for each level
+			- qry = empty_qry + stratum + == + level
+	5. Use the qry and sample functions to find the final stratified sample
 
 
 

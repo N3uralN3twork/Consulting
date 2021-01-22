@@ -1,23 +1,13 @@
-"""
-Moosavi, Sobhan, Mohammad Hossein Samavatian, Srinivasan Parthasarathy, and Rajiv Ramnath. "A Countrywide Traffic Accident Dataset.", 2019.
-"""
-setwd("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Random Sampling")
-library(readr)
-#accidents <- read_csv("C:/Users/miqui/OneDrive/CSU Classes/Consulting/Random Sampling/archive/US_Accidents_June20.csv")
-View(accidents)
-
 library(dplyr)
-library(lubridate)
-names(accidents)
+library(ggplot2)
 
-accidents$Month <- month(accidents$Start_Time)
-accidents$Year <- year(accidents$Start_Time)
+library(readxl)
+portfolio <- read_excel("C:/Users/miqui/OneDrive/Finances/Quinn_Finances2.xlsx", 
+                        sheet = "Portfolio Value")
+View(portfolio)
 
-table(accidents$Month)
-table(accidents$Year)
+portfolio$`Capital Invested` <- as.numeric(portfolio$`Capital Invested`)
+str(portfolio)
 
-df <- accidents %>% filter(Month %in% c(5, 6, 7),
-                           Year == 2020) # Summer months in 2020
-
-
-
+ggplot(data = portfolio, aes(x = Date, y = "Capital Invested")) + 
+  geom_bar()
